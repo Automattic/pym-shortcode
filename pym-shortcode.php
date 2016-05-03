@@ -6,7 +6,7 @@ Description: Adds a [pym src=""] shortcode to simplify use of NPR's Pym.js
 Version: 0.1
 Author: The INN Nerds
 Author URI: http://nerds.inn.org/
-License: GPL2
+License: GPL Version 2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
