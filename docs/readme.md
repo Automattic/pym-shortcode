@@ -1,4 +1,4 @@
-# Using Pym Shortcode
+# Pym Shortcode
 
 Pym Shortcode will resize an iframe responsively depending on the height of its content and the width of its container. The plugin uses [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the NPR Visuals Team, to allow embedded content in WordPress posts and pages using a simple shortcode. 
 
@@ -7,6 +7,40 @@ Pym Shortcode will resize an iframe responsively depending on the height of its 
 1. Download the zip file from this Github repo and upload it manually to your WordPress site.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Nothing to configure, just begin using Pym Shortcode!
+
+## Using Pym Shortcode
+
+In a WordPress post or page use Pym Shortcode like this:
+
+`[pym src="http://blog.apps.npr.org/pym.js/examples/table/child.html"]`
+
+Example in a post:
+
+[Pym Shortcode in a WordPress post](img/pym-shortcode-in-post.png)
+
+Desktop view of the WordPress post with the NPR embed using Pym Shortcode:
+
+![Desktop view of the WordPress post with the NPR embed using Pym Shortcode](img/pym-example-desktop.png)
+
+Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
+
+![Mobile view of the WordPress post with the NPR embed using Pym Shortcode](img/pym-example-phone.png)
+
+## Options
+
+```
+[pym src="" pymsrc="" pymoptions=""]
+```
+
+`src` is the URL of the page that is to be embedded.
+
+`pymsrc` is optional; only set this if you need to specify a different source than the default. The default pym source is `js/pym.src` in this plugin.
+
+`pymoptions` is optional; this should be a javascript object without the surrounding `{}`, and is given in the event that options need to be passed to the `pymParent`. NPR gives [this example](http://blog.apps.npr.org/pym.js/#examples) javascript:
+
+```js
+pym.Parent('example', 'child.html', { xdomain: '*\.npr\.org' });
+```
 
 ## Frequently Asked Questions
 
@@ -36,25 +70,6 @@ The default pym source is js/pym.src in this plugin which would be served by wha
 
 - If the embed isn't resizing correctly (especially vertically), the pym.js script may not be loading correctly.
 - You see if the embed is being served by https by opening the embed in new tab and looking at the protocol it's using.
-
-
-## Screenshots
-
-Embeddable table from NPR:
-
-![an embeddable table from NPR](img/responsive-iframe-npr.png)
-
-Pym Shortcode in a WordPress post:
-
-![Pym Shortcode in a WordPress post](img/pym-shortcode-in-post.png)
-
-Desktop view of the WordPress post with the NPR embed using Pym Shortcode:
-
-![Desktop view of the WordPress post with the NPR embed using Pym Shortcode](img/pym-example-desktop.png)
-
-Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
-
-![Mobile view of the WordPress post with the NPR embed using Pym Shortcode](img/pym-example-phone.png)
 
 ## You may also want to look at NPR's Pym.js resources:
 
