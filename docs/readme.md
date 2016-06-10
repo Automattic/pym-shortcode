@@ -69,7 +69,7 @@ The default pym source is js/pym.src in this plugin which would be served by wha
 ### How do you know if there's an HTTPS problem with a given embedded iframe?
 
 - If the embed isn't resizing correctly (especially vertically), the pym.js script may not be loading correctly.
-- You see if the embed is being served by https by opening the embed in new tab and looking at the protocol it's using.
+- You can determine if the embed is being served by https by opening the embed in new tab and looking at the protocol it's using.
 
 ## You may also want to look at NPR's Pym.js resources:
 
