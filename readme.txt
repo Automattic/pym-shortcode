@@ -1,5 +1,5 @@
 === Pym Shortcode ===
-Contributors: benlk, aschweigert
+Contributors: inn_nerds
 Donate link: https://inn.org/donate
 Tags: pym,javascript,embeds,responsive
 Requires at least: 3.0.1
