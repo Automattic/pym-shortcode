@@ -16,7 +16,7 @@ In a WordPress post or page use Pym Shortcode like this:
 
 Example in a post:
 
-[Pym Shortcode in a WordPress post](img/pym-shortcode-in-post.png)
+![Pym Shortcode in a WordPress post](img/pym-shortcode-in-post.png)
 
 Desktop view of the WordPress post with the NPR embed using Pym Shortcode:
 
