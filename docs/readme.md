@@ -1,6 +1,6 @@
 # Pym Shortcode
 
-Pym Shortcode will resize an iframe responsively depending on the height of its content and the width of its container. The plugin uses [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the NPR Visuals Team, to allow embedded content in WordPress posts and pages using a simple shortcode. 
+Pym Shortcode will resize an iframe responsively depending on the height of its content and the width of its container. The plugin uses [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the NPR Visuals Team, to allow embedded content in WordPress posts and pages using a simple shortcode. Like Pym.js it also bypasses the usual cross-domain issues.
 
 ## Installation
 
@@ -34,7 +34,7 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 
 `src` is the URL of the page that is to be embedded.
 
-`pymsrc` is optional; only set this if you need to specify a different source than the default. The default pym source is `js/pym.src` in this plugin.
+`pymsrc` is optional; only set this if you need to specify a different source for Pym.js than the default. The default pym source is `js/pym.src` in this plugin.
 
 `pymoptions` is optional; this should be a javascript object without the surrounding `{}`, and is given in the event that options need to be passed to the `pymParent`. NPR gives [this example](http://blog.apps.npr.org/pym.js/#examples) javascript:
 
