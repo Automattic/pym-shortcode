@@ -1,8 +1,8 @@
 # Pym Shortcode
 
-Pym Shortcode will resize an iframe responsively depending on the height of its content and the width of its container. The plugin uses [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the NPR Visuals Team, to allow embedded content in WordPress posts and pages using a simple shortcode. Like `pym.js` it also bypasses the usual cross-domain issues.
+Pym Shortcode will responsively resize an iframe's height depending on the width of its container. The plugin uses [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the [NPR Visuals Team](http://blog.apps.npr.org/), to allow embedded content in WordPress posts and pages using a simple shortcode. Using `pym.js`, it bypasses the usual cross-domain issues.
 
-## Installation
+## Plugin Installation
 
 1. In the WordPress Dashboard go to **Plugins**, then click the **Add Plugins** button and search the WordPress Plugins Directory for Pym Shortcode. Alternatively, you can download the zip file from this Github repo and upload it manually to your WordPress site.
 2. Activate the plugin through the 'Plugins' screen in WordPress
@@ -54,7 +54,7 @@ Normally WordPress strips out JavaScript inserted in posts and pages, so the nat
 
 ### When would I use a Pym solution versus embed code without using Pym?
 
-If you're embedding a YouTube video or a SoundCloud audio player, you don't need Pym.js and in fact you would not want to use it. To make these commodity types of embeds responsive, you may need to add CSS rules depending on your theme. They won't actually work with Pym Shortcode. 
+If you're embedding a YouTube video or a SoundCloud audio player, you don't need Pym.js and in fact you would not want to use it. To make these commodity types of embeds responsive, you may need to add CSS rules depending on your theme. They won't be resized by Pym Shortcode.
 
 You would want to use Pym for other types of iframe content including tables, charts, and interactive elements. For example, news organizations often create data-driven visualizations that are hosted in another application and need to be iframed into their CMS. 
 
@@ -62,16 +62,39 @@ For Pym Shortcode to work, `pym.js` code must be on the "Child Page" which is th
 
 ### Is Pym.js or this plugin dependent on jQuery or any other library?
 
-Nope, all the required JavaScript is self-contained in `pym.js`.
+Nope, all the required JavaScript is self-contained in `pym.js`. The shortcode will enqueue `pym.js` when necessary. You will need to include `pym.js` on the embedded page, however.
 
-### How do you serve pym.js if the embedded page's domain has an SSL cert (and can/will be served over HTTPS) but the parent page's domain does not have an SSL certificate?
+### Why would I want to change the pym.js source URL?
 
-The default pym source is `js/pym.src` in this plugin which would be served by whatever protocol your site is using. But you can optionally change the source by using the `pymsrc` parameter in the shortcode, for example a CDN source for Pym.js like `https://cdnjs.cloudflare.com/ajax/libs/pym/0.4.5/pym.min.js`
+There are several reasons why you might want to change the version of Pym used to embed a webpage. For example:
 
-### How do you know if there's an HTTPS problem with a given embedded iframe?
+- The embedded page uses an older version of Pym
+- The embedded page is loaded over HTTPS, so Pym must be loaded over HTTPS to communicate with the child
+- The embedded page uses a modified version of Pym
 
-- If the embed isn't resizing correctly (especially vertically), the `pym.js` script may not be loading correctly.
-- You can determine if the embed is being served by `https` by opening the embed in new tab and looking at the protocol it's using.
+In any of these cases, set the new version of Pym using the `pymsrc` option in the shortcode:
+
+```
+[pym src="http://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://cdnjs.cloudflare.com/ajax/libs/pym/0.4.5/pym.min.js" pymoptions=""]
+```
+
+### How do I serve pym.js if the embedded page uses HTTPS and my site does not?
+
+If the embedded page's domain has an SSL certificate and is loaded over HTTPS, and if your site is loaded over plain HTTP, then the Pym script on your page will not be able to talk to the Pym script in the embedded page. This can be fixed by making sure your site loads over HTTPS, or by specifying an alternate source for your Pym script.
+
+The default pym source is `js/pym.src` in this plugin, served by whatever protocol your site is using. You can change the source by using the `pymsrc` parameter in the shortcode, for example an HTTPS-using CDN source like `https://cdnjs.cloudflare.com/ajax/libs/pym/0.4.5/pym.min.js`:
+
+```
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://cdnjs.cloudflare.com/ajax/libs/pym/0.4.5/pym.min.js" pymoptions=""]
+```
+
+### How do I know if there's an HTTPS problem with a given embedded iframe?
+
+If the embed isn't resizing correctly (especially vertically), the `pym.js` script may not be loading correctly.
+
+You can determine if the embed is being served by `https` by opening the embed in new tab and looking at the protocol it's using. To open the embed in a new tab, try right-clicking on the embed and choosing "Open frame in new tab" or a similar option.
+
+You can also check by opening your browser's developer tools and looking in the console for errors.
 
 ## Other Pym Resources
 
