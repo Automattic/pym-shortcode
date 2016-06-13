@@ -22,21 +22,7 @@ Pym Shortcode will resize an iframe responsively depending on the height of its 
 
 == Frequently Asked Questions ==
 
-= Why would I want to use Pym in the first place? =
-
-Using iframes in a responsive page can be frustrating. It’s easy enough to make an iframe’s width span 100% of its container, but sizing its height is tricky — especially if the content of the iframe changes height depending on page width (for example, because of text wrapping or media queries) or events within the iframe.
-
-= Why is a WordPress plugin needed to use Pym.js? =
-
-Normally WordPress strips out JavaScript inserted in posts and pages, so the native Pym.js code won't work. Pym Shortcode simply provides a wrapper around Pym.js so you can embed anything you'd use Pym.js for by using WordPress shortcode. 
-
-= Is Pym.js or this plugin dependent on jQuery or any other library? =
-
-Nope.
-
-= How do you serve pym.js if the embedded page's domain has an SSL cert (and can/will be served over HTTPS) but the parent page's domain does not have an SSL certificate? =
-
-The default pym source is js/pym.src in this plugin, but you can optionally change the source by using the `pymsrc` parameter in the shortcode, for example a CDN source for Pym.js like `https://cdnjs.cloudflare.com/ajax/libs/pym/0.4.5/pym.min.js`
+For answers to frequently asked questions, [see this plugin's documentation on GitHub](https://github.com/INN/pym-shortcode/tree/master/docs)
 
 == Screenshots ==
 
