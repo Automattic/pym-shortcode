@@ -16,7 +16,7 @@ Pym Shortcode will resize an iframe responsively depending on the height of its 
 
 == Installation ==
 
-1. Download the zip file from this Github repo and upload it manually to your WordPress site.
+1. In the WordPress Dashboard go to **Plugins**, then click the **Add Plugins** button and search the WordPress Plugins Directory for Pym Shortcode. Alternatively, you can download the zip file from this Github repo and upload it manually to your WordPress site.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Nothing to configure, just begin using Pym Shortcode!
 
