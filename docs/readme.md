@@ -4,7 +4,7 @@ Pym Shortcode will resize an iframe responsively depending on the height of its 
 
 ## Installation
 
-1. Download the zip file from this Github repo and upload it manually to your WordPress site.
+1. In the WordPress Dashboard go to **Plugins**, then click the **Add Plugins** button and search the WordPress Plugins Directory for Pym Shortcode. Alternatively, you can download the zip file from this Github repo and upload it manually to your WordPress site.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Nothing to configure, just begin using Pym Shortcode!
 
@@ -54,9 +54,9 @@ Normally WordPress strips out JavaScript inserted in posts and pages, so the nat
 
 ### When would I use a Pym solution versus embed code without using Pym?
 
-If you're embedding a YouTube video or a SoundCloud audio player, you don't need Pym.js and in fact you would not want to use it. To make these commodity types of embeds responsive, you may need to add CSS rules depending on your theme. Beyond that, Pym will just get in the way. 
+If you're embedding a YouTube video or a SoundCloud audio player, you don't need Pym.js and in fact you would not want to use it. To make these commodity types of embeds responsive, you may need to add CSS rules depending on your theme. They won't actually work with Pym. 
 
-You would want to use Pym for other types of iframe content including tables, charts, and interactive elements. For example, news organizations often create data-driven visualizations that are hosted in another application and need to be iframed into their CMS. Pym.js is built for that.
+You would want to use Pym for other types of iframe content including tables, charts, and interactive elements. For example, news organizations often create data-driven visualizations that are hosted in another application and need to be iframed into their CMS. In this case they would add Pym.js to the child page to be embedded
 
 ### Is Pym.js or this plugin dependent on jQuery or any other library?
 
@@ -71,7 +71,9 @@ The default pym source is js/pym.src in this plugin which would be served by wha
 - If the embed isn't resizing correctly (especially vertically), the pym.js script may not be loading correctly.
 - You can determine if the embed is being served by https by opening the embed in new tab and looking at the protocol it's using.
 
-## You may also want to look at NPR's Pym.js resources:
+## Other Pym Resources
+
+You may also want to look at NPR's Pym.js resources, especially if you're interesting in building Pym-compatible embeds:
 
 * [Pym.js homepage](http://blog.apps.npr.org/pym.js/)
 * [Pym.js repo on GutHub/nprapps](https://github.com/nprapps/pym.js/)
