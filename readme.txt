@@ -1,14 +1,14 @@
 === Pym Shortcode ===
 Contributors: inn_nerds
 Donate link: https://inn.org/donate
-Tags: pym,javascript,embeds,responsive
+Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
 Tested up to: 4.5.2
 Stable tag: v0.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A WordPress solution to embed iframes responsive horizontally and vertically using the NPR Visuals Team's pym.js in shortcode.
+A WordPress solution to embed iframes that are responsive horizontally and vertically using the NPR Visuals Team's pym.js.
 
 == Description ==
 
