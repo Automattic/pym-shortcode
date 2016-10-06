@@ -96,6 +96,12 @@ You can determine if the embed is being served by `https` by opening the embed i
 
 You can also check by opening your browser's developer tools and looking in the console for errors.
 
+### What license is this plugin licensed under?
+
+This plugin is released under the GNU GPL, version 2 or later.
+
+Pym.js, included in this plugin, is [released under the MIT open source license](https://github.com/nprapps/pym.js/tree/master#license-and-credits).
+
 ## Other Pym Resources
 
 You may also want to look at NPR's Pym.js resources, especially if you're interesting in building Pym-compatible embeds:

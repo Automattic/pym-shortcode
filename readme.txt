@@ -4,7 +4,7 @@ Donate link: https://inn.org/donate
 Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
 Tested up to: 4.6
-Stable tag: v0.1.0
+Stable tag: v1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,11 +44,15 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 
 == Changelog ==
 
+= 1.1.1=
+
+* Update to pym.js version 1.1.1: https://github.com/nprapps/pym.js/releases/tag/v1.1.1
+
 = 1.0 =
 
 * First release of the plugin
 
-== Upgrade Notice == 
+== Upgrade Notice ==
 
 No updates at this time.
 
