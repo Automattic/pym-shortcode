@@ -15,7 +15,7 @@
 
 `src` is the URL of the page that is to be embedded.
 
-`pymsrc` is optional; only set this if you need to specify a different source than the default. The default pym source is `js/pym.js` in this plugin.
+`pymsrc` is optional; only set this if you need to specify a different source than the default. The default pym source is `js/pym.v1.min.js` in this plugin.
 
 `pymoptions` is optional; this should be a javascript object without the surrounding `{}`, and is given in the event that options need to be passed to the `pymParent`. NPR gives [this example](http://blog.apps.npr.org/pym.js/#examples) javascript:
 
