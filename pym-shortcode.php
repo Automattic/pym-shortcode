@@ -22,14 +22,14 @@ function pym_shortcode( $atts, $context, $tag ) {
 
 	// generate an ID for this embed, necessary to prevent conflicts
 	global $pym_id;
-	if ( ! isset($pym_id) ) {
+	if ( ! isset( $pym_id ) ) {
 		$pym_id = 0;
 	} else {
 		++$pym_id;
 	}
 
-	$pymsrc = empty($atts['pymsrc']) ? plugins_url( '/js/pym.js', __FILE__ ) : $atts['pymsrc'];
-	$pymoptions = empty($atts['pymoptions']) ? '' : $atts['pymoptions'];
+	$pymsrc = empty( $atts['pymsrc'] ) ? plugins_url( '/js/pym.js', __FILE__ ) : $atts['pymsrc'];
+	$pymoptions = empty( $atts['pymoptions'] ) ? '' : $atts['pymoptions'];
 
 	$src = $atts['src'];
 
@@ -39,7 +39,7 @@ function pym_shortcode( $atts, $context, $tag ) {
 
 	// If this is the first one on the page, output the pym src
 	// or if the pymsrc is set, output that.
-	if ( $pym_id == 0 || $atts['pymscr'] ) {
+	if ( 0 === $pym_id || $atts['pymscr'] ) {
 		echo sprintf(
 			'<script src="%s"></script>',
 			$pymsrc
@@ -61,4 +61,4 @@ function pym_shortcode( $atts, $context, $tag ) {
 	$ret = ob_get_clean();
 	return $ret;
 }
-add_shortcode('pym', 'pym_shortcode');
+add_shortcode( 'pym', 'pym_shortcode' );
