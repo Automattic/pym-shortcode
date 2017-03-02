@@ -3,7 +3,7 @@
 Plugin Name: Pym Shortcode
 Plugin URI: https://github.com/INN/pym-shortcode
 Description: Adds a [pym src=""] shortcode to simplify use of NPR's Pym.js
-Version: 0.1
+Version: 1.1.2
 Author: The INN Nerds
 Author URI: http://nerds.inn.org/
 License: GPL Version 2 or later
@@ -28,7 +28,7 @@ function pym_shortcode( $atts, $context, $tag ) {
 		++$pym_id;
 	}
 
-	$pymsrc = empty( $atts['pymsrc'] ) ? plugins_url( '/js/pym.js', __FILE__ ) : $atts['pymsrc'];
+	$pymsrc = empty( $atts['pymsrc'] ) ? plugins_url( '/js/pym.v1.min.js', __FILE__ ) : $atts['pymsrc'];
 	$pymoptions = empty( $atts['pymoptions'] ) ? '' : $atts['pymoptions'];
 
 	$src = $atts['src'];
