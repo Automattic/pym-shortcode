@@ -39,7 +39,7 @@ function pym_shortcode( $atts, $context, $tag ) {
 
 	// If this is the first one on the page, output the pym src
 	// or if the pymsrc is set, output that.
-	if ( 0 === $pym_id || $atts['pymscr'] ) {
+	if ( 0 === $pym_id || ! empty( $atts['pymsrc'] ) ) {
 		echo sprintf(
 			'<script src="%s"></script>',
 			$pymsrc
