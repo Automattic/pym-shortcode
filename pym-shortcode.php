@@ -30,12 +30,17 @@ function pym_shortcode( $atts, $context, $tag ) {
 
 	$pymsrc = empty( $atts['pymsrc'] ) ? plugins_url( '/js/pym.v1.min.js', __FILE__ ) : $atts['pymsrc'];
 	$pymoptions = empty( $atts['pymoptions'] ) ? '' : $atts['pymoptions'];
+	$id = empty( $atts['id'] ) ? '' : esc_attr( $atts['id'] );
+	$actual_id = empty( $id ) ? 'pym_' . $pym_id : $id;
 
 	$src = $atts['src'];
 
 	ob_start();
 
-	echo '<div id="pym_' . $pym_id . '"></div>';
+	printf(
+		'<div id="%1$s"></div>',
+		$actual_id
+	);
 
 	// If this is the first one on the page, output the pym src
 	// or if the pymsrc is set, output that.
@@ -51,7 +56,7 @@ function pym_shortcode( $atts, $context, $tag ) {
 	echo sprintf(
 		'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', {%4$s})',
 		$pym_id,
-		"pym_$pym_id",
+		$actual_id,
 		$src,
 		$pymoptions
 	);
