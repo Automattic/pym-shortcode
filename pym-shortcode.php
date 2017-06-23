@@ -28,13 +28,21 @@ function pym_shortcode( $atts, $context, $tag ) {
 		++$pym_id;
 	}
 
+	// Set us up the vars.
 	$pymsrc = empty( $atts['pymsrc'] ) ? plugins_url( '/js/pym.v1.min.js', __FILE__ ) : $atts['pymsrc'];
 	$pymoptions = empty( $atts['pymoptions'] ) ? '' : $atts['pymoptions'];
 	$id = empty( $atts['id'] ) ? '' : esc_attr( $atts['id'] );
 	$actual_id = empty( $id ) ? 'pym_' . $pym_id : $id;
-	$class = empty( $atts['class'] ) ? '' : esc_attr( $atts['class'] ) ;
-	$actual_classes = 'pym ' . $class;
-	error_log(var_export( $actual_class, true));
+
+	/**
+	 * Filter pym_shortcode_default_class allows setting the default class on embeds
+	 *
+	 * @param String $default
+	 * @return String the default class name
+	 */
+	$default_class = apply_filters( 'pym_shortcode_default_class', 'pym' );
+	$class = empty( $atts['class'] ) ? '' : esc_attr( $atts['class'] );
+	$actual_classes = $default_class . ' ' . $class;
 
 	$src = $atts['src'];
 
