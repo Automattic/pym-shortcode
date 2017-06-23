@@ -74,7 +74,7 @@ function pym_shortcode( $atts, $content, $tag ) {
 		esc_js( $pym_id ),
 		esc_js( $actual_id ),
 		esc_js( $src ),
-		esc_js( $pymoptions )
+		$pymoptions
 	);
 	echo '</script>';
 
