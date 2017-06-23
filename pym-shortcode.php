@@ -32,14 +32,18 @@ function pym_shortcode( $atts, $context, $tag ) {
 	$pymoptions = empty( $atts['pymoptions'] ) ? '' : $atts['pymoptions'];
 	$id = empty( $atts['id'] ) ? '' : esc_attr( $atts['id'] );
 	$actual_id = empty( $id ) ? 'pym_' . $pym_id : $id;
+	$class = empty( $atts['class'] ) ? '' : esc_attr( $atts['class'] ) ;
+	$actual_classes = 'pym ' . $class;
+	error_log(var_export( $actual_class, true));
 
 	$src = $atts['src'];
 
 	ob_start();
 
 	printf(
-		'<div id="%1$s"></div>',
-		$actual_id
+		'<div id="%1$s" class="%2$s"></div>',
+		$actual_id,
+		$actual_classes
 	);
 
 	// If this is the first one on the page, output the pym src
