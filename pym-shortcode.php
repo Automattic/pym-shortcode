@@ -17,10 +17,14 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * A shortcode to simplify the process of embedding articles using pym.js
+ *
+ * @param Array  $atts    the attributes passed in the shortcode.
+ * @param String $content the enclosed content; should be empty for this shortcode.
+ * @param String $tag     the shortcode tag.
  */
-function pym_shortcode( $atts, $context, $tag ) {
+function pym_shortcode( $atts, $content, $tag ) {
 
-	// generate an ID for this embed, necessary to prevent conflicts
+	// generate an ID for this embed; necessary to prevent conflicts.
 	global $pym_id;
 	if ( ! isset( $pym_id ) ) {
 		$pym_id = 0;
@@ -50,8 +54,8 @@ function pym_shortcode( $atts, $context, $tag ) {
 
 	printf(
 		'<div id="%1$s" class="%2$s"></div>',
-		$actual_id,
-		$actual_classes
+		esc_attr( $actual_id ),
+		esc_attr( $actual_classes )
 	);
 
 	// If this is the first one on the page, output the pym src
@@ -59,22 +63,22 @@ function pym_shortcode( $atts, $context, $tag ) {
 	if ( 0 === $pym_id || ! empty( $atts['pymsrc'] ) ) {
 		echo sprintf(
 			'<script src="%s"></script>',
-			$pymsrc
+			esc_attr( $pymsrc )
 		);
 	}
 
-	// Output the parent's scripts
+	// Output the parent's scripts.
 	echo '<script>';
 	echo sprintf(
 		'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', {%4$s})',
-		$pym_id,
-		$actual_id,
-		$src,
-		$pymoptions
+		esc_js( $pym_id ),
+		esc_js( $actual_id ),
+		esc_js( $src ),
+		esc_js( $pymoptions )
 	);
 	echo '</script>';
 
-	// What is output to the page
+	// What is output to the page:
 	$ret = ob_get_clean();
 	return $ret;
 }
