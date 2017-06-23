@@ -48,10 +48,11 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 
 * Update to pym.js version 1.2.2: https://github.com/nprapps/pym.js/releases/tag/v1.2.2 (Changelog at https://github.com/nprapps/pym.js/blob/master/CHANGELOG )
 * (we skipped pym.js version 1.2.1: https://github.com/nprapps/pym.js/releases/tag/v1.2.1 )
+* Add `id=""` attribute to allow setting custom IDs on embeds. [#21](https://github.com/INN/pym-shortcode/issues/21)
 
 = 1.2.0.2 =
 
-* Fix encoding error on pym.v1.min.js, [thanks to lchheng](https://github.com/INN/pym-shortcode/pull/18
+* Fix encoding error on pym.v1.min.js, [thanks to lchheng](https://github.com/INN/pym-shortcode/pull/18)
 
 = 1.2.0.1 =
 
