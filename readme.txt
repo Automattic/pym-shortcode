@@ -50,7 +50,7 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 * (we skipped pym.js version 1.2.1: https://github.com/nprapps/pym.js/releases/tag/v1.2.1 )
 * Add `id=""` attribute to allow setting custom IDs on embeds. [#21](https://github.com/INN/pym-shortcode/issues/21)
 * Add `class=""` attribute to allow setting custom classes on embeds. [#22](https://github.com/INN/pym-shortcode/issues/22) and [#23](https://github.com/INN/pym-shortcode/issues/23).
-* Add a default class name `pym` to all embeds output by this plugin.
+* Add a default class name `pym` to all embed-containing div elements output by this plugin, and a filter 'pym_shortcode_default_class' to allow changing it.
 
 = 1.2.0.2 =
 
