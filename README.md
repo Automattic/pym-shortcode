@@ -10,7 +10,7 @@
 ## All options:
 
 ```
-[pym src="" pymsrc="" pymoptions="" id="" ]
+[pym src="" pymsrc="" pymoptions="" id="" class="" ]
 ```
 
 `src` is the URL of the page that is to be embedded.
@@ -34,5 +34,15 @@ To do the same thing with this Pym shortcode, you would write:
 For example, the shortcode `[pym src="http://blog.apps.npr.org/pym.js/examples/graphic/child.html" id="extremely_specific_id"]` results in the following output:
 
 ```html
-<div id="extremely_specific_example"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('extremely_specific_example', 'http://blog.apps.npr.org/pym.js/examples/graphic/child.html', {})</script>
+<div id="extremely_specific_example" class="pym"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('extremely_specific_example', 'http://blog.apps.npr.org/pym.js/examples/graphic/child.html', {})</script>
 ```
+
+`class` is optional; this should be a valid HTML class name. It will be added to the element's default class, `'pym'`. You would want to use this if, for example, you wanted to [use a size-based class name to determine the size of the embed on your site](https://github.com/INN/pym-shortcode/issues/23). The class `'pym'` will always be output on container elements created by the Pym Shortcode. This class was introduced in version 1.2.2.
+
+For example, the shortcode `[pym src="http://blog.apps.npr.org/pym.js/examples/graphic/child.html" class="one two three four float-left mw_50"]` results in the following output:
+
+```html
+<div id="pym_0" class="pym one two three four float-left mw_50"></div><script src="http://insideenergy.dev/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('pym_0', 'http://blog.apps.npr.org/pym.js/examples/graphic/child.html', {})</script>
+```
+
+If you do not want the class `'pym'` output on container elements, [add a filter](https://codex.wordpress.org/Plugin_API/Filter_Reference) to the hook `pym_shortcode_default_class` that returns an empty string.
