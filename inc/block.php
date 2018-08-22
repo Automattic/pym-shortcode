@@ -17,7 +17,7 @@ function pym_block_init() {
 	$block_js = 'js/block.js';
 	wp_register_script(
 		'pym-block-editor',
-		plugins_url( $block_js, __FILE__ ),
+		plugins_url( $block_js, dirname( __FILE__ ) ),
 		array(
 			'wp-blocks',
 			'wp-i18n',
@@ -29,7 +29,7 @@ function pym_block_init() {
 	$editor_css = 'css/editor.css';
 	wp_register_style(
 		'pym-block-editor',
-		plugins_url( $editor_css, __FILE__ ),
+		plugins_url( $editor_css, dirname( __FILE__ ) ),
 		array(
 			'wp-blocks',
 		),
@@ -39,7 +39,7 @@ function pym_block_init() {
 	$style_css = 'css/style.css';
 	wp_register_style(
 		'pym-block',
-		plugins_url( $style_css, __FILE__ ),
+		plugins_url( $style_css, dirname( __FILE__ ) ),
 		array(
 			'wp-blocks',
 		),
