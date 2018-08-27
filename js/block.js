@@ -4,11 +4,29 @@
 	 * @see https://github.com/WordPress/gutenberg/tree/master/blocks#api
 	 */
 	var registerBlockType = wp.blocks.registerBlockType;
+
 	/**
 	 * Returns a new element of given type. Element is an abstraction layer atop React.
 	 * @see https://github.com/WordPress/gutenberg/tree/master/element#element
 	 */
 	var el = wp.element.createElement;
+
+	/**
+	 * Rendering
+	 */
+	var ServerSideRender = wp.components.ServerSideRender;
+
+	/**
+	 * Text tools
+	 */
+	var TextControl = wp.components.TextControl;
+
+	/**
+	 * The sidebar controls I think?
+	 * @todo check definition
+	 */
+	var InspectorControls = wp.editor.InspectorControls;
+
 	/**
 	 * Retrieves the translation of text.
 	 * @see https://github.com/WordPress/gutenberg/tree/master/i18n#api
@@ -39,12 +57,30 @@
 		category: 'embed',
 
 		/**
-		 * Optional block extended support features.
+		 * Gutenberg features supported by this block
+		 * @link https://wordpress.org/gutenberg/handbook/block-api/#supports-optional
 		 */
 		supports: {
 			// Removes support for an HTML mode.
 			html: false,
+			align: true,
+			alignWide: true,
+			anchor: true,
+			customClassName: true,
+			className: true,
+			inserter: true,
+			multiple: true,
 		},
+
+		/**
+		 * Describe the block for the block inspector
+		 */
+		description: 'Embed a webpage using NPR\'s Pym.js',
+
+		/**
+		 * Make the block easier to find by including keywords
+		 */
+		keywords: [ __( 'NPR' ) ],
 
 		/**
 		 * The edit function describes the structure of your block in the context of the editor.
@@ -55,11 +91,60 @@
 		 * @return {Element}       Element to render.
 		 */
 		edit: function( props ) {
-			return el(
-				'p',
-				{ className: props.className },
-				__( 'Hello from the editor!' )
-			);
+			return [
+				// https://gist.github.com/pento/cf38fd73ce0f13fcf0f0ae7d6c4b685d#file-php-block-js-L59
+				/*
+				 * The ServerSideRender element uses the REST API to automatically call
+				 * php_block_render() in your PHP code whenever it needs to get an updated
+				 * view of the block.
+				 */
+				el( ServerSideRender, {
+					block: 'pym-shortcode/pym',
+					attributes: props.attributes,
+				} ),
+				/*
+				 * InspectorControls lets you add controls to the Block sidebar. In this case,
+				 * we're adding a TextControl, which lets us edit the 'foo' attribute (which
+				 * we defined in the PHP). The onChange property is a little bit of magic to tell
+				 * the block editor to update the value of our 'foo' property, and to re-render
+				 * the block.
+				 */
+				el( InspectorControls, {},
+					el( TextControl, {
+						label: 'Child URL',
+						value: props.attributes.src,
+						onChange: ( value ) => { props.setAttributes( { src: value } ); },
+					} )
+				),
+				el( InspectorControls, {},
+					el( TextControl, {
+						label: 'Pym.js URL (optional)',
+						value: props.attributes.pymsrc,
+						onChange: ( value ) => { props.setAttributes( { pymsrc: value } ); },
+					} )
+				),
+				el( InspectorControls, {},
+					el( TextControl, {
+						label: 'Pym Options',
+						value: props.attributes.pymoptions,
+						onChange: ( value ) => { props.setAttributes( { pymoptions: value } ); },
+					} )
+				),
+				el( InspectorControls, {},
+					el( TextControl, {
+						label: 'Element ID for this frame (optional)',
+						value: props.attributes.parent_id,
+						onChange: ( value ) => { props.setAttributes( { parent_id: value } ); },
+					} )
+				),
+				el( InspectorControls, {},
+					el( TextControl, {
+						label: 'CSS Classes to add to frame (optional)',
+						value: props.attributes.className,
+						onChange: ( value ) => { props.setAttributes( { class: value } ); },
+					} )
+				)
+			];
 		},
 
 		/**
@@ -70,12 +155,64 @@
 		 * @return {Element}       Element to render.
 		 */
 		save: function() {
-			return el(
-				'p',
-				{},
-				__( 'Hello from the saved content!' )
-			);
-		}
+			// null because this is rendered serverside in PHP.
+			return null;
+		},
+
+		/**
+		 * @todo provide transformation from shortcode
+		 * @todo provide transformation to plain embed
+		 *
+		 * @link https://wordpress.org/gutenberg/handbook/block-api/#transforms-optional
+		 */
+		transforms: {
+			from: [
+				{
+					type: 'shortcode',
+					tag: 'pym',
+					attributes: {
+						src: {
+							type: 'string',
+							shortcode: function( named ) {
+								return named.src ? named.src : '';
+							},
+						},
+						pymsrc: {
+							type: 'string',
+							shortcode: function( named ) {
+								return named.pymsrc ? named.pymsrc : '';
+							},
+						},
+						pymoptions: {
+							type: 'string',
+							shortcode: function( named ) {
+								return named.pymoptions ? named.pymoptions : '';
+							},
+						},
+						parent_id: {
+							type: 'string',
+							shortcode: function( named ) {
+								return named.id ? named.id : '';
+							},
+						},
+						className: {
+							type: 'string',
+							shortcode: function( named ) {
+								return named.class ? named.class : '';
+							},
+						},
+						align: {
+							type: 'string',
+							shortcode: function( named ) {
+								var align = named.align ? named.align : 'alignnone';
+								return align.replace( 'align', '' );
+							},
+						},
+					},
+				},
+			]
+			// @todo provide "to" transformations for embed, plain HTML, etc
+		},
 	} );
 } )(
 	window.wp

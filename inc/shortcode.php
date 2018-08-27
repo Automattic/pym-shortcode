@@ -10,7 +10,7 @@
  * @param String $content the enclosed content; should be empty for this shortcode.
  * @param String $tag     the shortcode tag.
  */
-function pym_shortcode( $atts, $content, $tag ) {
+function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 
 	// generate an ID for this embed; necessary to prevent conflicts.
 	global $pym_id;

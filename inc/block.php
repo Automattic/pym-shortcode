@@ -47,9 +47,35 @@ function pym_block_init() {
 	);
 
 	register_block_type( 'pym-shortcode/pym', array(
-		'editor_script' => 'pym-block-editor',
-		'editor_style'  => 'pym-block-editor',
-		'style'         => 'pym-block',
+		'attributes'    => array(
+			'src' => array(
+				'type' => 'string',
+			),
+			'pymsrc' => array(
+				'type' => 'string',
+			),
+			'pymoptions' => array(
+				'type' => 'string',
+			),
+			'id' => array(
+				'type' => 'string',
+			),
+			'className' => array(
+				'type' => 'string',
+			),
+			'align' => array(
+				'type' => 'string',
+			),
+		),
+		'editor_script'   => 'pym-block-editor',
+		'editor_style'    => 'pym-block-editor',
+		'style'           => 'pym-block',
+		'render_callback' => 'pym_shortcode_debug',
 	) );
 }
 add_action( 'init', 'pym_block_init' );
+
+// temporary function to mock the shortcode
+function pym_shortcode_debug( $atts = array(), $content = '', $tag = '' ) {
+	return '<p>' . print_r( $atts, true ) . '</p>';
+}
