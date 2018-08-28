@@ -173,7 +173,8 @@
 		 * @return {Element}       Element to render.
 		 */
 		save: function() {
-			// null because this is rendered serverside in PHP.
+			// null because this block is rendered serverside in PHP.
+			// If there were something returned here, that return would be saved in the post_content.
 			return null;
 		},
 
