@@ -70,7 +70,7 @@ function pym_block_init() {
 		'editor_script'   => 'pym-block-editor',
 		'editor_style'    => 'pym-block-editor',
 		'style'           => 'pym-block',
-		'render_callback' => 'pym_shortcode_debug',
+		'render_callback' => 'pym_shortcode',
 	) );
 }
 add_action( 'init', 'pym_block_init' );
