@@ -36,16 +36,6 @@ function pym_block_init() {
 		filemtime( "$dir/$editor_css" )
 	);
 
-	$style_css = 'css/style.css';
-	wp_register_style(
-		'pym-block',
-		plugins_url( $style_css, dirname( __FILE__ ) ),
-		array(
-			'wp-blocks',
-		),
-		filemtime( "$dir/$style_css" )
-	);
-
 	register_block_type( 'pym-shortcode/pym', array(
 		'attributes'    => array(
 			'src' => array(
