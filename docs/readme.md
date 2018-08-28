@@ -29,7 +29,7 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 ## Options
 
 ```
-[pym src="" pymsrc="" pymoptions=""]
+[pym src="" pymsrc="" pymoptions="" class="" align=""]
 ```
 
 `src` is the URL of the page that is to be embedded.
@@ -41,6 +41,10 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 ```js
 pym.Parent('example', 'child.html', { xdomain: '*\.npr\.org' });
 ```
+
+`class` is optional; this should be a CSS class name or space-separated series of CSS classes as you would apply them to an HTML element.
+
+`align` is optional; this should be one of the [WordPress-provided generated alignment types](https://codex.wordpress.org/CSS#WordPress_Generated_Classes): `left`, `right`, `center`, `none`. The value provided here will be prefixed with `align` and output as a CSS class on the Pym parent, so that the shortcode `[pym align="foo"]` results in the output `<div id="pym_0" class="pym alignfoo ">...`
 
 ## Frequently Asked Questions
 
