@@ -34,7 +34,8 @@ function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 	 */
 	$default_class = apply_filters( 'pym_shortcode_default_class', 'pym' );
 	$class = empty( $atts['class'] ) ? '' : esc_attr( $atts['class'] );
-	$actual_classes = $default_class . ' ' . $class;
+	$align = empty( $atts['align'] ) ? '' : 'align' . esc_attr( $atts['align'] );
+	$actual_classes = $default_class . ' ' . $align . ' ' . $class;
 
 	$src = $atts['src'];
 
