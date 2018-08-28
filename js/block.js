@@ -34,6 +34,12 @@
 	var __ = wp.i18n.__;
 
 	/**
+	 * Literally just for a fancy dashicon
+	 * @see https://github.com/WordPress/gutenberg/blob/master/packages/components/src/dashicon/README.md
+	 */
+	var dashicon = wp.components.Dashicon;
+
+	/**
 	 * Every block starts by registering a new block type definition.
 	 * @see https://wordpress.org/gutenberg/handbook/block-api/
 	 */
@@ -98,10 +104,34 @@
 				 * php_block_render() in your PHP code whenever it needs to get an updated
 				 * view of the block.
 				 */
+				/*
 				el( ServerSideRender, {
 					block: 'pym-shortcode/pym',
 					attributes: props.attributes,
 				} ),
+				*/
+				el(
+					'div',
+					{
+						// attributes
+						className: props.className,
+					},
+					// children follow
+					el( TextControl, {
+						label: [
+							el(
+								dashicon,
+								{
+									icon: 'analytics'
+								},
+							),
+							'Pym Child URL'
+						],
+						value: props.attributes.src,
+						placeholder: 'What is the URL of your Pym child?',
+						onChange: ( value ) => { props.setAttributes( { src: value } ); },
+					} )
+				),
 				/*
 				 * InspectorControls lets you add controls to the Block sidebar. In this case,
 				 * we're adding a TextControl, which lets us edit the 'foo' attribute (which
@@ -113,37 +143,25 @@
 					el( TextControl, {
 						label: 'Child URL',
 						value: props.attributes.src,
+						placeholder: 'What is the URL of your Pym child?',
 						onChange: ( value ) => { props.setAttributes( { src: value } ); },
-					} )
-				),
-				el( InspectorControls, {},
+					} ),
 					el( TextControl, {
 						label: 'Pym.js URL (optional)',
 						value: props.attributes.pymsrc,
 						onChange: ( value ) => { props.setAttributes( { pymsrc: value } ); },
-					} )
-				),
-				el( InspectorControls, {},
+					} ),
 					el( TextControl, {
 						label: 'Pym Options',
 						value: props.attributes.pymoptions,
 						onChange: ( value ) => { props.setAttributes( { pymoptions: value } ); },
-					} )
-				),
-				el( InspectorControls, {},
+					} ),
 					el( TextControl, {
 						label: 'Element ID for this frame (optional)',
 						value: props.attributes.parent_id,
 						onChange: ( value ) => { props.setAttributes( { parent_id: value } ); },
 					} )
 				),
-				el( InspectorControls, {},
-					el( TextControl, {
-						label: 'CSS Classes to add to frame (optional)',
-						value: props.attributes.className,
-						onChange: ( value ) => { props.setAttributes( { class: value } ); },
-					} )
-				)
 			];
 		},
 
