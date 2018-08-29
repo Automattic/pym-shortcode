@@ -49,6 +49,7 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 * Adds a "Pym Embed" block for use in Gutenberg.
 * Shortcode now gains an `align=""` parameter, so that WordPress's generated [alignment CSS classes](https://codex.wordpress.org/CSS#WordPress_Generated_Classes) can be used on embeds. By enabling this in the shortcode, the Gutenberg Block also gains support for alignment.
 * Script tags for embeds are no longer output by `the_content()`, instead being output during `wp_footer()` by [closures](https://secure.php.net/manual/en/functions.anonymous.php) hooked on the `'wp_footer'` action.
+* The source URL for `pym.js` is no longer output by `the_content()`, instead being output during `wp_footer` by an action dedicated to the task. If different shortcodes and/or blocks on the page specify different source URLs for Pym.js, all are output (after removing duplicates), but a message is logged in the browser console. If `WP_DEBUG` is set, this message is also logged to the server log, with the post ID specified.
 
 = 1.3.2 =
 
