@@ -8,6 +8,7 @@ Author: The INN Nerds
 Author URI: http://nerds.inn.org/
 License: GPL Version 2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: pym_shortcode
 */
 
 // If this file is called directly, abort.
