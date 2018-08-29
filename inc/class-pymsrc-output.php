@@ -30,7 +30,10 @@ class Pymsrc_Output{
 	}
 
 	/**
-	 * Set us up the vars
+	 * During construction, register the output function for this post.
+	 *
+	 * If the Pymsrc_Output class hasn't been used on a post, then
+	 * there's no need to register any output.
 	 */
 	private function __construct() {
 		add_action( 'wp_footer', array( $this, 'output' ) );
@@ -45,7 +48,6 @@ class Pymsrc_Output{
 	/**
 	 * Add an item to the array of sources
 	 *
-	 * @param string $id The ID of the script tag to be added
 	 * @param string $url The URL of the script tag to be added
 	 * @return Bool whether there was a success.
 	 *
@@ -53,8 +55,12 @@ class Pymsrc_Output{
 	 * @link https://github.com/INN/pym-shortcode/issues/8 arbitrary js
 	 * @link https://github.com/INN/pym-shortcode/issues/31 force CDN version
 	 */
-	public function add( $id, $url ) {
-		$this->sources[$id] = $url;
+	public function add( $url ) {
+		$sources = array_unique( array_merge(
+			$this->sources,
+			array( $url )
+		) );
+		$this->sources = $sources;
 	}
 
 	/**
@@ -73,7 +79,7 @@ class Pymsrc_Output{
 	 */
 	public function output() {
 		$this->maybe_warning_message();
-		foreach ( $this->sources as $id => $url ) {
+		foreach ( $this->sources as $url ) {
 			wp_enqueue_script(
 				esc_attr( $id ),
 				$url,

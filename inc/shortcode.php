@@ -61,7 +61,7 @@ function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 	// or if the pymsrc is set, output that.
 	if ( 0 === $pym_id || ! empty( $atts['pymsrc'] ) ) {
 		$pymsrc_output = Pymsrc_Output::get_instance();
-		$pymsrc_output->add( $pym_id, $pymsrc );
+		$pymsrc_output->add( $pymsrc );
 	}
 
 	// Output the parent's scripts.
