@@ -46,6 +46,9 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 
 = [unreleased] =
 
+* Adds a "Pym Embed" block for use in Gutenberg
+* Script tags for embeds are no longer output by `the_content()`, instead being output during `wp_footer()` by [closures](https://secure.php.net/manual/en/functions.anonymous.php) hooked on the `'wp_footer'` action.
+
 = 1.3.2 =
 
 * *RECOMMENDED UPDATE* : Pym users, NPR has released an update that closes a potential security hole. We recommend everyone update to 1.3.2.
