@@ -133,7 +133,7 @@ class Pymsrc_Output{
 	public function warning_message_footer() {
 		printf(
 			'<script type="text/javascript">window.console && console.log( \'%1$s\', %2$s );</script>',
-			wp_json_encode( __( 'Hi Pym user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym embeds.', 'pym_shortcode' ) ),
+			wp_json_encode( __( 'Hi Pym user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym embeds. For more details, see https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console', 'pym_shortcode' ) ),
 			wp_json_encode( $this->sources )
 		);
 	}

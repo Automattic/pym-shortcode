@@ -86,23 +86,25 @@ In any of these cases, set the different version of `Pym.js` using the `pymsrc` 
 
 If a post has multiple instances of the pym shortcode or block present, and between those different pym instances there are different source URLs for `pym.js` specified, then you should expect to see a message like the following in the browser's console when viewing that page:
 
-> Hi Pym user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym embeds."
+> Hi Pym user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym embeds. For more details, see https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console"
 
 If your server is running with [`WP_DEBUG` set to `true`](https://codex.wordpress.org/WP_DEBUG), then your server console will also contain a message like this:
 
 ```
-PHP message: post 5 There are more than one pym source URLs set on this page! The list: array (
+PHP message: post 5: There are more than one pym source URLs set on this page! The list: array (
   0 => 'http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js',
   1 => 'https://pym.nprapps.org/pym.v1.js',
 )
 ```
+
+This message is included to make the process of debugging your content easier.
 
 To remedy this issue, take the following steps:
 
 1. Make sure every `[pym]` shortcode in the page has the same `pymsrc=""` attribute
 2. Make sure that every Pym Embed block on the page has the same URL set in the block settings for the "Pym.js URL" option.
 
-If your post has a mix of Pym shortcodes and blocks, you'll need to make sure that both sets use the same thing.
+If your post has a mix of Pym shortcodes and blocks, you'll need to make sure that both types of Pym embed on the page use the same source URL.
 
 ### How do I serve `Pym.js` if the embedded page uses HTTPS and my site does not?
 
@@ -136,3 +138,5 @@ You may also want to look at NPR's `Pym.js` resources, especially if you're inte
 
 * [`Pym.js` homepage](http://blog.apps.npr.org/pym.js/)
 * [`Pym.js` repo on GutHub/nprapps](https://github.com/nprapps/pym.js/)
+
+As for things that you might want to use Pym.js for, have you checked out NPR's [dailygraphics rig for deploying graphics projects in responsive iframes](https://github.com/nprapps/dailygraphics/)?
