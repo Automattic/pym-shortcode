@@ -9,6 +9,8 @@
  * @param Array  $atts    the attributes passed in the shortcode.
  * @param String $content the enclosed content; should be empty for this shortcode.
  * @param String $tag     the shortcode tag.
+ * @uses pym_shortcode_script_footer_enqueue
+ * @return String the embed HTML
  */
 function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 
@@ -57,18 +59,36 @@ function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 	}
 
 	// Output the parent's scripts.
-	echo '<script>';
-	echo sprintf(
-		'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', {%4$s})',
-		esc_js( $pym_id ),
-		esc_js( $actual_id ),
-		esc_js( $src ),
-		$pymoptions
-	);
-	echo '</script>';
+	pym_shortcode_script_footer_enqueue( array(
+		'pym_id' => $pym_id,
+		'actual_id' => $actual_id,
+		'src' => $src,
+		'pymoptions' => $pymoptions,
+	) );
 
 	// What is output to the page:
 	$ret = ob_get_clean();
 	return $ret;
 }
 add_shortcode( 'pym', 'pym_shortcode' );
+
+/**
+ * Given the necessary arguments for creating a embed's activation javascript, enqueue that script in the footer
+ *
+ * @param Array $args Has indices 'pym_id', 'actual_id', 'src', 'pymoptions'
+ * @since 1.3.2.1
+ */
+function pym_shortcode_script_footer_enqueue( $args = array() ) {
+	add_action( 'wp_footer', function() use ( $args ) {
+		// Output the parent's scripts.
+		echo '<script>';
+		echo sprintf(
+			'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', {%4$s})',
+			esc_js( $args['pym_id'] ),
+			esc_js( $args['actual_id'] ),
+			esc_js( $args['src'] ),
+			$args['pymoptions']
+		);
+	echo '</script>';
+	} );
+}
