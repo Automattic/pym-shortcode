@@ -81,7 +81,7 @@ class Pymsrc_Output{
 		$this->maybe_warning_message();
 		foreach ( $this->sources as $url ) {
 			wp_enqueue_script(
-				esc_attr( $id ),
+				esc_attr( uniqid( 'pym_', $url ) ), // Timestamp-based identifier seeded with URL to ensure different handles for different scripts.
 				$url,
 				array(),
 				null,
@@ -116,8 +116,9 @@ class Pymsrc_Output{
 	public function warning_message_debug() {
 		error_log(
 			sprintf(
-				'%1$s %2$s',
-				__( 'There are more than one pym source URLs set on this page! The list:', 'pym_shortcode' ),
+				'post %1$s: %2$s %3$s',
+				get_the_id(),
+				__( 'There are more than one pym source URLs set on this post! The list:', 'pym_shortcode' ),
 				var_export( $this->sources, true )
 			)
 		);

@@ -82,11 +82,33 @@ In any of these cases, set the different version of `Pym.js` using the `pymsrc` 
 [pym src="http://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://cdnjs.cloudflare.com/ajax/libs/pym/0.4.5/pym.min.js" pymoptions=""]
 ```
 
+### I've set a different `pymsrc` option, but now I'm seeing a message in the console
+
+If a post has multiple instances of the pym shortcode or block present, and between those different pym instances there are different source URLs for `pym.js` specified, then you should expect to see a message like the following in the browser's console when viewing that page:
+
+> Hi Pym user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym embeds."
+
+If your server is running with [`WP_DEBUG` set to `true`](https://codex.wordpress.org/WP_DEBUG), then your server console will also contain a message like this:
+
+```
+PHP message: post 5 There are more than one pym source URLs set on this page! The list: array (
+  0 => 'http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js',
+  1 => 'https://pym.nprapps.org/pym.v1.js',
+)
+```
+
+To remedy this issue, take the following steps:
+
+1. Make sure every `[pym]` shortcode in the page has the same `pymsrc=""` attribute
+2. Make sure that every Pym Embed block on the page has the same URL set in the block settings for the "Pym.js URL" option.
+
+If your post has a mix of Pym shortcodes and blocks, you'll need to make sure that both sets use the same thing.
+
 ### How do I serve `Pym.js` if the embedded page uses HTTPS and my site does not?
 
 If the embedded page's domain has an SSL certificate and is loaded over HTTPS, and if your site is loaded over plain HTTP, then the Pym script on your page will not be able to talk to the Pym script in the embedded page. This can be fixed by making sure your site loads over HTTPS, or by specifying an alternate source for your Pym script.
 
-The default pym source is `js/pym.v1.min.js` in this plugin, served by whatever protocol your site is using. You can change the source by using the `pymsrc` parameter in the shortcode, for example an HTTPS-using CDN source like `https://pym.nprapps.org/pym.v1.min.js`:
+The default pym source is `js/pym.v1.min.js` in this plugin's folder, served by whatever protocol your site is using. You can change the source by using the `pymsrc` parameter in the shortcode, for example an HTTPS-using CDN source like `https://pym.nprapps.org/pym.v1.min.js`:
 
 ```
 [pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js" pymoptions=""]
