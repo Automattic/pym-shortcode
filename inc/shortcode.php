@@ -4,7 +4,12 @@
  */
 
 /**
+ *
+
+/**
  * A shortcode to simplify the process of embedding articles using pym.js
+ *
+ * This function also powers the Pym Embed block output.
  *
  * @param Array  $atts    the attributes passed in the shortcode.
  * @param String $content the enclosed content; should be empty for this shortcode.
@@ -23,7 +28,6 @@ function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 	}
 
 	// Set us up the vars.
-	$pymsrc = empty( $atts['pymsrc'] ) ? plugins_url( '/js/pym.v1.min.js', dirname( __FILE__ ) ) : $atts['pymsrc'];
 	$pymoptions = empty( $atts['pymoptions'] ) ? '' : $atts['pymoptions'];
 	$id = empty( $atts['id'] ) ? '' : esc_attr( $atts['id'] );
 	$actual_id = empty( $id ) ? 'pym_' . $pym_id : $id;
@@ -49,13 +53,15 @@ function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 		esc_attr( $actual_classes )
 	);
 
-	// If this is the first one on the page, output the pym src
+
+	// What's the pymsrc for this shortcode?
+	$pymsrc = empty( $atts['pymsrc'] ) ? plugins_url( '/js/pym.v1.min.js', dirname( __FILE__ ) ) : $atts['pymsrc'];
+
+	// If this is the first Pym element on the page, output the pymsrc script tag
 	// or if the pymsrc is set, output that.
 	if ( 0 === $pym_id || ! empty( $atts['pymsrc'] ) ) {
-		echo sprintf(
-			'<script src="%s"></script>',
-			esc_attr( $pymsrc )
-		);
+		$pymsrc_output = Pymsrc_Output::get_instance();
+		$pymsrc_output->add( $pym_id, $pymsrc );
 	}
 
 	// Output the parent's scripts.
@@ -79,17 +85,21 @@ add_shortcode( 'pym', 'pym_shortcode' );
  * @since 1.3.2.1
  */
 function pym_shortcode_script_footer_enqueue( $args = array() ) {
-	add_action( 'wp_footer', function() use ( $args ) {
-		// Output the parent's scripts.
-		echo '<script>';
-		echo sprintf(
-			'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', {%4$s})',
-			esc_js( $args['pym_id'] ),
-			esc_js( $args['actual_id'] ),
-			esc_js( $args['src'] ),
-			$args['pymoptions']
-		);
-	echo '</script>';
-	echo PHP_EOL; // for pretty printing of scripts in the footer.
-	} );
+	add_action(
+		'wp_footer',
+		function() use ( $args ) {
+			// Output the parent's scripts.
+			echo '<script>';
+			echo sprintf(
+				'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', {%4$s})',
+				esc_js( (string) $args['pym_id'] ),
+				esc_js( $args['actual_id'] ),
+				esc_js( $args['src'] ),
+				$args['pymoptions']
+			);
+			echo '</script>';
+			echo PHP_EOL; // for pretty printing of scripts in the footer.
+		},
+		20 // So that this comes after the pymsrc tag is output at priority 10.
+	);
 }

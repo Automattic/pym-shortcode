@@ -19,6 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
 $includes = array(
 	'/inc/block.php',
 	'/inc/shortcode.php',
+	'/inc/class-pymsrc-output.php',
 );
 foreach ( $includes as $include ) {
 	if ( 0 === validate_file( dirname( __FILE__ ) . $include ) ) {
