@@ -90,5 +90,6 @@ function pym_shortcode_script_footer_enqueue( $args = array() ) {
 			$args['pymoptions']
 		);
 	echo '</script>';
+	echo PHP_EOL; // for pretty printing of scripts in the footer.
 	} );
 }
