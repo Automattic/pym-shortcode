@@ -32,13 +32,19 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 [pym src="" pymsrc="" pymoptions="" class="" align="" id="" ]
 ```
 
+### `src`, the child URL
+
 `src` is the URL of the page that is to be embedded.
+
+### `pymsrc`, the URL for pym.js
 
 `pymsrc` is optional; only set this if you need to specify a different source for Pym.js than the default. The default pym source is `js/pym.v1.min.js` in this plugin's directory on your server. [NPR recommends](http://blog.apps.npr.org/pym.js/#get-pym-cdn) that you use the CDN version of Pym.js in most cases, which is available at `https://pym.nprapps.org/pym.v1.min.js`. An example shortcode using this option is as follows:
 
 ```
 [pym src="http://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js"]
 ```
+
+### `pymoptions`, settings for Pym
 
 `pymoptions` is optional; this should be a javascript object without the surrounding `{}`, and is given in the event that options need to be passed to the `pymParent`. NPR gives [this example](http://blog.apps.npr.org/pym.js/#examples) javascript:
 
@@ -52,6 +58,8 @@ To do the same thing with this Pym shortcode, you would write:
 [pym src="child.html" pymoptions=" xdomain: '\\*\.npr\.org' "]
 ```
 
+### `class`, to add HTML classes to the Pym parent element
+
 `class` is optional; this should be a valid HTML class name. It will be added to the element's default class, `'pym'`. You would want to use this if, for example, you wanted to [use a size-based class name to determine the size of the embed on your site](https://github.com/INN/pym-shortcode/issues/23). The class `'pym'` will always be output on container elements created by the Pym Shortcode. This class was introduced in version 1.2.2.
 
 For example, the shortcode `[pym src="http://blog.apps.npr.org/pym.js/examples/graphic/child.html" class="one two three four float-left mw_50"]` results in the following output:
@@ -62,8 +70,11 @@ For example, the shortcode `[pym src="http://blog.apps.npr.org/pym.js/examples/g
 
 If you do not want the class `'pym'` output on container elements, [add a filter](https://codex.wordpress.org/Plugin_API/Filter_Reference) to the hook `pym_shortcode_default_class` that returns an empty string.
 
+### `align`, for WordPress alignment support
 
 `align` is optional; this should be one of the [WordPress-provided generated alignment types](https://codex.wordpress.org/CSS#WordPress_Generated_Classes): `left`, `right`, `center`, `none`. If your theme supports the `wide` or `full` values, you can use those too, as the value provided here will be prefixed with `align` and output as a CSS class on the Pym parent, so that the shortcode `[pym align="foo"]` results in the output `<div id="pym_0" class="pym alignfoo ">...`
+
+### `id`, to set the Pym parent element's ID
 
 `id` is optional; this should be a valid HTML element ID name. It will be used as the ID of your `pymParent` iframe on the parent page. You would want to use this if, for example, [your embedded page contained navigation to another page, requiring the second page to know the pymParent element ID](https://github.com/INN/pym-shortcode/issues/20).
 
