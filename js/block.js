@@ -99,17 +99,6 @@
 		edit: function( props ) {
 			return [
 				// https://gist.github.com/pento/cf38fd73ce0f13fcf0f0ae7d6c4b685d#file-php-block-js-L59
-				/*
-				 * The ServerSideRender element uses the REST API to automatically call
-				 * php_block_render() in your PHP code whenever it needs to get an updated
-				 * view of the block.
-				 */
-				/*
-				el( ServerSideRender, {
-					block: 'pym-shortcode/pym',
-					attributes: props.attributes,
-				} ),
-				*/
 				el(
 					'div',
 					{
