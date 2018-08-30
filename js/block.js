@@ -26,6 +26,7 @@
 	 * @todo check definition
 	 */
 	var InspectorControls = wp.editor.InspectorControls;
+	var InspectorAdvancedControls = wp.editor.InspectorAdvancedControls;
 
 	/**
 	 * Retrieves the translation of text.
@@ -146,8 +147,10 @@
 						placeholder: 'What is the URL of your Pym child?',
 						onChange: ( value ) => { props.setAttributes( { src: value } ); },
 					} ),
+				),
+				el( InspectorAdvancedControls, {},
 					el( TextControl, {
-						label: 'Pym.js URL (optional)',
+						label: 'Pym.js source URL (optional)',
 						value: props.attributes.pymsrc,
 						onChange: ( value ) => { props.setAttributes( { pymsrc: value } ); },
 					} ),
@@ -155,11 +158,15 @@
 						label: 'Pym Options',
 						value: props.attributes.pymoptions,
 						onChange: ( value ) => { props.setAttributes( { pymoptions: value } ); },
-					} ),
-					el( TextControl, {
-						label: 'Element ID for this frame (optional)',
-						value: props.attributes.parent_id,
-						onChange: ( value ) => { props.setAttributes( { parent_id: value } ); },
+						help: [
+							'For more about this control, see ',
+							el( 'a', {
+								href: 'http://blog.apps.npr.org/pym.js/',
+							},
+								'the Usage section of the Pym.js docs',
+							),
+							'.'
+						],
 					} )
 				),
 			];
