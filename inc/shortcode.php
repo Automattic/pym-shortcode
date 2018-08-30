@@ -39,9 +39,15 @@ function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 	 * @return String the default class name
 	 */
 	$default_class = apply_filters( 'pym_shortcode_default_class', 'pym' );
-	$class = empty( $atts['class'] ) ? '' : esc_attr( $atts['class'] );
+	$shortcode_class = empty( $atts['class'] ) ? '' : esc_attr( $atts['class'] );
+	$gutenberg_class = empty( $atts['className'] ) ? '' : esc_attr( $atts['className'] );
 	$align = empty( $atts['align'] ) ? '' : 'align' . esc_attr( $atts['align'] );
-	$actual_classes = $default_class . ' ' . $align . ' ' . $class;
+	$actual_classes = implode( ' ', array(
+		$default_class,
+		$shortcode_class,
+		$gutenberg_class,
+		$align,
+	) );
 
 	$src = $atts['src'];
 
