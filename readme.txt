@@ -22,7 +22,7 @@ Pym Shortcode will resize an iframe responsively depending on the height of its 
 
 == Frequently Asked Questions ==
 
-For answers to frequently asked questions, [see this plugin's documentation on GitHub](https://github.com/INN/pym-shortcode/tree/master/docs)
+For answers to frequently asked questions, [see this plugin's documentation on GitHub](https://github.com/INN/pym-shortcode/tree/master/docs).
 
 == Screenshots ==
 
