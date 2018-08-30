@@ -18,8 +18,6 @@
  * @return String the embed HTML
  */
 function pym_shortcode( $atts = array(), $content='', $tag='' ) {
-	error_log(var_export( $atts, true));
-
 	// generate an ID for this embed; necessary to prevent conflicts.
 	global $pym_id;
 	if ( ! isset( $pym_id ) ) {
