@@ -138,6 +138,12 @@
 				),
 				el( InspectorAdvancedControls, {},
 					el( TextControl, {
+						label: 'Parent frame ID (optional)',
+						value: props.attributes.id,
+						onChange: ( value ) => { props.setAttributes( { id: value } ); },
+						help: 'The Pym Block will automatically generate an ID for the parent element and use that to initiate the Pym embed. If your Pym Child requires its parent to have a specific element ID, set that here.'
+					} ),
+					el( TextControl, {
 						label: 'Pym.js source URL (optional)',
 						value: props.attributes.pymsrc,
 						onChange: ( value ) => { props.setAttributes( { pymsrc: value } ); },
@@ -203,7 +209,7 @@
 								return named.pymoptions ? named.pymoptions : '';
 							},
 						},
-						parent_id: {
+						id: {
 							type: 'string',
 							shortcode: function( named ) {
 								return named.id ? named.id : '';
