@@ -68,11 +68,10 @@
 		 * @link https://wordpress.org/gutenberg/handbook/block-api/#supports-optional
 		 */
 		supports: {
-			// Removes support for an HTML mode.
-			html: false,
-			align: true,
-			alignWide: true,
-			anchor: true,
+			html: false, // Removes support for an HTML mode.
+			align: true, // supports alignment
+			alignWide: true, // supports the extra slignment
+			anchor: false, // see https://github.com/INN/pym-shortcode/issues/36
 			customClassName: true,
 			className: true,
 			inserter: true,
