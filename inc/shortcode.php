@@ -75,6 +75,13 @@ function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 		'actual_id' => $actual_id,
 		'src' => $src,
 		'pymoptions' => $pymoptions,
+		// The following options are not necessary for the default
+		// function pym_shortcode_script_footer_enqueue, but are provided
+		// in case someone wants to do other things with their own version
+		// of this function.
+		// @link https://github.com/INN/pym-shortcode/issues/19
+		'actual_classes' => $actual_classes,
+		'pymsrc' => $pymsrc,
 	) );
 
 	// What is output to the page:
@@ -84,27 +91,51 @@ function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 add_shortcode( 'pym', 'pym_shortcode' );
 
 /**
- * Given the necessary arguments for creating a embed's activation javascript, enqueue that script in the footer
+ * Given the necessary arguments for creating an embed's activation javascript, enqueue that script in the footer
  *
- * @param Array $args Has indices 'pym_id', 'actual_id', 'src', 'pymoptions'
+ * This function is pluggable. https://codex.wordpress.org/Pluggable_Functions
+ * If your site requires a different activation script than the one provided
+ * by this function, create a function in your site's theme or in a plugin
+ * with this plugin's name, accepting the arguments passed to this function.
+ *
+ * @link https://github.com/INN/pym-shortcode/issues/19
+ *
+ * @param Array $args Has the following indices:
+ *     - 'pym_id' Which Pym instance this is on the page, provided for
+ *        informational purposes. In this function, the pym_id value is
+ *        used as the variable name in `var pym_id = new pym.Parent(...);`
+ *     - 'actual_id' the element ID used for the Pym container element,
+ *        which is at this point set on the page and not changeable from
+ *        this function. This is the first argument for `new pym.Parent()`.
+ *     - 'src' the URL for the Pym child page. This is the second argument
+ *        for `new pym.Parent()`.
+ *     - 'pymoptions' The third argument for `pym.Parent()` See the xdomain
+ *        argument in http://blog.apps.npr.org/pym.js/#example-block
+ *     - 'actual_classes' The classes used on the Pym container element,
+ *        provided to this function for informational purposes.
+ *     - 'pymsrc' The URL from which Pym is to be loaded for this emebed,
+ *        based on the shortcode/block options and the plugin settings.
+ *
  * @since 1.3.2.1
  */
-function pym_shortcode_script_footer_enqueue( $args = array() ) {
-	add_action(
-		'wp_footer',
-		function() use ( $args ) {
-			// Output the parent's scripts.
-			echo '<script>';
-			echo sprintf(
-				'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', {%4$s})',
-				esc_js( (string) $args['pym_id'] ),
-				esc_js( $args['actual_id'] ),
-				esc_js( $args['src'] ),
-				$args['pymoptions']
-			);
-			echo '</script>';
-			echo PHP_EOL; // for pretty printing of scripts in the footer.
-		},
-		20 // So that this comes after the pymsrc tag is output at priority 10.
-	);
+if ( ! function_exists( 'pym_shortcode_script_footer_enqueue' ) ) {
+	function pym_shortcode_script_footer_enqueue( $args = array() ) {
+		add_action(
+			'wp_footer',
+			function() use ( $args ) {
+				// Output the parent's scripts.
+				echo '<script>';
+				echo sprintf(
+					'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', {%4$s})',
+					esc_js( (string) $args['pym_id'] ),
+					esc_js( $args['actual_id'] ),
+					esc_js( $args['src'] ),
+					$args['pymoptions']
+				);
+				echo '</script>';
+				echo PHP_EOL; // for pretty printing of scripts in the footer.
+			},
+			20 // So that this comes after the pymsrc tag is output at priority 10.
+		);
+	}
 }
