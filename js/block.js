@@ -171,12 +171,19 @@
 		 * into the final markup, which is then serialized by Gutenberg into `post_content`.
 		 * @see https://wordpress.org/gutenberg/handbook/block-edit-save/#save
 		 *
+		 * Though this block has a render callback, we save the URL of the embed in the post_content
+		 * just in case this plugin is ever deactivated.
+		 *
 		 * @return {Element}       Element to render.
 		 */
-		save: function() {
-			// null because this block is rendered serverside in PHP.
-			// If there were something returned here, that return would be saved in the post_content.
-			return null;
+		save: function( props ) {
+			return wp.element.createElement(
+				'a',
+				{
+					href: props.attributes.src,
+				},
+				props.attributes.src
+			);
 		},
 
 		/**
