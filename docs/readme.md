@@ -36,7 +36,7 @@ For the block, all options available via shortcode arguments are available throu
 
 `src` is the URL of the page that is to be embedded. In these examples, we use https://blog.apps.npr.org/pym.js/examples/table/child.html, the source code for which can be found at https://github.com/nprapps/pym.js/tree/master/examples/table .
 
-For the shortcode, `src` is the only required prarameter.
+For the shortcode, `src` is the only required parameter.
 
 ```
 [pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html"]
@@ -48,7 +48,7 @@ Here's what the setting looks like in a block:
 
 ### `pymsrc`, the URL for pym.js
 
-`pymsrc` is optional; only set this if you need to specify a different source for `Pym.js` than the default. The default pym source is `js/pym.v1.min.js` in this plugin's directory on your server. [NPR recommends](http://blog.apps.npr.org/pym.js/#get-pym-cdn) that you use the CDN version of `Pym.js` in most cases, which is available at `https://pym.nprapps.org/pym.v1.min.js`. An example shortcode using this option is as follows:
+`pymsrc` is optional; only set this if you need to specify a different source for `Pym.js` than the default. The default Pym.js source URL is `js/pym.v1.min.js` in this plugin's directory on your server. [NPR recommends](http://blog.apps.npr.org/pym.js/#get-pym-cdn) that you use the CDN version of `Pym.js` in most cases, which is available at `https://pym.nprapps.org/pym.v1.min.js`. An example shortcode using this option is as follows:
 
 ```
 [pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js"]
@@ -110,7 +110,7 @@ Normally WordPress strips out JavaScript inserted in posts and pages, so the usu
 
 ### When would I use a `Pym.js` solution versus embed code without using `Pym.js`?
 
-If you're embedding a YouTube video or a SoundCloud audio player, you don't need `Pym.js` and in fact you would not want to use it. WordPress supports many embeds through [oEmbed](https://codex.wordpress.org/Embeds). To make these commodity types of embeds responsive, you may need to add CSS rules depending on your theme. They won't be resized by this plugin.
+If you're embedding a YouTube video or a SoundCloud audio player, you don't need `Pym.js` and in fact, you would not want to use it. WordPress supports many embeds through [oEmbed](https://codex.wordpress.org/Embeds). To make these commodity types of embeds responsive, you may need to add CSS rules depending on your theme. They won't be resized by this plugin.
 
 You would want to use Pym for other types of content you create and embed using iframes such as tables, charts, and interactive elements. For example, news organizations often create data-driven visualizations that are hosted in another application and need to be iframed into their CMS.
 
@@ -122,9 +122,9 @@ Nope, all the required JavaScript is self-contained in `pym.v1.min.js`. The shor
 
 ### What is the URL for `pym.v1.min.js`?
 
-Assuming that you have installed this plugin via the wordpress.org plugin repository, and that your site is `https://example.org/`, you'll find `pym.v1.min.js` at `https://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js` .
+Assuming that you have installed this plugin via the wordpress.org plugin repository and that your site is `https://example.org/`, you'll find `pym.v1.min.js` at `https://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js` .
 
-You can check the validity of that assumption by putting a shortcode or block in a post, then viewing the post from the frontend. In the source code of the page you should see a script tag loading `pym.v1.min.js`. 
+You can check the validity of that assumption by putting a shortcode or block in a post, then viewing the post from the frontend. In the source code of the page, you should see a script tag loading `pym.v1.min.js`. 
 
 Or, you can specify the URL from which to load `Pym.js`.
 
@@ -169,9 +169,9 @@ If your post has a mix of Pym shortcodes and blocks, you'll need to make sure th
 
 ### How do I serve `Pym.js` if the embedded page uses HTTPS and my site does not?
 
-If the embedded page's domain has an SSL certificate and is loaded over HTTPS, and if your site is loaded over plain HTTP, then the Pym script on your page will not be able to talk to the Pym script in the embedded page. This can be fixed by making sure your site loads over HTTPS, or by specifying an alternate source for your Pym script.
+If the embedded page's domain has an SSL certificate and is loaded over HTTPS, and if your site is loaded over plain HTTP, then the Pym.js script on your page will not be able to talk to the Pym.js script in the embedded page. This can be fixed by making sure your site loads over HTTPS, or by specifying an alternate source for your Pym.js script.
 
-The default pym source is `js/pym.v1.min.js` in this plugin's folder, served by whatever protocol your site is using. You can change the source by using the `pymsrc` parameter in the shortcode, for example an HTTPS-using CDN source like `https://pym.nprapps.org/pym.v1.min.js`:
+The default Pym.js source URL is `js/pym.v1.min.js` in this plugin's folder, served by whatever protocol your site is using. You can change the source by using the `pymsrc` parameter in the shortcode, for example, an HTTPS-using CDN source like `https://pym.nprapps.org/pym.v1.min.js`:
 
 ```
 [pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js" pymoptions=""]
@@ -183,7 +183,7 @@ The URL provided above is the [official content delivery network (CDN) for Pym](
 
 If the embed isn't resizing correctly (especially vertically), the `Pym.js` script may not be loading correctly.
 
-You can determine if the embed is being served over HTTPS by opening the embed in new tab and looking at the protocol in its URL to see if it's `https://` instead of `http://`. To open the embed in a new tab, try right-clicking on the embed and choosing "Open frame in new tab" or a similar option.
+You can determine if the embed is being served over HTTPS by opening the embed in a new tab and looking at the protocol in its URL to see if it's `https://` instead of `http://`. To open the embed in a new tab, try right-clicking on the embed and choosing "Open frame in new tab" or a similar option.
 
 You can also check by opening your browser's developer tools and looking in the console for errors.
 
@@ -195,7 +195,7 @@ This plugin is released under the GNU GPL, version 2 or later.
 
 ## Other Pym Resources
 
-You may also want to look at NPR's `Pym.js` resources, especially if you're interesting in building compatible embeds:
+You may also want to look at NPR's `Pym.js` resources, especially if you're interested in building compatible embeds:
 
 * [`Pym.js` homepage](http://blog.apps.npr.org/pym.js/)
 * [`Pym.js` repo on GutHub/nprapps](https://github.com/nprapps/pym.js/)
