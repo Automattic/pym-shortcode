@@ -1,6 +1,8 @@
 <?php
 /**
  * The class and related methods for tracking which pymsrc tags will be output upon the page
+ *
+ * @package pym-shortcode
  */
 
 /**

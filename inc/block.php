@@ -64,8 +64,3 @@ function pym_block_init() {
 	) );
 }
 add_action( 'init', 'pym_block_init' );
-
-// temporary function to mock the shortcode
-function pym_shortcode_debug( $atts = array(), $content = '', $tag = '' ) {
-	return '<p>' . print_r( $atts, true ) . '</p>';
-}

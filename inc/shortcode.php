@@ -1,10 +1,9 @@
 <?php
 /**
  * The [pym] shortcode and related functions
- */
-
-/**
  *
+ * @package pym-shortcode
+ */
 
 /**
  * A shortcode to simplify the process of embedding articles using pym.js
