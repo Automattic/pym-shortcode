@@ -58,7 +58,7 @@ function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 	);
 
 	// What's the pymsrc for this shortcode?
-	$pymsrc = empty( $atts['pymsrc'] ) ? plugins_url( '/js/pym.v1.min.js', dirname( __FILE__ ) ) : $atts['pymsrc'];
+	$pymsrc = empty( $atts['pymsrc'] ) ? pym_pymsrc_default_url() : $atts['pymsrc'];
 
 	// If this is the first Pym element on the page, output the pymsrc script tag
 	// or if the pymsrc is set, output that.
@@ -136,4 +136,24 @@ if ( ! function_exists( 'pym_shortcode_script_footer_enqueue' ) ) {
 			20 // So that this comes after the pymsrc tag is output at priority 10.
 		);
 	}
+}
+
+/**
+ * The default URL for pymsrc, as defined in plugin settings
+ *
+ * @since 1.3.2.1
+ * @uses pym_pymsrc_local_url
+ */
+function pym_pymsrc_default_url() {
+	return pym_pymsrc_local_url();
+}
+
+/**
+ * The plugin-provided pymsrc url
+ *
+ * @since 1.3.2.1
+ * @return string The URL for /wp-content/plugins/pym-shortcode/js/pym.v1.min.js
+ */
+function pym_pymsrc_local_url() {
+	return plugins_url( '/js/pym.v1.min.js', dirname( __FILE__ ) );
 }
