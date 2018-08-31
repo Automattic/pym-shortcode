@@ -2,6 +2,31 @@
 
 Pym Shortcode will responsively resize an iframe's height depending on the width of its container. The plugin uses [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the [NPR Visuals Team](http://blog.apps.npr.org/), to allow embedded content in WordPress posts and pages using a simple shortcode. Using `Pym.js`, it bypasses the usual cross-domain issues.
 
+Contents:
+
+1. [Plugin Installation](#plugin-installation)
+2. [The Pym Shortcode](#the-pym-shortcode)
+3. [The Pym Block](#the-pym-block)
+4. [Options](#options)
+	1. src
+	2. pymsrc
+	3. pymoptions
+	4. class
+	5. align
+	6. id
+5. [Frequently Asked Questions](#frequently-asked-questions)
+	1. [Why would I want to use Pym in the first place?](#why-would-i-want-to-use-pym-in-the-first-place)
+	2. [Why is a WordPress plugin needed to use Pym.js?](#why-is-a-wordpress-plugin-needed-to-use-pymjs)
+	3. [When would I use a Pym.js solution versus embed code without using Pym.js?](#when-would-i-use-a-pymjs-solution-versus-embed-code-without-using-pymjs)
+	4. [Is Pym.js or this plugin dependent on jQuery or any other library?](#is-pymjs-or-this-plugin-dependent-on-jquery-or-any-other-library)
+	5. [What is the URL for pym.v1.min.js?](#what-is-the-url-for-pymv1minjs)
+	6. [Why would I want to change the Pym.js source URL?](#why-would-i-want-to-change-the-pymjs-source-url)
+	7. [I've set a different pymsrc option, but now I'm seeing a message in the console](#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console)
+	8. [How do I serve Pym.js if the embedded page uses HTTPS and my site does not?](#how-do-i-serve-pymjs-if-the-embedded-page-uses-https-and-my-site-does-not)
+	9. [How do I know if there's an HTTPS problem with a given embedded iframe?](#how-do-i-know-if-theres-an-https-problem-with-a-given-embedded-iframe)
+	10. [What license is this plugin licensed under?](#what-license-is-this-plugin-licensed-under)
+6. [Other Pym Resources](#other-pym-resources)
+
 ## Plugin Installation
 
 1. In the WordPress Dashboard go to **Plugins**, then click the **Add Plugins** button and search the WordPress Plugins Directory for Pym Shortcode. Alternatively, you can download the zip file from this Github repo and upload it manually to your WordPress site.
@@ -118,7 +143,7 @@ For the Pym shortcode or the Pym block to work, the `Pym.js` JavaScript library 
 
 ### Is `Pym.js` or this plugin dependent on jQuery or any other library?
 
-Nope, all the required JavaScript is self-contained in `pym.v1.min.js`. The shortcode will enqueue `pym.v1.min.js` when necessary. You will need to include `pym.v1.min.js` on the embedded page, however.
+Nope, all the required JavaScript is self-contained in the plugin-provided copy of `pym.v1.min.js`. The shortcode will enqueue `pym.v1.min.js` when necessary. You will need to include `pym.v1.min.js` on the embedded page, however.
 
 ### What is the URL for `pym.v1.min.js`?
 
