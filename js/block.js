@@ -117,7 +117,7 @@
 							'Pym Child URL'
 						],
 						value: props.attributes.src,
-						placeholder: 'What is the URL of your Pym child?',
+						placeholder: 'What is the URL of your Pym child page?',
 						onChange: ( value ) => { props.setAttributes( { src: value } ); },
 					} )
 				),
@@ -130,18 +130,18 @@
 				 */
 				el( InspectorControls, {},
 					el( TextControl, {
-						label: 'Child URL',
+						label: 'Pym Child URL',
 						value: props.attributes.src,
-						placeholder: 'What is the URL of your Pym child?',
+						placeholder: 'What is the URL of your Pym child page?',
 						onChange: ( value ) => { props.setAttributes( { src: value } ); },
 					} ),
 				),
 				el( InspectorAdvancedControls, {},
 					el( TextControl, {
-						label: 'Parent frame ID (optional)',
+						label: 'Parent element ID (optional)',
 						value: props.attributes.id,
 						onChange: ( value ) => { props.setAttributes( { id: value } ); },
-						help: 'The Pym Block will automatically generate an ID for the parent element and use that to initiate the Pym embed. If your Pym Child requires its parent to have a specific element ID, set that here.'
+						help: 'The Pym block will automatically generate an ID for the parent element and use that to initiate the Pym embed. If your child page\'s code requires its parent to have a specific element ID, set that here.'
 					} ),
 					el( TextControl, {
 						label: 'Pym.js source URL (optional)',

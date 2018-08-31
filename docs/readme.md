@@ -8,7 +8,7 @@ Pym Shortcode will responsively resize an iframe's height depending on the width
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Nothing to configure, just begin using Pym Shortcode!
 
-## Using Pym Shortcode
+## The Pym Shortcode
 
 In a WordPress post or page use Pym Shortcode like this:
 
@@ -18,13 +18,13 @@ Example in a post:
 
 ![Pym Shortcode in a WordPress post](img/pym-shortcode-in-post.png)
 
-Desktop view of the WordPress post with the NPR embed using Pym Shortcode:
+## The Pym Block
 
-![Desktop view of the WordPress post with the NPR embed using Pym Shortcode](img/pym-example-desktop.png)
+Example in a post:
 
-Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
+![Screenshot of the Pym Embed block in a post, with the block settings pane opened to show the block's options and advanced options](img/block-in-editor.png)
 
-![Mobile view of the WordPress post with the NPR embed using Pym Shortcode](img/pym-example-phone.png)
+For the block, all options available via shortcode arguments are available through the block's advanced options panel.
 
 ## Options
 
@@ -48,7 +48,7 @@ Here's what the setting looks like in a block:
 
 ### `pymsrc`, the URL for pym.js
 
-`pymsrc` is optional; only set this if you need to specify a different source for Pym.js than the default. The default pym source is `js/pym.v1.min.js` in this plugin's directory on your server. [NPR recommends](http://blog.apps.npr.org/pym.js/#get-pym-cdn) that you use the CDN version of Pym.js in most cases, which is available at `https://pym.nprapps.org/pym.v1.min.js`. An example shortcode using this option is as follows:
+`pymsrc` is optional; only set this if you need to specify a different source for `Pym.js` than the default. The default pym source is `js/pym.v1.min.js` in this plugin's directory on your server. [NPR recommends](http://blog.apps.npr.org/pym.js/#get-pym-cdn) that you use the CDN version of `Pym.js` in most cases, which is available at `https://pym.nprapps.org/pym.v1.min.js`. An example shortcode using this option is as follows:
 
 ```
 [pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js"]
@@ -95,7 +95,7 @@ In the Gutenberg editor, the alignment options are provided by the alignment con
 For example, the shortcode `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" id="extremely_specific_id"]` results in the following output:
 
 ```html
-<div id="extremely_specific_example" class="pym"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('extremely_specific_example', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
+<div id="extremely_specific_id" class="pym"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('extremely_specific_example', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
 ```
 
 ## Frequently Asked Questions
@@ -110,33 +110,42 @@ Normally WordPress strips out JavaScript inserted in posts and pages, so the usu
 
 ### When would I use a `Pym.js` solution versus embed code without using `Pym.js`?
 
-If you're embedding a YouTube video or a SoundCloud audio player, you don't need `Pym.js` and in fact you would not want to use it. WordPress supports many embeds through [oEmbed](https://codex.wordpress.org/Embeds). To make these commodity types of embeds responsive, you may need to add CSS rules depending on your theme. They won't be resized by Pym Shortcode.
+If you're embedding a YouTube video or a SoundCloud audio player, you don't need `Pym.js` and in fact you would not want to use it. WordPress supports many embeds through [oEmbed](https://codex.wordpress.org/Embeds). To make these commodity types of embeds responsive, you may need to add CSS rules depending on your theme. They won't be resized by this plugin.
 
-You would want to use Pym for other types of iframe content including tables, charts, and interactive elements. For example, news organizations often create data-driven visualizations that are hosted in another application and need to be iframed into their CMS.
+You would want to use Pym for other types of content you create and embed using iframes such as tables, charts, and interactive elements. For example, news organizations often create data-driven visualizations that are hosted in another application and need to be iframed into their CMS.
 
-For Pym Shortcode to work, `pym.v1.min.js` code must be on the "Child Page" which is the source of the content embedded in the shortcode. You can use Pym Shortcode to embed content from any page that is so enabled. For information on how to do this, see [NPR's `Pym.js` documentation](http://blog.apps.npr.org/pym.js/#examples).
+For the Pym shortcode or the Pym block to work, the `Pym.js` JavaScript library must be used on the embedded page, referred to as the "child page". You can use this plugin's shortcode or block to embed content from any page that is so enabled. For information on how to use `Pym.js` in your projects, see [NPR's `Pym.js` documentation](http://blog.apps.npr.org/pym.js/#examples).
 
 ### Is `Pym.js` or this plugin dependent on jQuery or any other library?
 
 Nope, all the required JavaScript is self-contained in `pym.v1.min.js`. The shortcode will enqueue `pym.v1.min.js` when necessary. You will need to include `pym.v1.min.js` on the embedded page, however.
+
+### What is the URL for `pym.v1.min.js`?
+
+Assuming that you have installed this plugin via the wordpress.org plugin repository, and that your site is `https://example.org/`, you'll find `pym.v1.min.js` at `https://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js` .
+
+You can check the validity of that assumption by putting a shortcode or block in a post, then viewing the post from the frontend. In the source code of the page you should see a script tag loading `pym.v1.min.js`. 
+
+Or, you can specify the URL from which to load `Pym.js`.
 
 ### Why would I want to change the `Pym.js` source URL?
 
 There are several reasons why you might want to change the version of `Pym.js` used to embed a webpage. For example:
 
 - The embedded page uses an older version of `Pym.js`
-- The embedded page is loaded over HTTPS, so `Pym.js` must be loaded over HTTPS to communicate with the child
+- The embedded page is loaded over HTTPS but your website is not, so `Pym.js` must be loaded over HTTPS to communicate with the child
 - The embedded page uses a modified version of `Pym.js`
+- For ease of development, you've standardized on the CDN-served copy of `Pym.js`
 
 In any of these cases, set the different version of `Pym.js` using the `pymsrc` option in the shortcode:
 
 ```
-[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://cdnjs.cloudflare.com/ajax/libs/pym/0.4.5/pym.min.js" pymoptions=""]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js" pymoptions=""]
 ```
 
 ### I've set a different `pymsrc` option, but now I'm seeing a message in the console
 
-If a post has multiple instances of the pym shortcode or block present, and between those different pym instances there are different source URLs for `pym.js` specified, then you should expect to see a message like the following in the browser's console when viewing that page:
+If a post has multiple instances of the Pym shortcode or block present, and between those different Pym instances there are different source URLs for `Pym.js` specified, then you should expect to see a message like the following in the browser's console when viewing that page:
 
 > Hi Pym user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym embeds. For more details, see https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console"
 
@@ -174,7 +183,7 @@ The URL provided above is the [official content delivery network (CDN) for Pym](
 
 If the embed isn't resizing correctly (especially vertically), the `Pym.js` script may not be loading correctly.
 
-You can determine if the embed is being served over HTTPS by opening the embed in new tab and looking at the protocol it's using. To open the embed in a new tab, try right-clicking on the embed and choosing "Open frame in new tab" or a similar option.
+You can determine if the embed is being served over HTTPS by opening the embed in new tab and looking at the protocol in its URL to see if it's `https://` instead of `http://`. To open the embed in a new tab, try right-clicking on the embed and choosing "Open frame in new tab" or a similar option.
 
 You can also check by opening your browser's developer tools and looking in the console for errors.
 
@@ -191,4 +200,4 @@ You may also want to look at NPR's `Pym.js` resources, especially if you're inte
 * [`Pym.js` homepage](http://blog.apps.npr.org/pym.js/)
 * [`Pym.js` repo on GutHub/nprapps](https://github.com/nprapps/pym.js/)
 
-As for things that you might want to use Pym.js for, have you checked out NPR's [dailygraphics rig for deploying graphics projects in responsive iframes](https://github.com/nprapps/dailygraphics/)?
+As for things that you might want to use `Pym.js` for, have you checked out NPR's [dailygraphics rig for deploying graphics projects in responsive iframes](https://github.com/nprapps/dailygraphics/)?
