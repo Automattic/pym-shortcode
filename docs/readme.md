@@ -34,7 +34,17 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 
 ### `src`, the child URL
 
-`src` is the URL of the page that is to be embedded.
+`src` is the URL of the page that is to be embedded. In these examples, we use https://blog.apps.npr.org/pym.js/examples/table/child.html, the source code for which can be found at https://github.com/nprapps/pym.js/tree/master/examples/table .
+
+For the shortcode, `src` is the only required prarameter.
+
+```
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html"]
+```
+
+Here's what the setting looks like in a block:
+
+![A Pym embed block in use in a post, showing its alignment controls](img/block.png)
 
 ### `pymsrc`, the URL for pym.js
 
@@ -73,6 +83,10 @@ If you do not want the class `'pym'` output on container elements, [add a filter
 ### `align`, for WordPress alignment support
 
 `align` is optional; this should be one of the [WordPress-provided generated alignment types](https://codex.wordpress.org/CSS#WordPress_Generated_Classes): `left`, `right`, `center`, `none`. If your theme supports the `wide` or `full` values, you can use those too, as the value provided here will be prefixed with `align` and output as a CSS class on the Pym parent, so that the shortcode `[pym align="foo"]` results in the output `<div id="pym_0" class="pym alignfoo ">...`
+
+In the Gutenberg editor, the alignment options are provided by the alignment controls that appear when the block is selected. The default choice is "none", with no option selected, and the other options are to align it left, center, or right. If your theme [declares support for the "wide" alignment](https://wordpress.org/gutenberg/handbook/extensibility/theme-support/#wide-alignment), you'll also see options for "wide" and "full" widths. The appearance of these alignment options on the page will depend on your site's theme.
+
+![A Pym embed block in use in a post, showing its alignment controls](img/block.png)
 
 ### `id`, to set the Pym parent element's ID
 
