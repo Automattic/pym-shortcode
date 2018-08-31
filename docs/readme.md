@@ -12,7 +12,7 @@ Pym Shortcode will responsively resize an iframe's height depending on the width
 
 In a WordPress post or page use Pym Shortcode like this:
 
-`[pym src="http://blog.apps.npr.org/pym.js/examples/table/child.html"]`
+`[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html"]`
 
 Example in a post:
 
@@ -41,7 +41,7 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 `pymsrc` is optional; only set this if you need to specify a different source for Pym.js than the default. The default pym source is `js/pym.v1.min.js` in this plugin's directory on your server. [NPR recommends](http://blog.apps.npr.org/pym.js/#get-pym-cdn) that you use the CDN version of Pym.js in most cases, which is available at `https://pym.nprapps.org/pym.v1.min.js`. An example shortcode using this option is as follows:
 
 ```
-[pym src="http://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js"]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js"]
 ```
 
 ### `pymoptions`, settings for Pym
@@ -49,23 +49,23 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 `pymoptions` is optional; this should be a javascript object without the surrounding `{}`, and is given in the event that options need to be passed to the `pymParent`. NPR gives [this example](http://blog.apps.npr.org/pym.js/#examples) javascript:
 
 ```js
-pym.Parent('example', 'child.html', { xdomain: '*\.npr\.org' });
+pym.Parent('example', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', { xdomain: '*\.npr\.org' });
 ```
 
 To do the same thing with this Pym shortcode, you would write:
 
 ```
-[pym src="child.html" pymoptions=" xdomain: '\\*\.npr\.org' "]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymoptions=" xdomain: '\\*\.npr\.org' "]
 ```
 
 ### `class`, to add HTML classes to the Pym parent element
 
 `class` is optional; this should be a valid HTML class name. It will be added to the element's default class, `'pym'`. You would want to use this if, for example, you wanted to [use a size-based class name to determine the size of the embed on your site](https://github.com/INN/pym-shortcode/issues/23). The class `'pym'` will always be output on container elements created by the Pym Shortcode. This class was introduced in version 1.2.2.
 
-For example, the shortcode `[pym src="http://blog.apps.npr.org/pym.js/examples/graphic/child.html" class="one two three four float-left mw_50"]` results in the following output:
+For example, the shortcode `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" class="one two three four float-left mw_50"]` results in the following output:
 
 ```html
-<div id="pym_0" class="pym one two three four float-left mw_50"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('pym_0', 'http://blog.apps.npr.org/pym.js/examples/graphic/child.html', {})</script>
+<div id="pym_0" class="pym one two three four float-left mw_50"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('pym_0', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
 ```
 
 If you do not want the class `'pym'` output on container elements, [add a filter](https://codex.wordpress.org/Plugin_API/Filter_Reference) to the hook `pym_shortcode_default_class` that returns an empty string.
@@ -78,10 +78,10 @@ If you do not want the class `'pym'` output on container elements, [add a filter
 
 `id` is optional; this should be a valid HTML element ID name. It will be used as the ID of your `pymParent` iframe on the parent page. You would want to use this if, for example, [your embedded page contained navigation to another page, requiring the second page to know the pymParent element ID](https://github.com/INN/pym-shortcode/issues/20).
 
-For example, the shortcode `[pym src="http://blog.apps.npr.org/pym.js/examples/graphic/child.html" id="extremely_specific_id"]` results in the following output:
+For example, the shortcode `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" id="extremely_specific_id"]` results in the following output:
 
 ```html
-<div id="extremely_specific_example" class="pym"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('extremely_specific_example', 'http://blog.apps.npr.org/pym.js/examples/graphic/child.html', {})</script>
+<div id="extremely_specific_example" class="pym"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('extremely_specific_example', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
 ```
 
 ## Frequently Asked Questions
@@ -117,7 +117,7 @@ There are several reasons why you might want to change the version of `Pym.js` u
 In any of these cases, set the different version of `Pym.js` using the `pymsrc` option in the shortcode:
 
 ```
-[pym src="http://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://cdnjs.cloudflare.com/ajax/libs/pym/0.4.5/pym.min.js" pymoptions=""]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://cdnjs.cloudflare.com/ajax/libs/pym/0.4.5/pym.min.js" pymoptions=""]
 ```
 
 ### I've set a different `pymsrc` option, but now I'm seeing a message in the console
