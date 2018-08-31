@@ -25,6 +25,7 @@ Contents:
 	8. [How do I serve Pym.js if the embedded page uses HTTPS and my site does not?](#how-do-i-serve-pymjs-if-the-embedded-page-uses-https-and-my-site-does-not)
 	9. [How do I know if there's an HTTPS problem with a given embedded iframe?](#how-do-i-know-if-theres-an-https-problem-with-a-given-embedded-iframe)
 	10. [What license is this plugin licensed under?](#what-license-is-this-plugin-licensed-under)
+	11. [How do I contribute to this plugin?](#how-do-i-contribute-to-this-plugin)
 6. [Other Pym Resources](#other-pym-resources)
 
 ## Plugin Installation
@@ -217,6 +218,10 @@ You can also check by opening your browser's developer tools and looking in the 
 This plugin is released under the GNU GPL, version 2 or later.
 
 `Pym.js`, included in this plugin, is [released under the MIT open source license](https://github.com/nprapps/pym.js/tree/master#license-and-credits).
+
+### How do I contribute to this plugin?
+
+We welcome your contributions; please see [the contribution instructions](../contributing.md).
 
 ## Other Pym Resources
 
