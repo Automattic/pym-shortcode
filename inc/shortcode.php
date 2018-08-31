@@ -17,7 +17,7 @@
  * @uses pym_shortcode_script_footer_enqueue
  * @return String the embed HTML
  */
-function pym_shortcode( $atts = array(), $content='', $tag='' ) {
+function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 	// generate an ID for this embed; necessary to prevent conflicts.
 	global $pym_id;
 	if ( ! isset( $pym_id ) ) {
@@ -57,7 +57,6 @@ function pym_shortcode( $atts = array(), $content='', $tag='' ) {
 		esc_attr( $actual_id ),
 		esc_attr( $actual_classes )
 	);
-
 
 	// What's the pymsrc for this shortcode?
 	$pymsrc = empty( $atts['pymsrc'] ) ? plugins_url( '/js/pym.v1.min.js', dirname( __FILE__ ) ) : $atts['pymsrc'];

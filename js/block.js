@@ -49,7 +49,7 @@
 		 * This is the display title for your block, which can be translated with `i18n` functions.
 		 * The block inserter will show this name.
 		 */
-		title: __( 'Pym Embed' ),
+		title: __( 'Pym Embed', 'pym-shortcode' ),
 
 		/**
 		 * An icon property should be specified to make it easier to identify a block.
@@ -81,7 +81,7 @@
 		/**
 		 * Describe the block for the block inspector
 		 */
-		description: 'Embed a webpage using NPR\'s Pym.js',
+		description: __( 'Embed a webpage using NPR\'s Pym.js', 'pym-shortcode' ), 
 
 		/**
 		 * Make the block easier to find by including keywords
@@ -114,10 +114,10 @@
 									icon: 'analytics'
 								},
 							),
-							'Pym Child URL'
+							__( 'Pym Child URL', 'pym-shortcode' )
 						],
 						value: props.attributes.src,
-						placeholder: 'What is the URL of your Pym child page?',
+						placeholder: __( 'What is the URL of your Pym child page?', 'pym-shortcode' ),
 						onChange: ( value ) => { props.setAttributes( { src: value } ); },
 					} )
 				),
@@ -130,28 +130,29 @@
 				 */
 				el( InspectorControls, {},
 					el( TextControl, {
-						label: 'Pym Child URL',
+						label: __( 'Pym Child URL', 'pym-shortcode' ),
 						value: props.attributes.src,
-						placeholder: 'What is the URL of your Pym child page?',
+						placeholder: __( 'What is the URL of your Pym child page?', 'pym-shortcode' ),
 						onChange: ( value ) => { props.setAttributes( { src: value } ); },
 					} ),
 				),
 				el( InspectorAdvancedControls, {},
 					el( TextControl, {
-						label: 'Parent element ID (optional)',
+						label: __( 'Parent element ID (optional)', 'pym-shortcode' ),
 						value: props.attributes.id,
 						onChange: ( value ) => { props.setAttributes( { id: value } ); },
-						help: 'The Pym block will automatically generate an ID for the parent element and use that to initiate the Pym embed. If your child page\'s code requires its parent to have a specific element ID, set that here.'
+						help: __( 'The Pym block will automatically generate an ID for the parent element and use that to initiate the Pym embed. If your child page\'s code requires its parent to have a specific element ID, set that here.', 'pym-shortcode' ),
 					} ),
 					el( TextControl, {
-						label: 'Pym.js source URL (optional)',
+						label: __( 'Pym.js source URL (optional)', 'pym-shortcode' ),
 						value: props.attributes.pymsrc,
 						onChange: ( value ) => { props.setAttributes( { pymsrc: value } ); },
 					} ),
 					el( TextControl, {
-						label: 'Pym Options',
+						label: __( 'Pym Options', 'pym-shortcode' ),
 						value: props.attributes.pymoptions,
 						onChange: ( value ) => { props.setAttributes( { pymoptions: value } ); },
+						// @todo make this translatable https://github.com/WordPress/gutenberg/blob/master/packages/i18n/README.md
 						help: [
 							'For more about this control, see ',
 							el( 'a', {
