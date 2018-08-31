@@ -8,7 +8,7 @@ Contents:
 2. [The Pym Shortcode](#the-pym-shortcode)
 3. [The Pym Block](#the-pym-block)
 4. [Options](#options)
-	1. src
+	1. [src: the only required argument](#src-the-child-url)
 	2. pymsrc
 	3. pymoptions
 	4. class
@@ -58,7 +58,7 @@ For the block, all options available via shortcode arguments are available throu
 [pym src="" pymsrc="" pymoptions="" class="" align="" id="" ]
 ```
 
-### `src`, the child URL
+### `src`, the child URL (required argument)
 
 `src` is the URL of the page that is to be embedded. In these examples, we use https://blog.apps.npr.org/pym.js/examples/table/child.html, the source code for which can be found at https://github.com/nprapps/pym.js/tree/master/examples/table .
 
