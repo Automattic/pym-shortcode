@@ -3,6 +3,7 @@ Contributors: inn_nerds
 Donate link: https://inn.org/donate
 Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
+Requires PHP: 5.3
 Tested up to: 4.9.8
 Stable tag: 1.3.2
 License: GPLv2 or later
