@@ -152,6 +152,8 @@ Assuming that you have installed this plugin via the wordpress.org plugin reposi
 
 You can check the validity of that assumption by putting a shortcode or block in a post, then viewing the post from the frontend. In the source code of the page, you should see a script tag loading `pym.v1.min.js`. 
 
+The URL can also be found on the "Pym Plugin Info" page, found under the "Tools" menu in your site's admin dashboard.
+
 Or, you can specify the URL from which to load `Pym.js`.
 
 ### Why would I want to change the `Pym.js` source URL?

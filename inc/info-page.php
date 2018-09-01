@@ -15,8 +15,8 @@ namespace INN\PymShortcode\Info;
 function register_options_page() {
 	add_submenu_page(
 		'tools.php',
-		__( 'Pym plugin info', 'pym-shortcode' ), // title of page
-		__( 'Pym plugin info', 'pym-shortcode' ), // menu text
+		__( 'Pym Plugin Info', 'pym-shortcode' ), // title of page
+		__( 'Pym Plugin Info', 'pym-shortcode' ), // menu text
 		'edit_posts', // capability required
 		'pym-shortcode-info', // menu slug
 		__NAMESPACE__ . '\options_page_callback' // callback for options page display
