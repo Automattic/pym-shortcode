@@ -20,6 +20,7 @@ Contents:
 	3. [When would I use a Pym.js solution versus embed code without using Pym.js?](#when-would-i-use-a-pymjs-solution-versus-embed-code-without-using-pymjs)
 	4. [Is Pym.js or this plugin dependent on jQuery or any other library?](#is-pymjs-or-this-plugin-dependent-on-jquery-or-any-other-library)
 	5. [What is the URL for pym.v1.min.js?](#what-is-the-url-for-pymv1minjs)
+	6. [What is the difference between `Pym.js` and `pym.v1.min.js`?](what-is-the-difference-between-pymjs-and-pymv1minjs)
 	6. [Why would I want to change the Pym.js source URL?](#why-would-i-want-to-change-the-pymjs-source-url)
 	7. [I've set a different pymsrc option, but now I'm seeing a message in the console](#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console)
 	8. [How do I serve Pym.js if the embedded page uses HTTPS and my site does not?](#how-do-i-serve-pymjs-if-the-embedded-page-uses-https-and-my-site-does-not)
@@ -153,6 +154,16 @@ Assuming that you have installed this plugin via the wordpress.org plugin reposi
 You can check the validity of that assumption by putting a shortcode or block in a post, then viewing the post from the frontend. In the source code of the page, you should see a script tag loading `pym.v1.min.js`. 
 
 Or, you can specify the URL from which to load `Pym.js`.
+
+### What is the difference between `Pym.js` and `pym.v1.min.js`?
+
+In this document, `Pym.js` is used to refer to the JavaScript library.
+
+`pym.v1.min.js` is a specific copy of that library, hosted on your server at a given URL. It's named following [NPR's `Pym.js` versioning strategy](https://github.com/nprapps/pym.js/tree/master#versioning). It is kept up to date with the CDN version of the library by this plugin's maintainers, [following these instructions](https://github.com/INN/pym-shortcode/blob/master/docs/updating-pym.md).
+
+The CDN version of `Pym.js` is at https://pym.nprapps.org/pym.v1.min.js .
+
+Also in this plugin is `js/pym.js`, which is `Pym.js` version 1.1.0, and which is kept around for legacy support for graphics created before this plugin had a defined update strategy.
 
 ### Why would I want to change the `Pym.js` source URL?
 
