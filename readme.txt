@@ -1,4 +1,4 @@
-=== Pym Shortcode ===
+=== Pym.js Embeds ===
 Contributors: inn_nerds
 Donate link: https://inn.org/donate
 Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
@@ -8,17 +8,17 @@ Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A WordPress solution to embed iframes that are responsive horizontally and vertically using the NPR Visuals Team's pym.js.
+A WordPress solution to embed iframes that are responsive horizontally and vertically using the NPR Visuals Team's `Pym.js`.
 
 == Description ==
 
-Pym Shortcode will resize an iframe responsively depending on the height of its content and the width of its container. The plugin uses [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the NPR Visuals Team, to allow embedded content in WordPress posts and pages using a simple shortcode.
+Pym.js Embeds provides shortcode and Gutenberg block wrappers for embedding responsive iframes using [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the NPR Visuals Team. Embedded content resizes vertically to match its container's width.
 
 == Installation ==
 
-1. In the WordPress Dashboard go to **Plugins**, then click the **Add Plugins** button and search the WordPress Plugins Directory for Pym Shortcode. Alternatively, you can download the zip file from this Github repo and upload it manually to your WordPress site.
+1. In the WordPress Dashboard go to **Plugins**, then click the **Add Plugins** button and search the WordPress Plugins Directory for Pym.js Embeds. Alternatively, you can download the zip file from this Github repo and upload it manually to your WordPress site.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Nothing to configure, just begin using Pym Shortcode!
+3. Nothing to configure, just begin using Pym.js Embeds!
 
 == Frequently Asked Questions ==
 
@@ -46,6 +46,9 @@ Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
 
 = [unreleased] =
 
+Adds Gutenberg support.
+
+* Plugin renamed from "Pym Shortcode" to "Pym.js Embeds".
 * Adds a "Pym Embed" block for use in Gutenberg. [PR #34](https://github.com/INN/pym-shortcode/pull/34) for issue [#28](https://github.com/INN/pym-shortcode/issues/28).
 * Shortcode now gains an `align=""` parameter, so that WordPress's generated [alignment CSS classes](https://codex.wordpress.org/CSS#WordPress_Generated_Classes) can be used on embeds. By enabling this in the shortcode, the Gutenberg Block also gains support for alignment. [PR #34](https://github.com/INN/pym-shortcode/pull/34)
 * Script tags for embeds are no longer output by `the_content()`, instead being output during `wp_footer()` by [closures](https://secure.php.net/manual/en/functions.anonymous.php) hooked on the `'wp_footer'` action. [PR #34](https://github.com/INN/pym-shortcode/pull/34) for issues [#33](https://github.com/INN/pym-shortcode/issues/33) and [#35](https://github.com/INN/pym-shortcode/issues/35).
