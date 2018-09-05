@@ -15,8 +15,8 @@ namespace INN\PymShortcode\Info;
 function register_options_page() {
 	add_submenu_page(
 		'tools.php',
-		__( 'Pym Plugin Info', 'pym-shortcode' ), // title of page
-		__( 'Pym Plugin Info', 'pym-shortcode' ), // menu text
+		__( 'Pym.js Embeds Plugin Information', 'pym-shortcode' ), // title of page
+		__( 'Pym.js Embeds Info', 'pym-shortcode' ), // menu text
 		'edit_posts', // capability required
 		'pym-shortcode-info', // menu slug
 		__NAMESPACE__ . '\options_page_callback' // callback for options page display
@@ -38,7 +38,7 @@ function options_page_callback() {
 
 	printf(
 		'<p>%1$s</p>',
-		wp_kses_post( __( 'For information on how to use the block and shortcode provided by the Pym plugin, read the plugin\'s documentation <a href="https://github.com/INN/pym-shortcode/tree/master/docs">on GitHub</a>.', 'pym-shortcode' ) )
+		wp_kses_post( __( 'For information on how to use the block and shortcode provided by the Pym.js Embeds plugin, read the plugin\'s documentation <a href="https://github.com/INN/pym-shortcode/tree/master/docs">on GitHub</a>.', 'pym-shortcode' ) )
 	);
 
 	printf(
