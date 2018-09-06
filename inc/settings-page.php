@@ -87,7 +87,8 @@ function options_page_callback() {
 	?>
 		<form action="options.php" method="post">
 			<?php
-				do_settings_sections( settings_page() );
+				settings_fields( option_group() );
+				do_settings_sections( settings_section() );
 				submit_button( esc_html__( 'Save settings', 'pym-shortcode' ) );
 			?>
 		</form>
@@ -109,7 +110,7 @@ function admin_init() {
 	);
 
 	add_settings_section(
-		'pymsrc_settings',
+		settings_section(),
 		__( 'Pym.js Source Settings', 'pym-shortcode' ),
 		__NAMESPACE__ . '\pym_settings_section_callback',
 		settings_page()
@@ -120,7 +121,7 @@ function admin_init() {
 		__( 'Default pymsrc', 'pym-shortcode' ),
 		__NAMESPACE__ . '\field_default_pymsrc',
 		settings_page(), // menu slug of this page.
-		'pymsrc_settings',
+		settings_section(), // settings section slug.
 		array(
 			'label_for' => 'default_pymsrc',
 		)
@@ -131,7 +132,7 @@ function admin_init() {
 		__( 'Override pymsrc', 'pym-shortcode' ),
 		__NAMESPACE__ . '\field_override_pymsrc',
 		settings_page(), // menu slug of this page.
-		'pymsrc_settings',
+		settings_section(), // settings section slug.
 		array(
 			'label_for' => 'override_pymsrc',
 		)
