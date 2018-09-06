@@ -87,8 +87,7 @@ function options_page_callback() {
 	?>
 		<form action="options.php" method="post">
 			<?php
-				settings_fields( option_group() );
-				do_settings_sections( settings_section() );
+				do_settings_sections( settings_page() );
 				submit_button( esc_html__( 'Save settings', 'pym-shortcode' ) );
 			?>
 		</form>
@@ -110,8 +109,8 @@ function admin_init() {
 	);
 
 	add_settings_section(
-		settings_section(),
-		__( 'Settings', 'pym-shortcode' ),
+		'pymsrc_settings',
+		__( 'Pym.js Source Settings', 'pym-shortcode' ),
 		__NAMESPACE__ . '\pym_settings_section_callback',
 		settings_page()
 	);
@@ -121,7 +120,7 @@ function admin_init() {
 		__( 'Default pymsrc', 'pym-shortcode' ),
 		__NAMESPACE__ . '\field_default_pymsrc',
 		settings_page(), // menu slug of this page.
-		settings_section(), // settings section slug.
+		'pymsrc_settings',
 		array(
 			'label_for' => 'default_pymsrc',
 		)
@@ -132,7 +131,7 @@ function admin_init() {
 		__( 'Override pymsrc', 'pym-shortcode' ),
 		__NAMESPACE__ . '\field_override_pymsrc',
 		settings_page(), // menu slug of this page.
-		settings_section(), // settings section slug.
+		'pymsrc_settings',
 		array(
 			'label_for' => 'override_pymsrc',
 		)
@@ -148,6 +147,10 @@ add_action( 'admin_init', __NAMESPACE__ . '\admin_init' );
  * @param Array $args Arguments passed to the section callback.
  */
 function pym_settings_section_callback( $args ) {
+	printf(
+		'<p>%1$s</p>',
+		__( 'The Pym.js JavaScript library can be provided from many sources. By default, shortcodes and blocks will use a copy of Pym.js hosted on your website to power embeds. For more information about changing the Pym.js source URL, referred to as \'pymsrc\', please <a href="https://github.com/INN/pym-shortcode/blob/master/docs/readme.md">read this plugin\'s documentation</a>.', 'pym-shortcode' )
+	);
 }
 
 /**
@@ -229,6 +232,6 @@ function field_override_pymsrc( $args ) {
 	printf(
 		'<label for="%1$s" style="display:block;clear:both; margin-top:0.5em;">%2$s</label>',
 		esc_attr( $id ),
-		esc_html__( 'Checking this box means that every Pym.js embed will use the default pymsrc URL, ignoring the pymsrc URL set in the embed\'s shortcode attributes or block settings.', 'pym-shortcode' )
+		esc_html__( 'Checking this box means that every Pym.js embed will use the default pymsrc URL, ignoring the pymsrc URL set in the embed\'s shortcode attributes or block settings. We recommend that you check this box after setting the default pymsrc URL to the CDN-provided copy of the library.', 'pym-shortcode' )
 	);
 }

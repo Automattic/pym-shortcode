@@ -145,6 +145,7 @@ if ( ! function_exists( 'pym_shortcode_script_footer_enqueue' ) ) {
  * @uses pym_pymsrc_local_url
  */
 function pym_pymsrc_default_url() {
+	$settings = get_option( option_key() );
 	return pym_pymsrc_local_url();
 }
 
