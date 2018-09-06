@@ -103,7 +103,9 @@ To do the same thing with this Pym shortcode, you would write:
 For example, the shortcode `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" class="one two three four float-left mw_50"]` results in the following output:
 
 ```html
-<div id="pym_0" class="pym one two three four float-left mw_50"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('pym_0', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
+<div id="pym_0" class="pym one two three four float-left mw_50"></div>
+...
+<script>var pym_0 = new pym.Parent('pym_0', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
 ```
 
 If you do not want the class `'pym'` output on container elements, [add a filter](https://codex.wordpress.org/Plugin_API/Filter_Reference) to the hook `pym_shortcode_default_class` that returns an empty string.
