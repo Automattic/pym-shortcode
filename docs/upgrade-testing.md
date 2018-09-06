@@ -12,12 +12,12 @@ Depending on what search engine is enabled on your site, you may be able to find
 
 ### wp-cli
 
-If you have [wp-cli](https://wp-cli.org/) installed in your environment, you can get a list of posts using the `[pym]` shortcode by running a search using [wp post list](https://developer.wordpress.org/cli/commands/post/list/)
+If you have [wp-cli](https://wp-cli.org/) installed in your environment, you can get a list of posts using the `[pym]` shortcode by running a search using [wp post list](https://developer.wordpress.org/cli/commands/post/list/):
 
 ```
 wp post list --s='[pym'
 ```
-You should see a list of posts and their IDs.
+Your terminal should return a list of posts and their IDs:
 
 ```
 +----+------------------------------------------+-------------------+---------------------+-------------+
@@ -27,7 +27,7 @@ You should see a list of posts and their IDs.
 +----+------------------------------------------+-------------------+---------------------+-------------+
 ```
 
-To find posts containg shortcode or blocks with a custom pymsrc set:
+To find posts containing shortcode or blocks with a custom pymsrc set:
 
 ```
 $ wp post list --s='pymsrc'
@@ -41,11 +41,13 @@ $ wp post list --s='pymsrc'
 
 You can change the formatting of the list and the information it contains for each post using the arguments of [wp post list](https://developer.wordpress.org/cli/commands/post/list/).
 
-As an example, here's how to use `wp post list` on a Mac to open in a browser every single post containing a pymsrc setting:
+As an example, here's how to use `wp post list`, on a [local Valet development install running on a Mac](https://github.com/INN/docs/blob/master/projects/largo/site-setup-valet.md), to open in your default web browser every single post containing a pymsrc setting:
 
 ```
 wp post list --s='pymsrc' --format=ids | tr "[:space:]" "\n" | xargs -I % open http://pym-shortcode.test/?p=%
 ```
+
+This opened two tabs: one each for post `5` and `10`. Use this with caution if you have a lot of stories with `Pym.js` embeds; you might crash your web browser.
 
 ## Testing the pymsrc override
 
