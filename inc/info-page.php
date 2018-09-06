@@ -5,7 +5,7 @@
  * This is available to everyone who can edit posts, because they'll need this info if they're creating new child pages for embed using the shortcode or plugin.
  */
 
-namespace INN\PymShortcode\Info;
+namespace INN\PymEmbeds\Info;
 
 /**
  * Create the option page
@@ -18,7 +18,7 @@ function register_options_page() {
 		__( 'Pym.js Embeds Plugin Information', 'pym-shortcode' ), // title of page
 		__( 'Pym.js Embeds Info', 'pym-shortcode' ), // menu text
 		'edit_posts', // capability required
-		'pym-shortcode-info', // menu slug
+		'pym-embeds-info', // menu slug
 		__NAMESPACE__ . '\options_page_callback' // callback for options page display
 	);
 }

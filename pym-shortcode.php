@@ -20,6 +20,7 @@ $includes = array(
 	'/inc/block.php',
 	'/inc/shortcode.php',
 	'/inc/info-page.php',
+	'/inc/settings-page.php',
 	'/inc/class-pymsrc-output.php',
 );
 foreach ( $includes as $include ) {
