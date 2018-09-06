@@ -1,4 +1,4 @@
-=== Pym Shortcode ===
+=== Pym.js Embeds ===
 Contributors: inn_nerds
 Donate link: https://inn.org/donate
 Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
@@ -9,15 +9,15 @@ Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A WordPress solution to embed iframes that are responsive horizontally and vertically using the NPR Visuals Team's pym.js.
+A WordPress solution to embed iframes that are responsive horizontally and vertically using the NPR Visuals Team's `Pym.js`.
 
 == Description ==
 
-Pym Shortcode will resize an iframe responsively depending on the height of its content and the width of its container. The plugin uses [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the NPR Visuals Team, to allow embedded content in WordPress posts and pages using a simple shortcode.
+Pym.js Embeds provides shortcode and Gutenberg block wrappers for embedding responsive iframes using [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the NPR Visuals Team. Embedded content resizes vertically to match its container's width.
 
 == Installation ==
 
-1. In the WordPress Dashboard go to **Plugins**, then click the **Add Plugins** button and search the WordPress Plugins Directory for Pym Shortcode. Alternatively, you can download the zip file from this Github repo and upload it manually to your WordPress site.
+1. In the WordPress Dashboard go to **Plugins**, then click the **Add Plugins** button and search the WordPress Plugins Directory for Pym.js Embeds. Alternatively, you can download the zip file from this Github repo and upload it manually to your WordPress site.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. In **Settings > Pym.js Embed Settings**, decide whether you'd like to change the plugin's behavior to use a non-default source URL for `Pym.js`, and whether you'd like to prevent post authors from setting embed-specific URLs for `Pym.js`
 4. Begin embedding content!
@@ -32,17 +32,17 @@ Embeddable table from NPR:
 
 ![an embeddable table from NPR](img/responsive-iframe-npr.png)
 
-Pym Shortcode in a WordPress post:
+Pym.js Shortcode in a WordPress post:
 
-![Pym Shortcode in a WordPress post](img/pym-shortcode-in-post.png)
+![Pym.js Shortcode in a WordPress post](img/pym-shortcode-in-post.png)
 
-Desktop view of the WordPress post with the NPR embed using Pym Shortcode:
+Desktop view of the WordPress post with the NPR embed using Pym.js Shortcode:
 
-![Desktop view of the WordPress post with the NPR embed using Pym Shortcode](img/pym-example-desktop.png)
+![Desktop view of the WordPress post with the NPR embed using Pym.js Shortcode](img/pym-example-desktop.png)
 
-Mobile view of the WordPress post with the NPR embed using Pym Shortcode:
+Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode:
 
-![Mobile view of the WordPress post with the NPR embed using Pym Shortcode](img/pym-example-phone.png)
+![Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode](img/pym-example-phone.png)
 
 == Changelog ==
 
@@ -54,7 +54,8 @@ Following the practice begun at plugin version 1.1.2 of [having the plugin versi
 
 New features:
 
-* Adds a "Pym Embed" block for use in Gutenberg. [PR #34](https://github.com/INN/pym-shortcode/pull/34) for issue [#28](https://github.com/INN/pym-shortcode/issues/28).
+* Plugin renamed from "Pym Shortcode" to "Pym.js Embeds".
+* Adds a "Pym.js Embed" block for use in Gutenberg. [PR #34](https://github.com/INN/pym-shortcode/pull/34) for issue [#28](https://github.com/INN/pym-shortcode/issues/28).
 	* If a block is created using this plugin and Gutenberg, and Gutenberg is then disabled, the block will show a link to the embedded graphic.
 * Through the settings page, you can now serve pym.js using your newsroom's CDN or NPR's CDN! [PR #45]() for [issue #31](https://github.com/INN/pym-shortcode/issues/31).
 * Adds a settings page, available to those with the `manage_options` capability, with the following options:
@@ -77,7 +78,7 @@ Changes:
 
 = 1.3.2 =
 
-* *RECOMMENDED UPDATE* : Pym users, NPR has released an update that closes a potential security hole. We recommend everyone update to 1.3.2.
+* *RECOMMENDED UPDATE* : Pym.js users, NPR has released an update that closes a potential security hole. We recommend everyone update to 1.3.2.
 * Update to pym.js version 1.3.2: https://github.com/nprapps/pym.js/releases/tag/v1.3.2 (Changelog at https://github.com/nprapps/pym.js/blob/v1.3.2/CHANGELOG)
 
 = 1.3.1 =
@@ -118,11 +119,7 @@ Changes:
 
 * First release of the plugin
 
-== Upgrade Notice ==
-
-No updates at this time.
-
-== Pym Resources from NPR ==
+== Pym.js Resources from NPR ==
 
 You may also want to look at NPR's Pym.js resources:
 

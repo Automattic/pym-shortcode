@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Pym Shortcode
+Plugin Name: Pym.js Embeds
 Plugin URI: https://github.com/INN/pym-shortcode
 Description: Adds a [pym src=""] shortcode to simplify use of NPR's Pym.js
 Version: 1.3.2.1

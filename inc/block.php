@@ -1,8 +1,8 @@
 <?php
 /**
- * The Gutenberg block for Pym embeds
+ * The Gutenberg block for Pym.js embeds
  *
- * @package pym-shortcode
+ * @package pym-embeds
  */
 
 /**
