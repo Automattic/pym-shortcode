@@ -190,7 +190,7 @@ Or, you can specify the URL from which to load `Pym.js`.
 
 In this document, `Pym.js` is used to refer to the JavaScript library.
 
-`pym.v1.min.js` is a specific copy of that library, hosted on your server at a given URL. It's named following [NPR's `Pym.js` versioning strategy](https://github.com/nprapps/pym.js/tree/master#versioning). It is kept up to date with the CDN version of the library by this plugin's maintainers, [following these instructions](https://github.com/INN/pym-shortcode/blob/master/docs/updating-pym.md).
+`pym.v1.min.js` is a specific copy of that library, hosted on your server at a given URL. It's named following [NPR's `Pym.js` versioning strategy](https://github.com/nprapps/pym.js/tree/master#versioning). It is kept up to date with the CDN version of the library by this plugin's maintainers, [following these instructions](https://github.com/INN/pym-shortcode/blob/master/docs/maintainer-notes.md).
 
 The CDN version of `Pym.js` is at https://pym.nprapps.org/pym.v1.min.js .
 
