@@ -17,8 +17,8 @@ namespace INN\PymEmbeds\Info;
 function register_options_page() {
 	add_submenu_page(
 		'tools.php',
-		__( 'Pym.js Embeds Plugin Information', 'pym-shortcode' ), // title of page
-		__( 'Pym.js Embeds Info', 'pym-shortcode' ), // menu text
+		__( 'Pym.js Embeds Plugin Information', 'pym-embeds' ), // title of page
+		__( 'Pym.js Embeds Info', 'pym-embeds' ), // menu text
 		'edit_posts', // capability required
 		'pym-embeds-info', // menu slug
 		__NAMESPACE__ . '\options_page_callback' // callback for options page display
@@ -40,12 +40,12 @@ function options_page_callback() {
 
 	printf(
 		'<p>%1$s</p>',
-		wp_kses_post( __( 'For information on how to use the block and shortcode provided by the Pym.js Embeds plugin, read the plugin\'s documentation <a href="https://github.com/INN/pym-shortcode/tree/master/docs">on GitHub</a>.', 'pym-shortcode' ) )
+		wp_kses_post( __( 'For information on how to use the block and shortcode provided by the Pym.js Embeds plugin, read the plugin\'s documentation <a href="https://github.com/INN/pym-shortcode/tree/master/docs">on GitHub</a>.', 'pym-embeds' ) )
 	);
 
 	printf(
 		'<label for="local_url">%1$s</label>',
-		esc_html__( 'The URL for the copy of Pym.js hosted on this site is:', 'pym-shortcode' )
+		esc_html__( 'The URL for the copy of Pym.js hosted on this site is:', 'pym-embeds' )
 	);
 
 	// copying how qz.com does their share links
