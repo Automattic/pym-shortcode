@@ -57,3 +57,29 @@ wp post list --s='pymsrc' --format=ids | tr "[:space:]" "\n" | xargs -I % open h
 	3. 
 
 You may want to take the time to edit your embedded pages so that they all use the NPR CDN version of `Pym.js`, or use your newsroom's CDN version of `Pym.js`. You should be using [the most-recent version of `Pym.js`](http://blog.apps.npr.org/pym.js/) in any case.
+
+## Testing embed alignment
+
+Version 1.3.2.1 of this plugin introduced [support for WordPress' alignment CSS classes](./readme.md#align-for-wordpress-alignment-support).
+
+For advice on styling the alignment classes, see [the Gutenberg docs](https://wordpress.org/gutenberg/handbook/extensibility/theme-support/#wide-alignments-and-floats).
+
+### Shortcode testing
+
+Test your theme's alignment CSS classes with the following shortcodes:
+
+```
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align=""]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="none"]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="left"]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="center"]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="right"]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="wide"]
+[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="full"]
+```
+
+You'll want to check that the embeds are positioned correctly on the page in all browsers that you support and at all viewport widths.
+
+### Block testing
+
+Test your theme's alignment CSS by creating blocks with each alignment option. Your theme may need to [declare wide alignment](https://wordpress.org/gutenberg/handbook/extensibility/theme-support/#wide-alignment) in order to see the "wide" and "full" options.
