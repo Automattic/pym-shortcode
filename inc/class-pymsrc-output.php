@@ -2,7 +2,7 @@
 /**
  * The class and related methods for tracking which pymsrc tags will be output upon the page
  *
- * @package pym-shortcode
+ * @package pym-embeds
  */
 
 /**
@@ -129,13 +129,13 @@ class Pymsrc_Output{
 	/**
 	 * Output a thing in the footer that shows up in the browser console, to assist in debugging
 	 *
-	 * This has to support IE 9 because Pym supports IE 9, but `console.log` and `console.error` aren't available in IE 9 unless the dev tools are open. Thus, the check `window.console`.
+	 * This has to support IE 9 because Pym.js supports IE 9, but `console.log` and `console.error` aren't available in IE 9 unless the dev tools are open. Thus, the check `window.console`.
 	 * @link https://stackoverflow.com/questions/8002116/should-i-be-removing-console-log-from-production-code/15771110
 	 */
 	public function warning_message_footer() {
 		printf(
 			'<script type="text/javascript">window.console && console.log( \'%1$s\', %2$s );</script>',
-			wp_json_encode( __( 'Hi Pym user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym embeds. For more details, see https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console', 'pym_shortcode' ) ),
+			wp_json_encode( __( 'Hi Pym.js user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym.js embeds. For more details, see https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console', 'pym_shortcode' ) ),
 			wp_json_encode( $this->sources )
 		);
 	}

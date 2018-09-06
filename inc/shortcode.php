@@ -2,7 +2,7 @@
 /**
  * The [pym] shortcode and related functions
  *
- * @package pym-shortcode
+ * @package pym-embeds
  */
 
  use INN\PymEmbeds\Settings\option_key;
@@ -10,7 +10,8 @@
 /**
  * A shortcode to simplify the process of embedding articles using pym.js
  *
- * This function also powers the Pym Embed block output.
+ * This function also powers the Pym.js Embed block output in Gutenberg,
+ * as the render callback for a dynamic block.
  *
  * @param Array  $atts    the attributes passed in the shortcode.
  * @param String $content the enclosed content; should be empty for this shortcode.
@@ -72,8 +73,10 @@ function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 		$pymsrc = $atts['pymsrc'];
 	}
 
-	// If this is the first Pym element on the page, output the pymsrc script tag
-	// or if the pymsrc is set, output that.
+	// If this is the first Pym.js element on the page,
+	// register the default pymsrc script tag for output.
+	//
+	// Or, if the pymsrc is set, register that specific pymsrc for output.
 	if ( 0 === $pym_id || ! empty( $atts['pymsrc'] ) ) {
 		$pymsrc_output = Pymsrc_Output::get_instance();
 		$pymsrc_output->add( $pymsrc );
@@ -111,19 +114,19 @@ add_shortcode( 'pym', 'pym_shortcode' );
  * @link https://github.com/INN/pym-shortcode/issues/19
  *
  * @param Array $args Has the following indices:
- *     - 'pym_id' Which Pym instance this is on the page, provided for
+ *     - 'pym_id' Which Pym.js embed instance this is on the page, provided for
  *        informational purposes. In this function, the pym_id value is
  *        used as the variable name in `var pym_id = new pym.Parent(...);`
- *     - 'actual_id' the element ID used for the Pym container element,
+ *     - 'actual_id' the element ID used for the Pym.js container element,
  *        which is at this point set on the page and not changeable from
  *        this function. This is the first argument for `new pym.Parent()`.
- *     - 'src' the URL for the Pym child page. This is the second argument
+ *     - 'src' the URL for the Pym.js child page. This is the second argument
  *        for `new pym.Parent()`.
  *     - 'pymoptions' The third argument for `pym.Parent()` See the xdomain
  *        argument in http://blog.apps.npr.org/pym.js/#example-block
- *     - 'actual_classes' The classes used on the Pym container element,
+ *     - 'actual_classes' The classes used on the Pym.js container element,
  *        provided to this function for informational purposes.
- *     - 'pymsrc' The URL from which Pym is to be loaded for this emebed,
+ *     - 'pymsrc' The URL from which Pym.js is to be loaded for this emebed,
  *        based on the shortcode/block options and the plugin settings.
  *
  * @since 1.3.2.1

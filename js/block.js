@@ -49,7 +49,7 @@
 		 * This is the display title for your block, which can be translated with `i18n` functions.
 		 * The block inserter will show this name.
 		 */
-		title: __( 'Pym Embed' ),
+		title: __( 'Pym.js Embed' ),
 
 		/**
 		 * An icon property should be specified to make it easier to identify a block.
@@ -114,10 +114,10 @@
 									icon: 'analytics'
 								},
 							),
-							__( 'Pym Child URL' )
+							__( 'Pym.js Child URL' )
 						],
 						value: props.attributes.src,
-						placeholder: __( 'What is the URL of your Pym child page?' ),
+						placeholder: __( 'What is the URL of your Pym.js child page?' ),
 						onChange: ( value ) => { props.setAttributes( { src: value } ); },
 					} )
 				),
@@ -130,26 +130,26 @@
 				 */
 				el( InspectorControls, {},
 					el( TextControl, {
-						label: __( 'Pym Child URL' ),
+						label: __( 'Pym.js Child URL' ),
 						value: props.attributes.src,
-						placeholder: __( 'What is the URL of your Pym child page?' ),
+						placeholder: __( 'What is the URL of your Pym.js child page?' ),
 						onChange: ( value ) => { props.setAttributes( { src: value } ); },
 					} ),
 				),
 				el( InspectorAdvancedControls, {},
 					el( TextControl, {
-						label: __( 'Parent element ID (optional)' ),
+						label: __( 'Parent Element ID (optional)' ),
 						value: props.attributes.id,
 						onChange: ( value ) => { props.setAttributes( { id: value } ); },
-						help: __( 'The Pym block will automatically generate an ID for the parent element and use that to initiate the Pym embed. If your child page\'s code requires its parent to have a specific element ID, set that here.' ),
+						help: __( 'The Pym.js block will automatically generate an ID for the parent element and use that to initiate the Pym.js embed. If your child page\'s code requires its parent to have a specific element ID, set that here.' ),
 					} ),
 					el( TextControl, {
-						label: __( 'Pym.js source URL (optional)' ),
+						label: __( 'Pym.js Source URL (optional)' ),
 						value: props.attributes.pymsrc,
 						onChange: ( value ) => { props.setAttributes( { pymsrc: value } ); },
 					} ),
 					el( TextControl, {
-						label: __( 'Pym Options' ),
+						label: __( 'Pym.js Options' ),
 						value: props.attributes.pymoptions,
 						onChange: ( value ) => { props.setAttributes( { pymoptions: value } ); },
 						// @todo make this translatable https://github.com/WordPress/gutenberg/blob/master/packages/i18n/README.md

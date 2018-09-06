@@ -2,6 +2,7 @@
 /**
  * The settings page for this plugin.
  *
+ * @package pym-embeds
  */
 
 namespace INN\PymEmbeds\Settings;

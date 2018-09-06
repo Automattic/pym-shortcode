@@ -3,6 +3,8 @@
  * The informational page for this plugin.
  *
  * This is available to everyone who can edit posts, because they'll need this info if they're creating new child pages for embed using the shortcode or plugin.
+ *
+ * @package pym-embeds
  */
 
 namespace INN\PymEmbeds\Info;

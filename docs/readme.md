@@ -5,18 +5,18 @@ Pym.js Embeds provides shortcode and Gutenberg block wrappers for embedding resp
 Contents:
 
 1. [Plugin Installation](#plugin-installation)
-2. [The Pym Shortcode](#the-pym-shortcode)
-3. [The Pym Block](#the-pym-block)
+2. [The Pym.js Shortcode](#the-pym-shortcode)
+3. [The Pym.js Block](#the-pym-block)
 4. [Embed Options](#embed-options)
 	1. [src: the only required argument](#src-the-child-url-required-argument)
 	2. [pymsrc](#pymsrc-the-url-for-pymjs)
-	3. [pymoptions](#pymoptions-settings-for-pym)
-	4. [class](#class-to-add-html-classes-to-the-pym-parent-element)
+	3. [pymoptions](#pymoptions-settings-for-pymjs)
+	4. [class](#class-to-add-html-classes-to-the-pymjs-parent-element)
 	5. [align](#align-for-wordpress-alignment-support)
 	6. [id](#id-to-set-the-pym-parent-elements-id)
 5. [Plugin Options](#plugin-options)
 5. [Frequently Asked Questions](#frequently-asked-questions)
-	1. [Why would I want to use Pym in the first place?](#why-would-i-want-to-use-pym-in-the-first-place)
+	1. [Why would I want to use Pym.js in the first place?](#why-would-i-want-to-use-pym-in-the-first-place)
 	2. [Why is a WordPress plugin needed to use Pym.js?](#why-is-a-wordpress-plugin-needed-to-use-pymjs)
 	3. [When would I use a Pym.js solution versus embed code without using Pym.js?](#when-would-i-use-a-pymjs-solution-versus-embed-code-without-using-pymjs)
 	4. [Is Pym.js or this plugin dependent on jQuery or any other library?](#is-pymjs-or-this-plugin-dependent-on-jquery-or-any-other-library)
@@ -28,7 +28,7 @@ Contents:
 	9. [How do I know if there's an HTTPS problem with a given embedded iframe?](#how-do-i-know-if-theres-an-https-problem-with-a-given-embedded-iframe)
 	10. [What license is this plugin licensed under?](#what-license-is-this-plugin-licensed-under)
 	11. [How do I contribute to this plugin?](#how-do-i-contribute-to-this-plugin)
-6. [Other Pym Resources](#other-pym-resources)
+6. [Other Pym.js Resources](#other-pymjs-resources)
 
 ## Plugin Installation
 
@@ -36,21 +36,21 @@ Contents:
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Nothing to configure, just begin using Pym.js Embeds!
 
-## The Pym Shortcode
+## The Pym.js Shortcode
 
-In a WordPress post or page, use Pym Shortcode like this:
+In a WordPress post or page, use the Pym.js Shortcode like this:
 
 `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html"]`
 
 Example in a post:
 
-![Pym Shortcode in a WordPress post](img/pym-shortcode-in-post.png)
+![Pym.js Shortcode in a WordPress post](img/pym-shortcode-in-post.png)
 
-## The Pym Block
+## The Pym.js Block
 
 Example in a post:
 
-![Screenshot of the Pym Embed block in a post, with the block settings pane opened to show the block's options and advanced options](img/block-in-editor.png)
+![Screenshot of the Pym.js Embed block in a post, with the block settings pane opened to show the block's options and advanced options](img/block-in-editor.png)
 
 For the block, all options available via shortcode arguments are available through the block's Advanced Options panel.
 
@@ -72,7 +72,7 @@ For the shortcode, `src` is the only required parameter.
 
 Here's what the setting looks like in a block:
 
-![A Pym embed block in use in a post, showing its alignment controls](img/block.png)
+![A Pym.js embed block in use in a post, showing its alignment controls](img/block.png)
 
 ### `pymsrc`, the URL for Pym.js
 
@@ -90,15 +90,15 @@ Here's what the setting looks like in a block:
 pym.Parent('example', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', { xdomain: '*\.npr\.org' });
 ```
 
-To do the same thing with this Pym Shortcode, you would write:
+To do the same thing with this Pym.js Shortcode, you would write:
 
 ```
 [pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymoptions=" xdomain: '\\*\.npr\.org' "]
 ```
 
-### `class`, to add HTML classes to the Pym parent element
+### `class`, to add HTML classes to the Pym.js parent element
 
-`class` is optional; this should be a valid HTML class name. It will be added to the element's default class, `'pym'`. You would want to use this if, for example, you wanted to [use a size-based class name to determine the size of the embed on your site](https://github.com/INN/pym-shortcode/issues/23). The class `'pym'` will always be output on container elements created by the Pym Shortcode. This class was introduced in version 1.2.2.
+`class` is optional; this should be a valid HTML class name. It will be added to the element's default class, `'pym'`. You would want to use this if, for example, you wanted to [use a size-based class name to determine the size of the embed on your site](https://github.com/INN/pym-shortcode/issues/23). The class `'pym'` will always be output on container elements created by the Pym.js Shortcode. This class was introduced in version 1.2.2.
 
 For example, the shortcode `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" class="one two three four float-left mw_50"]` results in the following output:
 
@@ -112,13 +112,13 @@ If you do not want the class `'pym'` output on container elements, [add a filter
 
 ### `align`, for WordPress alignment support
 
-`align` is optional; this should be one of the [WordPress-provided generated alignment types](https://codex.wordpress.org/CSS#WordPress_Generated_Classes): `left`, `right`, `center`, `none`. If your theme supports the `wide` or `full` values, you can use those too, as the value provided here will be prefixed with `align` and output as a CSS class on the Pym parent, so that the shortcode `[pym align="foo"]` results in the output `<div id="pym_0" class="pym alignfoo ">...`
+`align` is optional; this should be one of the [WordPress-provided generated alignment types](https://codex.wordpress.org/CSS#WordPress_Generated_Classes): `left`, `right`, `center`, `none`. If your theme supports the `wide` or `full` values, you can use those too, as the value provided here will be prefixed with `align` and output as a CSS class on the Pym.js parent, so that the shortcode `[pym align="foo"]` results in the output `<div id="pym_0" class="pym alignfoo ">...`
 
 In the Gutenberg editor, the alignment options are provided by the alignment controls that appear when the block is selected. The default choice is "none", with no option selected, and the other options are to align it left, center, or right. If your theme [declares support for the "wide" alignment](https://wordpress.org/gutenberg/handbook/extensibility/theme-support/#wide-alignment), you'll also see options for "wide" and "full" widths. The appearance of these alignment options on the page will depend on your site's theme.
 
-![A Pym embed block in use in a post, showing its alignment controls](img/block.png)
+![A Pym.js embed block in use in a post, showing its alignment controls](img/block.png)
 
-### `id`, to set the Pym parent element's ID
+### `id`, to set the Pym.js parent element's ID
 
 `id` is optional; this should be a valid HTML element ID name. It will be used as the ID of your `pymParent` iframe on the parent page. You would want to use this if, for example, [your embedded page contained navigation to another page, requiring the second page to know the pymParent element ID](https://github.com/INN/pym-shortcode/issues/20).
 
@@ -170,7 +170,7 @@ If you're embedding a YouTube video or a SoundCloud audio player, you don't need
 
 You would want to use `Pym.js` for other types of content you create and embed using iframes such as tables, charts, and interactive elements. For example, news organizations often create data-driven visualizations that are hosted in another application and need to be iframed into their CMS.
 
-For the Pym shortcode or the Pym block to work, the `Pym.js` JavaScript library must be used on the embedded page, referred to as the "child page". You can use this plugin's shortcode or block to embed content from any page that is so enabled. For information on how to use `Pym.js` in your projects, see [NPR's `Pym.js` documentation](http://blog.apps.npr.org/pym.js/#examples).
+For the Pym.js shortcode or the Pym.js block to work, the `Pym.js` JavaScript library must be used on the embedded page, referred to as the "child page". You can use this plugin's shortcode or block to embed content from any page that is so enabled. For information on how to use `Pym.js` in your projects, see [NPR's `Pym.js` documentation](http://blog.apps.npr.org/pym.js/#examples).
 
 ### Is `Pym.js` or this plugin dependent on jQuery or any other library?
 
@@ -182,7 +182,7 @@ Assuming that you have installed this plugin via the wordpress.org plugin reposi
 
 You can check the validity of that assumption by putting a shortcode or block in a post, then viewing the post from the frontend. In the source code of the page, you should see a script tag loading `pym.v1.min.js`. 
 
-The URL can also be found on the "Pym Plugin Info" page, found under the "Tools" menu in your site's admin dashboard.
+The URL can also be found on the "Pym.js Plugin Info" page, found under the "Tools" menu in your site's admin dashboard.
 
 Or, you can specify the URL from which to load `Pym.js`.
 
@@ -213,9 +213,9 @@ In any of these cases, set the different version of `Pym.js` using the `pymsrc` 
 
 ### I've set a different `pymsrc` option, but now I'm seeing a message in the console
 
-If a post has multiple instances of the Pym shortcode or block present, and between those different Pym instances there are different source URLs for `Pym.js` specified, then you should expect to see a message like the following in the browser's console when viewing that page:
+If a post has multiple instances of the Pym.js shortcode or block present, and between those different Pym.js instances there are different source URLs for `Pym.js` specified, then you should expect to see a message like the following in the browser's console when viewing that page:
 
-> Hi Pym user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym embeds. For more details, see https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console"
+> Hi Pym.js user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym.js embeds. For more details, see https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console"
 
 If your server is running with [`WP_DEBUG` set to `true`](https://codex.wordpress.org/WP_DEBUG), then your server console will also contain a message like this:
 
@@ -231,9 +231,9 @@ This message is included to make the process of debugging your content easier.
 To remedy this issue, take the following steps:
 
 1. Make sure every `[pym]` shortcode in the page has the same `pymsrc=""` attribute
-2. Make sure that every Pym Embed block on the page has the same URL set in the block settings for the "Pym.js URL" option.
+2. Make sure that every Pym.js Embed block on the page has the same URL set in the block settings for the "Pym.js URL" option.
 
-If your post has a mix of Pym shortcodes and blocks, you'll need to make sure that both types of Pym embed on the page use the same source URL.
+If your post has a mix of Pym.js shortcodes and blocks, you'll need to make sure that both types of Pym.js embed on the page use the same source URL.
 
 ### How do I serve `Pym.js` if the embedded page uses HTTPS and my site does not?
 
@@ -265,7 +265,7 @@ This plugin is released under the GNU GPL, version 2 or later.
 
 We welcome your contributions; please see [the contribution instructions](../contributing.md).
 
-## Other Pym Resources
+## Other Pym.js Resources
 
 You may also want to look at NPR's `Pym.js` resources, especially if you're interested in building compatible embeds:
 
