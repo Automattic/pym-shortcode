@@ -5,6 +5,8 @@
  * @package pym-shortcode
  */
 
+ use INN\PymEmbeds\Settings\option_key;
+
 /**
  * A shortcode to simplify the process of embedding articles using pym.js
  *
@@ -14,6 +16,8 @@
  * @param String $content the enclosed content; should be empty for this shortcode.
  * @param String $tag     the shortcode tag.
  * @uses pym_shortcode_script_footer_enqueue
+ * @uses pym_pymsrc_default_url
+ * @uses \INN\PymEmbeds\Settings\option_key()
  * @return String the embed HTML
  */
 function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
@@ -31,7 +35,7 @@ function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 	$actual_id = empty( $id ) ? 'pym_' . $pym_id : $id;
 
 	/**
-	 * Filter pym_shortcode_default_class allows setting the default class on embeds
+	 * Filter pym_shortcode_default_class allows setting the default class on embeds.
 	 *
 	 * @param String $default
 	 * @return String the default class name
@@ -58,7 +62,15 @@ function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 	);
 
 	// What's the pymsrc for this shortcode?
-	$pymsrc = empty( $atts['pymsrc'] ) ? pym_pymsrc_default_url() : $atts['pymsrc'];
+	if (
+		pym_maybe_override_pymsrc() // if the box to override has been checked...
+		|| empty( $atts['pymsrc'] ) // if there is no specified pymsrc...
+		|| ! wp_http_validate_url( $atts['pymsrc'] ) // if the specified pymsrc is not a safe URL...
+	) {
+		$pymsrc = pym_pymsrc_default_url(); // use the default URL.
+	} else {
+		$pymsrc = $atts['pymsrc'];
+	}
 
 	// If this is the first Pym element on the page, output the pymsrc script tag
 	// or if the pymsrc is set, output that.
@@ -139,13 +151,33 @@ if ( ! function_exists( 'pym_shortcode_script_footer_enqueue' ) ) {
 }
 
 /**
+ * Whether to force use of the default pymsrc URL.
+ *
+ * @since 1.3.2.1
+ * @uses \INN\PymEmbeds\Settings\option_key()
+ * @return bool Whether to force use of the default URL.
+ */
+function pym_maybe_override_pymsrc() {
+	$settings = get_option( \INN\PymEmbeds\Settings\option_key() );
+	if ( isset( $settings['override_pymsrc'] ) && 'on' === $settings['override_pymsrc'] ) {
+		return true;
+	}
+	return false;
+}
+
+/**
  * The default URL for pymsrc, as defined in plugin settings
  *
  * @since 1.3.2.1
  * @uses pym_pymsrc_local_url
  */
 function pym_pymsrc_default_url() {
-	$settings = get_option( option_key() );
+	$settings = get_option( \INN\PymEmbeds\Settings\option_key() );
+	if ( isset ( $settings['default_pymsrc'] ) ) {
+		if ( wp_http_validate_url( $settings['default_pymsrc'] ) ) {
+			return $settings['default_pymsrc'];
+		}
+	}
 	return pym_pymsrc_local_url();
 }
 
