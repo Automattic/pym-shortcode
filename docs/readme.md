@@ -7,13 +7,14 @@ Contents:
 1. [Plugin Installation](#plugin-installation)
 2. [The Pym Shortcode](#the-pym-shortcode)
 3. [The Pym Block](#the-pym-block)
-4. [Options](#options)
-	1. [src: the only required argument](#src-the-child-url)
-	2. pymsrc
-	3. pymoptions
-	4. class
-	5. align
-	6. id
+4. [Embed Options](#embed-options)
+	1. [src: the only required argument](#src-the-child-url-required-argument)
+	2. [pymsrc](#pymsrc-the-url-for-pymjs)
+	3. [pymoptions](#pymoptions-settings-for-pym)
+	4. [class](#class-to-add-html-classes-to-the-pym-parent-element)
+	5. [align](#align-for-wordpress-alignment-support)
+	6. [id](#id-to-set-the-pym-parent-elements-id)
+5. [Plugin Options](#plugin-options)
 5. [Frequently Asked Questions](#frequently-asked-questions)
 	1. [Why would I want to use Pym in the first place?](#why-would-i-want-to-use-pym-in-the-first-place)
 	2. [Why is a WordPress plugin needed to use Pym.js?](#why-is-a-wordpress-plugin-needed-to-use-pymjs)
@@ -53,7 +54,7 @@ Example in a post:
 
 For the block, all options available via shortcode arguments are available through the block's advanced options panel.
 
-## Options
+## Embed Options
 
 ```
 [pym src="" pymsrc="" pymoptions="" class="" align="" id="" ]
@@ -124,6 +125,30 @@ For example, the shortcode `[pym src="https://blog.apps.npr.org/pym.js/examples/
 ```html
 <div id="extremely_specific_id" class="pym"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('extremely_specific_example', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
 ```
+
+## Plugin Options
+
+The Pym.js Embed Settings page can be found under WordPress' "Settings" menu.
+
+The settings page provides two options: the default pymsrc and the option to override all pymsrc arguments.
+
+We **strongly recommend** that you set the default pymsrc to `https://pym.nprapps.org/pym.v1.min.js` and check the box to enable the pymsrc override.
+
+### Default pymsrc
+
+As explained in the documentation for [the pymsrc embed option](#pymsrc-the-url-for-pymjs), the default copy of `Pym.js` used by this plugin is the copy bundled with this plugin. NPR recommends, and we recommend, that you use the copy of `Pym.js` provided by NPR's CDN. However, this plugin cannot force you to do so; the WordPress.org plugin guidelines generally [prohibit plugin use of third-party scripts without user consent](https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/#7-plugins-may-not-track-users-without-their-consent), and frown upon plugins that use CDNs by default. Therefore, we give you the option to use NPR's CDN, or your nwesroom's CDN, and ship the plugin in a state that defaults to no CDN.
+
+Shortcodes and blocks have the the option to specify an alternate source for `Pym.js` at a per-embed level, which allows you to opt into using the CDN version of the script on a per-embed level. This is less than optimal; every time you create a `Pym.js` embed on your site, you will need to check that the pymsrc option is set.
+
+To save time and effort, set the "Default pymsrc" option in the plugin settings to NPR's CDN copy of `Pym.js`: `https://pym.nprapps.org/pym.v1.min.js`
+
+### Override pymsrc
+
+Anyone who can edit a post can set the pymsrc URL on a shortcode or a block, and the pymsrc URL can be *any* resource. Browsers will try to load it as JavaScript, even if the set URL is for an image, a 404 page, or a non-`Pym.js` library. This is not good.
+
+We **strongly recommend** that you check this box, to force all `Pym.js` Embed shortcodes and blocks to use the plugin's default pymsrc.
+
+This box is not checked by default, because defaulting to overriding the pymsrc URL would potentially break existing shortcodes on sites that used this plugin before release version 1.3.2.1. If you used this plugin to create `[pym]` shortcodes before release 1.3.2.1, and wish to test your embeds before enabling the override, read [this testing advice](./upgrade-testing.md).
 
 ## Frequently Asked Questions
 
