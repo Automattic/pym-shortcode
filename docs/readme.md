@@ -123,7 +123,9 @@ In the Gutenberg editor, the alignment options are provided by the alignment con
 For example, the shortcode `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" id="extremely_specific_id"]` results in the following output:
 
 ```html
-<div id="extremely_specific_id" class="pym"></div><script src="http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js"></script><script>var pym_0 = new pym.Parent('extremely_specific_example', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
+<div id="extremely_specific_id" class="pym">
+...
+<script>var pym_0 = new pym.Parent('extremely_specific_example', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
 ```
 
 ## Plugin Options
