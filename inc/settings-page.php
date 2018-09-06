@@ -163,6 +163,7 @@ function pym_settings_section_callback( $args ) {
  * @param Mixed $value The setting.
  * @return Array The sanitized setting
  * @uses pym_pymsrc_local_url
+ * @uses pym_plugin_version
  */
 function sanitize_callback( $value ) {
 	error_log(var_export( $value, true));
@@ -175,6 +176,8 @@ function sanitize_callback( $value ) {
 	$new_value['default_pymsrc'] = ! empty( $proposed_pymsrc ) ? $proposed_pymsrc : null;
 
 	$new_value['override_pymsrc'] = ( isset( $value['override_pymsrc'] ) && 'on' === $value['override_pymsrc'] ) ? 'on': null;
+
+	$new_value['version'] = pym_plugin_version();
 
 	return $new_value;
 }

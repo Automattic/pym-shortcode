@@ -3,7 +3,7 @@
 Plugin Name: Pym Shortcode
 Plugin URI: https://github.com/INN/pym-shortcode
 Description: Adds a [pym src=""] shortcode to simplify use of NPR's Pym.js
-Version: 1.3.2
+Version: 1.3.2.1
 Author: The INN Nerds
 Author URI: http://nerds.inn.org/
 License: GPL Version 2 or later
@@ -14,6 +14,15 @@ Text Domain: pym_shortcode
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
+}
+
+/**
+ * What version is this plugin?
+ *
+ * @return string The plugin version number
+ */
+function pym_plugin_version() {
+	return '1.3.2.1';
 }
 
 $includes = array(
