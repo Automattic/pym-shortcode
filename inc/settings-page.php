@@ -54,7 +54,7 @@ function settings_page() {
  */
 function register_options_page() {
 	add_submenu_page(
-		'tools.php',
+		'options-general.php',
 		__( 'Pym.js Embeds Plugin Settings', 'pym-shortcode' ), // title of page
 		__( 'Pym.js Embeds Settings', 'pym-shortcode' ), // menu text
 		'manage_options', // capability required
