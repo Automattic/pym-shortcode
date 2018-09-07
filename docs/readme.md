@@ -5,7 +5,7 @@ Pym.js Embeds provides shortcode and Gutenberg block wrappers for embedding resp
 Contents:
 
 1. [Plugin Installation](#plugin-installation)
-2. [The Pym.js Shortcode](#the-pym-shortcode)
+2. [The Pym.js Shortcode](#the-pymjs-shortcode)
 3. [The Pym.js Block](#the-pym-block)
 4. [Embed Options](#embed-options)
 	1. [src: the only required argument](#src-the-child-url-required-argument)

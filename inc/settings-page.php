@@ -56,8 +56,8 @@ function settings_page() {
 function register_options_page() {
 	add_submenu_page(
 		'options-general.php',
-		__( 'Pym.js Embeds Plugin Settings', 'pym-shortcode' ), // title of page
-		__( 'Pym.js Embeds Settings', 'pym-shortcode' ), // menu text
+		__( 'Pym.js Embeds Plugin Settings', 'pym-embeds' ), // title of page
+		__( 'Pym.js Embeds Settings', 'pym-embeds' ), // menu text
 		'manage_options', // capability required
 		settings_page(), // menu slug
 		__NAMESPACE__ . '\options_page_callback' // callback for options page display.
@@ -74,7 +74,7 @@ add_action( 'admin_menu', __NAMESPACE__ . '\register_options_page' );
 function options_page_callback() {
 	// check capabilities.
 	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( esc_html__( 'You do not have sufficient permissions to access the Pym.js Embeds plugin\'s settings.', 'pym-shortcode' ) );
+		wp_die( esc_html__( 'You do not have sufficient permissions to access the Pym.js Embeds plugin\'s settings.', 'pym-embeds' ) );
 		return;
 	}
 
@@ -90,7 +90,7 @@ function options_page_callback() {
 			<?php
 				settings_fields( option_group() );
 				do_settings_sections( settings_section() );
-				submit_button( esc_html__( 'Save settings', 'pym-shortcode' ) );
+				submit_button( esc_html__( 'Save settings', 'pym-embeds' ) );
 			?>
 		</form>
 	<?php
@@ -112,14 +112,14 @@ function admin_init() {
 
 	add_settings_section(
 		settings_section(),
-		__( 'Pym.js Source Settings', 'pym-shortcode' ),
+		__( 'Pym.js Source Settings', 'pym-embeds' ),
 		__NAMESPACE__ . '\pym_settings_section_callback',
 		settings_page()
 	);
 
 	add_settings_field(
 		'default_pymsrc',
-		__( 'Default pymsrc', 'pym-shortcode' ),
+		__( 'Default pymsrc', 'pym-embeds' ),
 		__NAMESPACE__ . '\field_default_pymsrc',
 		settings_page(), // menu slug of this page.
 		settings_section(), // settings section slug.
@@ -130,7 +130,7 @@ function admin_init() {
 
 	add_settings_field(
 		'override_pymsrc',
-		__( 'Override pymsrc', 'pym-shortcode' ),
+		__( 'Override pymsrc', 'pym-embeds' ),
 		__NAMESPACE__ . '\field_override_pymsrc',
 		settings_page(), // menu slug of this page.
 		settings_section(), // settings section slug.
@@ -151,7 +151,7 @@ add_action( 'admin_init', __NAMESPACE__ . '\admin_init' );
 function pym_settings_section_callback( $args ) {
 	printf(
 		'<p>%1$s</p>',
-		__( 'The Pym.js JavaScript library can be provided from many sources. By default, shortcodes and blocks will use a copy of Pym.js hosted on your website to power embeds. For more information about changing the Pym.js source URL, referred to as \'pymsrc\', please <a href="https://github.com/INN/pym-shortcode/blob/master/docs/readme.md">read this plugin\'s documentation</a>.', 'pym-shortcode' )
+		__( 'The Pym.js JavaScript library can be provided from many sources. By default, shortcodes and blocks will use a copy of Pym.js hosted on your website to power embeds. For more information about changing the Pym.js source URL, referred to as \'pymsrc\', please <a href="https://github.com/INN/pym-shortcode/blob/master/docs/readme.md">read this plugin\'s documentation</a>.', 'pym-embeds' )
 	);
 }
 
@@ -204,14 +204,14 @@ function field_default_pymsrc( $args ) {
 	printf(
 		'<label for="%1$s" style="display:block;clear:both; margin-top:0.5em;">%2$s</label>',
 		esc_attr( $id ),
-		wp_kses_post( __( 'This URL is where Pym.js will be loaded from for all embeds that do not set a pymsrc in the shortcode attributes or block settings. NPR and the Pym.js Embed plugin maintainers recommend that you use the NPR-provided CDN for this purpose: <code>https://pym.nprapps.org/pym.v1.min.js</code>', 'pym-shortcode' ) )
+		wp_kses_post( __( 'This URL is where Pym.js will be loaded from for all embeds that do not set a pymsrc in the shortcode attributes or block settings. NPR and the Pym.js Embed plugin maintainers recommend that you use the NPR-provided CDN for this purpose: <code>https://pym.nprapps.org/pym.v1.min.js</code>', 'pym-embeds' ) )
 	);
 	printf(
 		'<label for="%1$s" style="display:block;clear:both; margin-top:0.5em;">%2$s</label>',
 		esc_attr( $id ),
 		sprintf(
 			// translators: %1$s is a bare URL.
-			wp_kses_post( __( 'If no pymsrc URL is set here, then the plugin-provided copy of Pym.js will be used as the default: <code>%1$s</code>', 'pym-shortcode' ) ),
+			wp_kses_post( __( 'If no pymsrc URL is set here, then the plugin-provided copy of Pym.js will be used as the default: <code>%1$s</code>', 'pym-embeds' ) ),
 			esc_html( pym_pymsrc_local_url() )
 		)
 	);
@@ -237,6 +237,6 @@ function field_override_pymsrc( $args ) {
 	printf(
 		'<label for="%1$s" style="display:block;clear:both; margin-top:0.5em;">%2$s</label>',
 		esc_attr( $id ),
-		esc_html__( 'Checking this box means that every Pym.js embed will use the default pymsrc URL, ignoring the pymsrc URL set in the embed\'s shortcode attributes or block settings. We recommend that you check this box after setting the default pymsrc URL to the CDN-provided copy of the library.', 'pym-shortcode' )
+		esc_html__( 'Checking this box means that every Pym.js embed will use the default pymsrc URL, ignoring the pymsrc URL set in the embed\'s shortcode attributes or block settings. We recommend that you check this box after setting the default pymsrc URL to the CDN-provided copy of the library.', 'pym-embeds' )
 	);
 }
