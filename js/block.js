@@ -155,9 +155,11 @@
 						// @todo make this translatable https://github.com/WordPress/gutenberg/blob/master/packages/i18n/README.md
 						help: [
 							'For more about this control, see ',
-							el( 'a', {
-								href: 'http://blog.apps.npr.org/pym.js/',
-							},
+							el(
+								'a',
+								{
+									href: 'http://blog.apps.npr.org/pym.js/',
+								},
 								'the Usage section of the Pym.js docs',
 							),
 							'.'
