@@ -96,6 +96,8 @@ To do the same thing with this Pym.js Shortcode, you would write:
 [pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymoptions=" xdomain: '\\*\.npr\.org' "]
 ```
 
+For a full list of options, see the Pym.js [API documentation for the `config` parameter](http://blog.apps.npr.org/pym.js/api/pym.js/1.3.2/module-pym.Parent.html).
+
 ### `class`, to add HTML classes to the Pym.js parent element
 
 `class` is optional; this should be a valid HTML class name. It will be added to the element's default class, `'pym'`. You would want to use this if, for example, you wanted to [use a size-based class name to determine the size of the embed on your site](https://github.com/INN/pym-shortcode/issues/23). The class `'pym'` will always be output on container elements created by the Pym.js Shortcode. This class was introduced in version 1.2.2.
