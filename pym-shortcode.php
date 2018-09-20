@@ -4,8 +4,8 @@ Plugin Name: Pym.js Embeds
 Plugin URI: https://github.com/INN/pym-shortcode
 Description: Adds a [pym src=""] shortcode to simplify use of NPR's Pym.js
 Version: 1.3.2.1
-Author: The INN Nerds
-Author URI: http://nerds.inn.org/
+Author: INN Labs
+Author URI: http://labs.inn.org/
 License: GPL Version 2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: pym-embeds
