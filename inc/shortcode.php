@@ -32,7 +32,18 @@ function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 
 	// Set us up the vars.
 	$pymoptions = empty( $atts['pymoptions'] ) ? '' : $atts['pymoptions'];
-	$id = empty( $atts['id'] ) ? '' : esc_attr( $atts['id'] );
+
+	error_log(var_export( $atts, true));
+	// The element ID passed by the shortcode or the block
+	if ( ! empty( $atts['id'] ) ) {
+		$id = esc_attr( $atts['id'] );
+	} elseif ( ! empty( $atts['anchor'] ) ) {
+		$id = esc_attr( $atts['anchor'] );
+	} else {
+		$id = '';
+	}
+
+	// the parent element's ID;
 	$actual_id = empty( $id ) ? 'pym_' . $pym_id : $id;
 
 	/**

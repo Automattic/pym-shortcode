@@ -71,7 +71,7 @@
 			html: false, // Removes support for an HTML mode.
 			align: true, // supports alignment
 			alignWide: true, // supports the extra slignment
-			anchor: false, // see https://github.com/INN/pym-shortcode/issues/36
+			anchor: true,
 			customClassName: true,
 			className: true,
 			inserter: true,
@@ -104,6 +104,7 @@
 					{
 						// attributes
 						className: props.className,
+						anchor: props.anchor,
 					},
 					// children follow
 					el( TextControl, {
@@ -138,12 +139,6 @@
 				),
 				el( InspectorAdvancedControls, {},
 					el( TextControl, {
-						label: __( 'Parent Element ID (optional)' ),
-						value: props.attributes.id,
-						onChange: ( value ) => { props.setAttributes( { id: value } ); },
-						help: __( 'The Pym.js block will automatically generate an ID for the parent element and use that to initiate the Pym.js embed. If your child page\'s code requires its parent to have a specific element ID, set that here.' ),
-					} ),
-					el( TextControl, {
 						label: __( 'Pym.js Source URL (optional)' ),
 						value: props.attributes.pymsrc,
 						onChange: ( value ) => { props.setAttributes( { pymsrc: value } ); },
@@ -177,6 +172,9 @@
 		 * Though this block has a render callback, we save the URL of the embed in the post_content
 		 * just in case this plugin is ever deactivated.
 		 *
+		 * The 'anchor' attribute is saved as the 'id' attribute on the element by hacks.
+		 * @see https://github.com/INN/pym-shortcode/issues/36
+		 *
 		 * @return {Element}       Element to render.
 		 */
 		save: function( props ) {
@@ -184,6 +182,8 @@
 				'a',
 				{
 					href: props.attributes.src,
+					id: props.attributes.anchor,
+					className: props.attributes.class,
 				},
 				props.attributes.src
 			);
@@ -219,7 +219,7 @@
 								return named.pymoptions ? named.pymoptions : '';
 							},
 						},
-						id: {
+						anchor: {
 							type: 'string',
 							shortcode: function( named ) {
 								return named.id ? named.id : '';
@@ -243,6 +243,55 @@
 			]
 			// @todo provide "to" transformations for embed, plain HTML, etc
 		},
+
+		/**
+		 * Deprecated previous versions of this block
+		 *
+		 * - attributes
+		 * - support
+		 * - save
+		 * - migrate function
+		 * - isEligible
+		 *
+		 * @link https://wordpress.org/gutenberg/handbook/block-api/deprecated-blocks/
+		 */
+		deprecated: [
+			{
+				// before https://github.com/INN/pym-shortcode/issues/36
+				save: function( props ) {
+					return wp.element.createElement(
+						'a',
+						{
+							href: props.attributes.src,
+						},
+						props.attributes.src
+					);
+				},
+				migrate: function( attributes, innerBlocks ) {
+					attributes.anchor = attributes.id;
+					return [ attributes, innerBlocks ];
+				},
+			},
+			{
+				// before https://github.com/INN/pym-shortcode/issues/36
+				save: function( props ) {
+					return wp.element.createElement(
+						'a',
+						{
+							href: props.attributes.src,
+							anchor: props.attributes.anchor,
+							id: props.attributes.anchor,
+							className: props.attributes.class,
+						},
+						props.attributes.src
+					);
+				},
+				migrate: function( attributes, innerBlocks ) {
+					attributes.anchor = attributes.id;
+					return [ attributes, innerBlocks ];
+				},
+			},
+		]
 	} );
 } )(
 	window.wp

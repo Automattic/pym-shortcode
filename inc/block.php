@@ -49,6 +49,15 @@ function pym_block_init() {
 			),
 			'id' => array(
 				'type' => 'string',
+				'source' => 'attribute',
+				'selector' => 'a',
+				'attribute' => 'id',
+			),
+			'anchor' => array(
+				'type' => 'string',
+				'source' => 'attribute',
+				'selector' => 'a',
+				'attribute' => 'id',
 			),
 			'className' => array(
 				'type' => 'string',
