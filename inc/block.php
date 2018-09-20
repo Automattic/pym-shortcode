@@ -12,6 +12,11 @@
  * @see https://wordpress.org/gutenberg/handbook/blocks/writing-your-first-block-type/#enqueuing-block-scripts
  */
 function pym_block_init() {
+	if ( ! function_exists( 'register_block_type' ) ) {
+		// Gutenberg is not active.
+		return false;
+	}
+
 	$dir = dirname( dirname( __FILE__ ) );
 
 	$block_js = 'js/block.js';
