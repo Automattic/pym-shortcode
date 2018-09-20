@@ -1,5 +1,5 @@
 === Pym.js Embeds ===
-Contributors: inn_nerds
+Contributors: innlabs
 Donate link: https://inn.org/donate
 Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
