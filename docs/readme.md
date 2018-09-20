@@ -28,6 +28,7 @@ Contents:
 	9. [How do I know if there's an HTTPS problem with a given embedded iframe?](#how-do-i-know-if-theres-an-https-problem-with-a-given-embedded-iframe)
 	10. [What license is this plugin licensed under?](#what-license-is-this-plugin-licensed-under)
 	11. [How do I contribute to this plugin?](#how-do-i-contribute-to-this-plugin)
+	12. [How do I get support for this plugin?](#how-do-i-get-support-for-this-plugin)
 6. [Other Pym.js Resources](#other-pymjs-resources)
 
 ## Plugin Installation
@@ -266,6 +267,10 @@ This plugin is released under the GNU GPL, version 2 or later.
 ### How do I contribute to this plugin?
 
 We welcome your contributions; please see [the contribution instructions](../contributing.md).
+
+### How do I get support for this plugin?
+
+Send us an email at support@inn.org or [open an issue on GitHub](https://github.com/INN/pym-shortcode/issues/new).
 
 ## Other Pym.js Resources
 

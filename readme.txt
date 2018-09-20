@@ -26,6 +26,8 @@ Pym.js Embeds provides shortcode and Gutenberg block wrappers for embedding resp
 
 For answers to frequently asked questions, [see this plugin's documentation on GitHub](https://github.com/INN/pym-shortcode/tree/master/docs).
 
+For support resources, [see this plugin's documentation on GitHub](https://github.com/INN/pym-shortcode/tree/master/docs).
+
 == Screenshots ==
 
 Embeddable table from NPR:
