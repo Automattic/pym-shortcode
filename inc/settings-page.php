@@ -168,7 +168,6 @@ function pym_settings_section_callback( $args ) {
  * @uses pym_plugin_version
  */
 function sanitize_callback( $value ) {
-	error_log(var_export( $value, true));
 	$new_value = array();
 
 	$proposed_pymsrc = wp_http_validate_url( $value['default_pymsrc'] );
