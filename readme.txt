@@ -74,7 +74,7 @@ New features:
 
 Changes:
 
-* The source URL for `pymjs`, known as the pymsrc URL, is now passed through [wp_http_validate_url](https://developer.wordpress.org/reference/functions/wp_http_validate_url/). [PR #45]() for [issue #8](https://github.com/INN/pym-shortcode/issues/8).
+* The source URL for `pymjs`, known as the pymsrc URL, is now passed through [wp_http_validate_url](https://developer.wordpress.org/reference/functions/wp_http_validate_url/). [PR #45](https://github.com/INN/pym-shortcode/pull/45) for [issue #8](https://github.com/INN/pym-shortcode/issues/8).
 * The source URL for `pym.js` is no longer output by `the_content()`, instead being output during `wp_footer` by an action dedicated to the task. If different shortcodes and/or blocks on the page specify different source URLs for Pym.js, all are output (after removing duplicates), but a message is logged in the browser console. If `WP_DEBUG` is set, this message is also logged to the server log, with the post ID specified. [PR #34](https://github.com/INN/pym-shortcode/pull/34) for issues [#33](https://github.com/INN/pym-shortcode/issues/33) and [#35](https://github.com/INN/pym-shortcode/issues/35). See https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console
 * `docs/updating-pym.md` becomes `docs/maintainer-notes.md`
 
