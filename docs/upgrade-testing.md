@@ -2,7 +2,7 @@
 
 We recommend that you perform testing in a copy of your production environment, such as a staging or development server, or a local development environment. You should try to test with as complete a copy as possible, to include themes, plugins, and a copy of the database.
 
-If your live site uses an HTTPS certificate, your testing environment should use an HTTPS certificate. Talk to your hosting provider or consult your local development environment's docs for information about enabling HTTPS.
+If your live site uses an HTTPS certificate, your testing environment should use an HTTPS certificate. Talk to your hosting provider or consult your local development environment's docs for information about enabling HTTPS. (If your host doesn't offer HTTPS on your staging site, that's unfortunate, but it's not something that would prevent you from testing this plugin.)
 
 ## Finding posts that use the `[pym]` shortcode
 
