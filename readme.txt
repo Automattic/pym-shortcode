@@ -60,7 +60,7 @@ New features:
 * Adds a "Pym.js Embed" block for use in Gutenberg. [PR #34](https://github.com/INN/pym-shortcode/pull/34) for issue [#28](https://github.com/INN/pym-shortcode/issues/28).
 	* If a block is created using this plugin and Gutenberg, and Gutenberg is then disabled, the block will show a link to the embedded graphic.
 * Through the settings page, you can now serve pym.js using your newsroom's CDN or NPR's CDN! [PR #45](https://github.com/INN/pym-shortcode/pull/45) for [issue #31](https://github.com/INN/pym-shortcode/issues/31).
-* Adds a settings page, available to those with the `manage_options` capability, with the following options:
+* Adds a settings page, available to [those users with the `manage_options` capability](https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table), with the following options:
 	* Change the default pymsrc URL. [PR #45](https://github.com/INN/pym-shortcode/pull/45) for [issue #8](https://github.com/INN/pym-shortcode/issues/8).
 	* Override block and shortcode pymsrc URLs with the default pymsrc URL. [PR #45](https://github.com/INN/pym-shortcode/pull/45) for [issue #8](https://github.com/INN/pym-shortcode/issues/8).
 * Adds an informational page, available to all who can make posts, that lists the plugin's default source URL for `Pym.js`. This is to make the process of building new interactives easier.
