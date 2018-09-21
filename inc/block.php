@@ -50,14 +50,14 @@ function pym_block_init() {
 			'id' => array(
 				'type' => 'string',
 				'source' => 'attribute',
-				'selector' => 'a',
 				'attribute' => 'id',
+				'selector' => '*',
 			),
 			'anchor' => array(
 				'type' => 'string',
 				'source' => 'attribute',
-				'selector' => 'a',
 				'attribute' => 'id',
+				'selector' => '*',
 			),
 			'className' => array(
 				'type' => 'string',
