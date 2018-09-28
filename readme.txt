@@ -54,6 +54,8 @@ Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode:
 
 Following the practice begun at plugin version 1.1.2 of [having the plugin version number match the version number of the bundled copy of `Pym.js`](https://github.com/INN/pym-shortcode/blob/master/docs/maintainer-notes.md), the first three numbers in this plugin's version do not change with this release because the `Pym.js` version has not changed. We've tacked a `.1` on to the end to denote this release. Please read the release notes and test your site as appropriate before upgrading in production.
 
+We wish to thank all who helped us test [the release candidate](https://github.com/INN/pym-shortcode/releases/tag/v1.3.2.1-rc1) for this version, including Mike Janssen at [Current.org](https://current.org/).
+
 New features:
 
 * Plugin renamed from "Pym Shortcode" to "Pym.js Embeds".
