@@ -5,7 +5,7 @@ Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
 Requires PHP: 5.3
 Tested up to: 4.9.8
-Stable tag: 1.3.2
+Stable tag: 1.3.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,7 +48,7 @@ Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode:
 
 == Changelog ==
 
-= [1.3.2.1] =
+= 1.3.2.1 =
 
 This is a major update!
 
@@ -59,7 +59,7 @@ New features:
 * Plugin renamed from "Pym Shortcode" to "Pym.js Embeds".
 * Adds a "Pym.js Embed" block for use in Gutenberg. [PR #34](https://github.com/INN/pym-shortcode/pull/34) for issue [#28](https://github.com/INN/pym-shortcode/issues/28).
 	* If a block is created using this plugin and Gutenberg, and Gutenberg is then disabled, the block will show a link to the embedded graphic.
-* Through the settings page, you can now serve pym.js using your newsroom's CDN or NPR's CDN! [PR #45](https://github.com/INN/pym-shortcode/pull/45) for [issue #31](https://github.com/INN/pym-shortcode/issues/31).
+* Through the settings page, you can now serve Pym.js using your newsroom's CDN or NPR's CDN! [PR #45](https://github.com/INN/pym-shortcode/pull/45) for [issue #31](https://github.com/INN/pym-shortcode/issues/31).
 * Adds a settings page, available to [those users with the `manage_options` capability](https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table), with the following options:
 	* Change the default pymsrc URL. [PR #45](https://github.com/INN/pym-shortcode/pull/45) for [issue #8](https://github.com/INN/pym-shortcode/issues/8).
 	* Override block and shortcode pymsrc URLs with the default pymsrc URL. [PR #45](https://github.com/INN/pym-shortcode/pull/45) for [issue #8](https://github.com/INN/pym-shortcode/issues/8).
@@ -77,6 +77,7 @@ Changes:
 * The source URL for `pymjs`, known as the pymsrc URL, is now passed through [wp_http_validate_url](https://developer.wordpress.org/reference/functions/wp_http_validate_url/). [PR #45](https://github.com/INN/pym-shortcode/pull/45) for [issue #8](https://github.com/INN/pym-shortcode/issues/8).
 * The source URL for `pym.js` is no longer output by `the_content()`, instead being output during `wp_footer` by an action dedicated to the task. If different shortcodes and/or blocks on the page specify different source URLs for Pym.js, all are output (after removing duplicates), but a message is logged in the browser console. If `WP_DEBUG` is set, this message is also logged to the server log, with the post ID specified. [PR #34](https://github.com/INN/pym-shortcode/pull/34) for issues [#33](https://github.com/INN/pym-shortcode/issues/33) and [#35](https://github.com/INN/pym-shortcode/issues/35). See https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console
 * `docs/updating-pym.md` becomes `docs/maintainer-notes.md`
+* Script tags for embeds are no longer output by `the_content()`, instead being output during `wp_footer()` by [closures](https://secure.php.net/manual/en/functions.anonymous.php) hooked on the `'wp_footer'` action. [PR #34](https://github.com/INN/pym-shortcode/pull/34) for issues [#33](https://github.com/INN/pym-shortcode/issues/33) and [#35](https://github.com/INN/pym-shortcode/issues/35).
 
 = 1.3.2 =
 
@@ -127,5 +128,3 @@ You may also want to look at NPR's Pym.js resources:
 
 * [Pym.js homepage](http://blog.apps.npr.org/pym.js/)
 * [Pym.js repo on GutHub/nprapps](https://github.com/nprapps/pym.js/)
-
-[unreleased]: https://github.com/INN/pym-shortcode/compare/v1.3.2...HEAD
