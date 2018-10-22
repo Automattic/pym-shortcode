@@ -20,7 +20,7 @@ Contents:
 	2. [Why is a WordPress plugin needed to use Pym.js?](#why-is-a-wordpress-plugin-needed-to-use-pymjs)
 	3. [When would I use a Pym.js solution versus embed code without using Pym.js?](#when-would-i-use-a-pymjs-solution-versus-embed-code-without-using-pymjs)
 	4. [Is Pym.js or this plugin dependent on jQuery or any other library?](#is-pymjs-or-this-plugin-dependent-on-jquery-or-any-other-library)
-	5. [Where should I put the graphic files I want to embed using `Pym.js`?](#where-should-i-put-the-graphic-files-I-want-to-embed-using-pymjs)
+	5. [Where should I put the graphic files I want to embed using `Pym.js`?](#where-should-i-put-the-graphic-files-i-want-to-embed-using-pymjs)
 	6. [What is the URL for pym.v1.min.js?](#what-is-the-url-for-pymv1minjs)
 	7. [What is the difference between `Pym.js` and `pym.v1.min.js`?](what-is-the-difference-between-pymjs-and-pymv1minjs)
 	8. [Why would I want to change the Pym.js source URL?](#why-would-i-want-to-change-the-pymjs-source-url)
