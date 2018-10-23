@@ -20,15 +20,16 @@ Contents:
 	2. [Why is a WordPress plugin needed to use Pym.js?](#why-is-a-wordpress-plugin-needed-to-use-pymjs)
 	3. [When would I use a Pym.js solution versus embed code without using Pym.js?](#when-would-i-use-a-pymjs-solution-versus-embed-code-without-using-pymjs)
 	4. [Is Pym.js or this plugin dependent on jQuery or any other library?](#is-pymjs-or-this-plugin-dependent-on-jquery-or-any-other-library)
-	5. [What is the URL for pym.v1.min.js?](#what-is-the-url-for-pymv1minjs)
-	6. [What is the difference between `Pym.js` and `pym.v1.min.js`?](what-is-the-difference-between-pymjs-and-pymv1minjs)
-	6. [Why would I want to change the Pym.js source URL?](#why-would-i-want-to-change-the-pymjs-source-url)
-	7. [I've set a different pymsrc option, but now I'm seeing a message in the console](#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console)
-	8. [How do I serve Pym.js if the embedded page uses HTTPS and my site does not?](#how-do-i-serve-pymjs-if-the-embedded-page-uses-https-and-my-site-does-not)
-	9. [How do I know if there's an HTTPS problem with a given embedded iframe?](#how-do-i-know-if-theres-an-https-problem-with-a-given-embedded-iframe)
-	10. [What license is this plugin licensed under?](#what-license-is-this-plugin-licensed-under)
-	11. [How do I contribute to this plugin?](#how-do-i-contribute-to-this-plugin)
-	12. [How do I get support for this plugin?](#how-do-i-get-support-for-this-plugin)
+	5. [Where should I put the graphic files I want to embed using `Pym.js`?](#where-should-i-put-the-graphic-files-i-want-to-embed-using-pymjs)
+	6. [What is the URL for pym.v1.min.js?](#what-is-the-url-for-pymv1minjs)
+	7. [What is the difference between `Pym.js` and `pym.v1.min.js`?](what-is-the-difference-between-pymjs-and-pymv1minjs)
+	8. [Why would I want to change the Pym.js source URL?](#why-would-i-want-to-change-the-pymjs-source-url)
+	9. [I've set a different pymsrc option, but now I'm seeing a message in the console](#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console)
+	10. [How do I serve Pym.js if the embedded page uses HTTPS and my site does not?](#how-do-i-serve-pymjs-if-the-embedded-page-uses-https-and-my-site-does-not)
+	11. [How do I know if there's an HTTPS problem with a given embedded iframe?](#how-do-i-know-if-theres-an-https-problem-with-a-given-embedded-iframe)
+	12. [What license is this plugin licensed under?](#what-license-is-this-plugin-licensed-under)
+	13. [How do I contribute to this plugin?](#how-do-i-contribute-to-this-plugin)
+	14. [How do I get support for this plugin?](#how-do-i-get-support-for-this-plugin)
 6. [Other Pym.js Resources](#other-pymjs-resources)
 
 ## Plugin Installation
@@ -178,6 +179,10 @@ For the Pym.js shortcode or the Pym.js block to work, the `Pym.js` JavaScript li
 ### Is `Pym.js` or this plugin dependent on jQuery or any other library?
 
 Nope, all the required JavaScript is self-contained in the plugin-provided copy of `pym.v1.min.js`. The shortcode will enqueue `pym.v1.min.js` on the parent page when necessary. You will need to include `pym.v1.min.js` on the embedded page, however.
+
+### Where should I put the graphic files I want to embed using `Pym.js`?
+
+Child graphic assets could go in your WordPress server's uploads directory, uploaded via SFTP. Or on a GitHub page. Or on Amazon S3.
 
 ### What is the URL for `pym.v1.min.js`?
 
