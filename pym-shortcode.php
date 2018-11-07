@@ -3,7 +3,7 @@
 Plugin Name: Pym.js Embeds
 Plugin URI: https://github.com/INN/pym-shortcode
 Description: A WordPress solution to embed iframes that are responsive horizontally and vertically using the NPR Visuals Team's `Pym.js`.
-Version: 1.3.2.1
+Version: 1.3.2.2
 Author: INN Labs
 Author URI: http://labs.inn.org/
 License: GPL Version 2 or later
