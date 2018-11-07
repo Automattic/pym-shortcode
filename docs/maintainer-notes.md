@@ -28,3 +28,37 @@ The plugin's [version history](https://github.com/INN/pym-shortcode/releases) lo
 - 1.3.2
 - 1.3.2.1: Gutenberg and settings page
 - 1.3.2.2: WordPress 5.0 support
+
+### Testing before release
+
+See also https://github.com/INN/docs/blob/master/projects/wordpress-plugins/release.sh.md
+
+Plugin settings:
+
+- [ ] Does the plugin settings page work?
+
+Shortcode tests:
+
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymoptions=" xdomain: '\\*\.npr\.org' "]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" class="one two three four float-left mw_50"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align=""]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="none"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="left"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="center"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="right"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="wide"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" align="full"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" id="extremely_specific_id"]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js" pymoptions=""]`
+- [ ] `[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js" pymoptions=""]`
+
+Gutenberg tests:
+
+- [ ] the block, when inserted, prompts users for a URL
+- [ ] the block's alignment, custom classes, custom ID, and other options are respected.
+- [ ] the block uses the default pymsrc URL if the pymsrc attribute is not set
+- [ ] on a site with Gutenberg not installed, the plugin functions
+- [ ] on a 4.9 site with Gutenberg installed, the plugin functions
+- [ ] on a 5.0 site, the plugin functions

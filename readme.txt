@@ -48,11 +48,16 @@ Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode:
 
 == Changelog ==
 
+= unreleased =
+
+- Adds credit to GitHub user [eidietrich](https://github.com/eidietrich) for [PR #55](https://github.com/INN/pym-shortcode/pull/55) in the 1.3.2.2 release notes.
+
 = 1.3.2.2 =
 
 - Plugin is now tested against WordPress 5.0 beta 3.
 - Adds support for WordPress 5.0.
 - Fixes bug where the Pym.js Embeds block did not work in WordPress 5.0. [PR #58](https://github.com/INN/pym-shortcode/pulls/58) for [issue #57](https://github.com/INN/pym-shortcode/issues/57).
+- Adds advice for where to host graphics files. [PR #55](https://github.com/INN/pym-shortcode/pull/55) from Github user [eidietrich](https://github.com/eidietrich).
 
 = 1.3.2.1 =
 
