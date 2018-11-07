@@ -4,8 +4,8 @@ Donate link: https://inn.org/donate
 Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
 Requires PHP: 5.3
-Tested up to: 4.9.8
-Stable tag: 1.3.2.1
+Tested up to: 5.0-beta3
+Stable tag: 1.3.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,12 @@ Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode:
 ![Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode](img/pym-example-phone.png)
 
 == Changelog ==
+
+= 1.3.2.2 =
+
+- Plugin is now tested against WordPress 5.0 beta 3.
+- Adds support for WordPress 5.0.
+- Fixes bug where the Pym.js Embeds block did not work in WordPress 5.0. [PR #58](https://github.com/INN/pym-shortcode/pulls/58) for [issue #57](https://github.com/INN/pym-shortcode/issues/57).
 
 = 1.3.2.1 =
 

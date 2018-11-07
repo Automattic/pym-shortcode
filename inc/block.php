@@ -27,6 +27,8 @@ function pym_block_init() {
 			'wp-blocks',
 			'wp-i18n',
 			'wp-element',
+			'wp-editor',
+			'wp-components',
 		),
 		filemtime( "$dir/$block_js" )
 	);

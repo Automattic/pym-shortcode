@@ -27,3 +27,4 @@ The plugin's [version history](https://github.com/INN/pym-shortcode/releases) lo
 - 1.3.1
 - 1.3.2
 - 1.3.2.1: Gutenberg and settings page
+- 1.3.2.2: WordPress 5.0 support
