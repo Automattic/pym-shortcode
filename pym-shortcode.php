@@ -31,6 +31,7 @@ $includes = array(
 	'/inc/info-page.php',
 	'/inc/settings-page.php',
 	'/inc/class-pymsrc-output.php',
+	'/inc/amp.php',
 );
 foreach ( $includes as $include ) {
 	if ( 0 === validate_file( dirname( __FILE__ ) . $include ) ) {
