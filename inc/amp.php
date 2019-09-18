@@ -66,6 +66,18 @@ add_action( 'do_shortcode_tag', __NAMESPACE__ . '\convert_shortcode_to_ampiframe
  * @return string AMP-iframe HTML.
  */
 function get_pym_ampiframe( $src ) {
+	$src_domain_parts  = parse_url( $src );
+	$site_domain_parts = parse_url( get_site_url() );
+
+	if ( ! $src_domain_parts ) {
+		return '';
+	}
+
+	$sandbox = 'allow-scripts';
+	if ( strcasecmp( $src_domain_parts['host'], $site_domain_parts['host'] ) ) {
+		$sandbox .= ' allow-same-origin';
+	}
+
 	ob_start();
 	?>
 	<amp-iframe 
@@ -73,7 +85,7 @@ function get_pym_ampiframe( $src ) {
 		layout='responsive'
 		width='1'
 		height='1'
-		sandbox='allow-scripts allow-same-origin'
+		sandbox='<?php echo esc_attr( $sandbox ); ?>'
 		frameborder='0'
 		resizable
 	>
