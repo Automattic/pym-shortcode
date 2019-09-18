@@ -66,30 +66,30 @@ add_action( 'do_shortcode_tag', __NAMESPACE__ . '\convert_shortcode_to_ampiframe
  * @return string AMP-iframe HTML.
  */
 function get_pym_ampiframe( $src ) {
-		ob_start();
-		?>
-		<amp-iframe 
-			src='<?php echo esc_url( $src ); ?>'
-			layout='responsive'
-			width='1'
-			height='1'
-			sandbox='allow-scripts allow-same-origin'
-			frameborder='0'
-			resizable
+	ob_start();
+	?>
+	<amp-iframe 
+		src='<?php echo esc_url( $src ); ?>'
+		layout='responsive'
+		width='1'
+		height='1'
+		sandbox='allow-scripts allow-same-origin'
+		frameborder='0'
+		resizable
+	>
+		<div 
+			overflow 
+			tabindex=0 
+			aria-label='<?php esc_attr_e( 'Load interactive graphic', 'pym-embeds' ); ?>'
+			placeholder
+			style='width:100%; text-align:center; padding-top:50%; background:rgba(0,0,0,.7); color:#FFF; font-weight:bold'
 		>
-			<div 
-				overflow 
-				tabindex=0 
-				aria-label='<?php esc_attr_e( 'Load interactive graphic', 'pym-embeds' ); ?>'
-				placeholder
-				style='width:100%; text-align:center; padding-top:50%; background:rgba(0,0,0,.7); color:#FFF; font-weight:bold'
-			>
-				<?php esc_html_e( 'Load interactive graphic', 'pym-embeds' ); ?>
-			</div>
-		</amp-iframe>
-		<?php
+			<?php esc_html_e( 'Load interactive graphic', 'pym-embeds' ); ?>
+		</div>
+	</amp-iframe>
+	<?php
 
-		return ob_get_clean();
+	return ob_get_clean();
 }
 
 /**
