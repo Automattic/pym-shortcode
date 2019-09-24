@@ -28,13 +28,13 @@ function convert_block_to_ampiframe( $output, $block ) {
 		}
 
 		$pym_src = $matches[1];
+		return get_pym_ampiframe( $pym_src );
 	} elseif ( 'pym-shortcode/pym' === $block['blockName'] ) {
 		$pym_src = $block['attrs']['src'];
-	} else {
-		return $output;
+		return get_pym_ampiframe( $pym_src, $block['attrs'] );		
 	}
 
-	return get_pym_ampiframe( $pym_src );
+	return $output;
 }
 add_action( 'render_block', __NAMESPACE__ . '\convert_block_to_ampiframe', 10, 2 );
 
@@ -56,7 +56,7 @@ function convert_shortcode_to_ampiframe( $output, $tag, $attributes ) {
 		return $output;
 	}
 
-	return get_pym_ampiframe( $attributes['src'] );
+	return get_pym_ampiframe( $attributes['src'], $attributes );
 }
 add_action( 'do_shortcode_tag', __NAMESPACE__ . '\convert_shortcode_to_ampiframe', 10, 3 );
 
@@ -68,13 +68,32 @@ add_action( 'do_shortcode_tag', __NAMESPACE__ . '\convert_shortcode_to_ampiframe
  * @param  string $src iframe src.
  * @return string AMP-iframe HTML.
  */
-function get_pym_ampiframe( $src ) {
+function get_pym_ampiframe( $src, $atts = array() ) {
 	$src_domain_parts  = parse_url( $src );
 	$site_domain_parts = parse_url( get_site_url() );
 
 	if ( ! $src_domain_parts ) {
 		return '';
 	}
+
+
+	/**
+	 * Filter pym_shortcode_default_class allows setting the default class on embeds.
+	 *
+	 * @param String $default
+	 * @return String the default class name
+	 */
+	$default_class   = apply_filters( 'pym_shortcode_default_class', 'pym' );
+	$shortcode_class = empty( $atts['class'] ) ? '' : esc_attr( $atts['class'] );
+	$gutenberg_class = empty( $atts['className'] ) ? '' : esc_attr( $atts['className'] );
+	$align           = empty( $atts['align'] ) ? '' : 'align' . esc_attr( $atts['align'] );
+	$actual_classes  = implode( ' ', array(
+		$default_class,
+		$shortcode_class,
+		$gutenberg_class,
+		$align,
+	) );
+	$id              = empty( $atts['id'] ) ? '' : esc_attr( $atts['id'] );
 
 	$sandbox = 'allow-scripts';
 	if ( strcasecmp( $src_domain_parts['host'], $site_domain_parts['host'] ) ) {
@@ -83,25 +102,27 @@ function get_pym_ampiframe( $src ) {
 
 	ob_start();
 	?>
-	<amp-iframe 
-		src='<?php echo esc_url( $src ); ?>'
-		layout='responsive'
-		width='1'
-		height='1'
-		sandbox='<?php echo esc_attr( $sandbox ); ?>'
-		frameborder='0'
-		resizable
-	>
-		<div 
-			overflow 
-			tabindex=0 
-			aria-label='<?php esc_attr_e( 'Load interactive graphic', 'pym-embeds' ); ?>'
-			placeholder
-			style='width:100%; text-align:center; padding-top:50%; background:rgba(0,0,0,.7); color:#FFF; font-weight:bold'
+	<div class='<?php echo esc_attr( $actual_classes ); ?>' id='<?php echo esc_attr( $id ); ?>'>
+		<amp-iframe 
+			src='<?php echo esc_url( $src ); ?>'
+			layout='intrinsic'
+			width='1200'
+			height='1200'
+			sandbox='<?php echo esc_attr( $sandbox ); ?>'
+			frameborder='0'
+			resizable
 		>
-			<?php esc_html_e( 'Load interactive graphic', 'pym-embeds' ); ?>
-		</div>
-	</amp-iframe>
+			<div 
+				overflow 
+				tabindex=0 
+				aria-label='<?php esc_attr_e( 'Load interactive graphic', 'pym-embeds' ); ?>'
+				placeholder
+				style='width:100%; text-align:center; padding-top:50%; background:rgba(0,0,0,.7); color:#FFF; font-weight:bold'
+			>
+				<?php esc_html_e( 'Load interactive graphic', 'pym-embeds' ); ?>
+			</div>
+		</amp-iframe>
+	</div>
 	<?php
 
 	return ob_get_clean();
