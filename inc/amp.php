@@ -10,6 +10,7 @@ namespace INN\PymEmbeds\AMP;
 /**
  * Handle pym.js blocks and raw HTML blocks on AMP pages.
  *
+ * @since  1.3.2.3
  * @param  string $output HTML block output.
  * @param  array  $block Block attributes and information.
  * @return string HTML block output.
@@ -40,6 +41,7 @@ add_action( 'render_block', __NAMESPACE__ . '\convert_block_to_ampiframe', 10, 2
 /**
  * Handle pym.js shortcode on AMP pages.
  *
+ * @since  1.3.2.3
  * @param  string $output HTML shortcode output.
  * @param  string $tag Shortcode tag.
  * @param  array  $attributes Shortcode attributes.
@@ -61,6 +63,7 @@ add_action( 'do_shortcode_tag', __NAMESPACE__ . '\convert_shortcode_to_ampiframe
 /**
  * Build an amp-iframe out of pym.js iframe source. This is a pretty solid solution until native pym.js AMP compatibility.
  *
+ * @since  1.3.2.3
  * @see    https://github.com/ampproject/amphtml/issues/22714
  * @param  string $src iframe src.
  * @return string AMP-iframe HTML.
@@ -107,6 +110,7 @@ function get_pym_ampiframe( $src ) {
 /**
  * Check whether the current page is an AMP page.
  *
+ * @since  1.3.2.3
  * @return bool True if AMP page.
  */
 function is_amp() {
