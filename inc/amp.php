@@ -112,12 +112,12 @@ function get_pym_ampiframe( $src, $atts = array() ) {
 			frameborder='0'
 			resizable
 		>
+			<div placeholder><?php esc_html_e( 'Interactive graphic', 'pym-embeds' ); ?></div>
 			<div 
 				overflow 
 				tabindex=0 
 				aria-label='<?php esc_attr_e( 'Load interactive graphic', 'pym-embeds' ); ?>'
-				placeholder
-				style='width:100%; text-align:center; padding-top:50%; background:rgba(0,0,0,.7); color:#FFF; font-weight:bold'
+				style='padding: .5em; background:rgba(0,0,0,.7); color:#FFF; font-weight:bold;'
 			>
 				<?php esc_html_e( 'Load interactive graphic', 'pym-embeds' ); ?>
 			</div>
