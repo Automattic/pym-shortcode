@@ -36,7 +36,13 @@ See [release-checklist.md](./release-checklist.md) for the full list.
 
 ## Testing before release
 
+You should make a copy of this document to keep track of checking off the checkboxes:
+
 See also https://github.com/INN/docs/blob/master/projects/wordpress-plugins/release.sh.md
+
+Run the following tests both with and without [the AMP plugin](https://wordpress.org/plugins/amp/) activated:
+- [ ] with
+- [ ] without
 
 Plugin settings:
 

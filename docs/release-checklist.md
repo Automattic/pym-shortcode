@@ -20,8 +20,7 @@ Drawing from Largo's 0.7.0 release checklist issue https://github.com/INN/largo/
 
 The owner of the release needs to complete the following steps **BEFORE** merging the version-bump branch and tagging the release:
 
-- [ ] run the [theme check plugin](https://wordpress.org/plugins/theme-check/) and address any outstanding issues.
-- [ ] resolve all secret issues, private issues, or issues with the theme that are otherwise documented outside of this public repository
+- [ ] resolve all secret issues, private issues, or issues with the plugin that are otherwise documented outside of this public repository
 - [ ] resolve all GitHub maintainer security advisories: [merge](https://help.github.com/en/articles/collaborating-in-a-temporary-private-fork-to-resolve-a-security-vulnerability) and [publish](https://help.github.com/en/articles/publishing-a-maintainer-security-advisory).
 - [ ] update and sort the changelog
     - [ ] make sure changelog has all items from this release, and all PRs and issues are linked
