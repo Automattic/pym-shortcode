@@ -105,9 +105,8 @@ function get_pym_ampiframe( $src, $atts = array() ) {
 	<div class='<?php echo esc_attr( $actual_classes ); ?>' id='<?php echo esc_attr( $id ); ?>'>
 		<amp-iframe 
 			src='<?php echo esc_url( $src ); ?>'
-			layout='intrinsic'
-			width='1200'
-			height='1200'
+			layout='fixed-height'
+			height='200'
 			sandbox='<?php echo esc_attr( $sandbox ); ?>'
 			frameborder='0'
 			resizable
