@@ -36,7 +36,7 @@ See [release-checklist.md](./release-checklist.md) for the full list.
 
 ## Testing before release
 
-You should make a copy of this document to keep track of checking off the checkboxes:
+You should make a copy of this document to keep track of checking off the checkboxes. A Github comment is a fine place to do that, as in https://github.com/INN/pym-shortcode/issues/68#issuecomment-593634311.
 
 See also https://github.com/INN/docs/blob/master/projects/wordpress-plugins/release.sh.md
 
@@ -46,7 +46,8 @@ Run the following tests both with and without [the AMP plugin](https://wordpress
 
 Plugin settings:
 
-- [ ] Does the plugin settings page work?
+- [ ] Does the plugin settings page work? `/wp-admin/options-general.php?page=pym-embed-settings`
+- [ ] Does the plugin info page work? `/wp-admin/tools.php?page=pym-embeds-info`
 
 Shortcode tests:
 
