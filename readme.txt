@@ -4,16 +4,18 @@ Donate link: https://inn.org/donate
 Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
 Requires PHP: 5.3
-Tested up to: 5.0-beta3
-Stable tag: 1.3.2.2
+Tested up to: 5.3.2
+Stable tag: 1.3.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A WordPress solution to embed iframes that are responsive horizontally and vertically using the NPR Visuals Team's `Pym.js`.
+A WordPress block and shortcode for embedding iframes that are responsive horizontally and vertically, using the NPR Visuals Team's `Pym.js`. Now with AMP compatibility!
 
 == Description ==
 
 Pym.js Embeds provides shortcode and Gutenberg block wrappers for embedding responsive iframes using [Pym.js](http://blog.apps.npr.org/pym.js/), developed by the NPR Visuals Team. Embedded content resizes vertically to match its container's width.
+
+AMP compatibility is provided by the [official AMP plugin](https://wordpress.org/plugins/amp/).
 
 == Installation ==
 
@@ -48,9 +50,16 @@ Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode:
 
 == Changelog ==
 
-= unreleased =
+= 1.3.2.3 =
+
+New features:
+
+- Adds compatibility with [the official WordPress AMP Plugin](https://wordpress.org/plugins/amp/). On AMP endpoints, markup for Pym.js-based embeds is converted to `amp-iframe` tags. If you're not using the AMP Plugin, your site won't be affected. And if you're not viewing a page on an AMP endpoint, the page won't be affected. PR [#62](https://github.com/INN/pym-shortcode/pull/62) by Claudiu Lodromanean, [originally for Automattic's Newspack](https://github.com/Automattic/newspack-plugin/pull/276).
+
+Other updates:
 
 - Adds credit to GitHub user [eidietrich](https://github.com/eidietrich) for [PR #55](https://github.com/INN/pym-shortcode/pull/55) in the 1.3.2.2 release notes.
+- Fixes a 'nwesroom' typo. [PR #66](https://github.com/INN/pym-shortcode/pull/66) for issue [#65](https://github.com/INN/pym-shortcode/issues/65).
 
 = 1.3.2.2 =
 

@@ -1,6 +1,6 @@
 # Notes for Plugin maintainers
 
-### Updating Pym.js
+## Updating Pym.js
 
 `js/pym.v1.min.js` in this plugin should be kept up-to-date with the current version of https://pym.nprapps.org/pym.v1.min.js.
 
@@ -13,7 +13,7 @@ To update:
 
 NPR Visuals Team's [stated intention](https://github.com/nprapps/pym.js/tree/master#versioning) is that versions of `Pym.js` will be backwards-compatible for `0.x` and `0.0.x` releases, so we can copy those in directly. When a `x.0.0` release comes around, we'll need to figure out a plan for that. See discussion in https://github.com/INN/pym-shortcode/issues/12
 
-### Updating the plugin
+## Updating the plugin
 
 The plugin's `A.B.C` version number should match the version number of the bundled copy of `Pym.js`. We started doing this in plugin release 1.1.2.
 
@@ -28,14 +28,26 @@ The plugin's [version history](https://github.com/INN/pym-shortcode/releases) lo
 - 1.3.2
 - 1.3.2.1: Gutenberg and settings page
 - 1.3.2.2: WordPress 5.0 support
+- 1.3.2.3: AMP support
 
-### Testing before release
+## Release checklist
+
+See [release-checklist.md](./release-checklist.md) for the full list.
+
+## Testing before release
+
+You should make a copy of this document to keep track of checking off the checkboxes. A Github comment is a fine place to do that, as in https://github.com/INN/pym-shortcode/issues/68#issuecomment-593634311.
 
 See also https://github.com/INN/docs/blob/master/projects/wordpress-plugins/release.sh.md
 
+Run the following tests both with and without [the AMP plugin](https://wordpress.org/plugins/amp/) activated:
+- [ ] with
+- [ ] without
+
 Plugin settings:
 
-- [ ] Does the plugin settings page work?
+- [ ] Does the plugin settings page work? `/wp-admin/options-general.php?page=pym-embed-settings`
+- [ ] Does the plugin info page work? `/wp-admin/tools.php?page=pym-embeds-info`
 
 Shortcode tests:
 
