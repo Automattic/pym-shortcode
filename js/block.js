@@ -20,6 +20,7 @@
 	 * Text tools
 	 */
 	var TextControl = wp.components.TextControl;
+	var PanelBody = wp.components.PanelBody;
 
 	/**
 	 * The sidebar controls I think?
@@ -121,20 +122,19 @@
 						onChange: ( value ) => { props.setAttributes( { src: value } ); },
 					} )
 				),
-				/*
-				 * InspectorControls lets you add controls to the Block sidebar. In this case,
-				 * we're adding a TextControl, which lets us edit the 'foo' attribute (which
-				 * we defined in the PHP). The onChange property is a little bit of magic to tell
-				 * the block editor to update the value of our 'foo' property, and to re-render
-				 * the block.
-				 */
 				el( InspectorControls, {},
-					el( TextControl, {
-						label: __( 'Pym.js Child URL' ),
-						value: props.attributes.src,
-						placeholder: __( 'What is the URL of your Pym.js child page?' ),
-						onChange: ( value ) => { props.setAttributes( { src: value } ); },
-					} ),
+					el(
+						PanelBody, // inserting a PanelBody here for the presentational classes, so that it matches the display of InspectorAdvancedControls children
+						{
+							initialOpen: true,
+						},
+						el( TextControl, {
+							label: __( 'Pym.js Child URL' ),
+							value: props.attributes.src,
+							placeholder: __( 'What is the URL of your Pym.js child page?' ),
+							onChange: ( value ) => { props.setAttributes( { src: value } ); },
+						} )
+					)
 				),
 				el( InspectorAdvancedControls, {},
 					el( TextControl, {
