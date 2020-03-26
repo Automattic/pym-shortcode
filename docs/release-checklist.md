@@ -6,7 +6,7 @@ Drawing from Largo's 0.7.0 release checklist issue https://github.com/INN/largo/
 - [ ] check for [upstream updates to `release.sh` in INN/docs](https://github.com/INN/docs/blob/master/projects/wordpress-plugins/release.sh.md) and copy them into this plugin
 - [ ] write release announcement
     - [ ] GitHub release drafted
-        - can be copied from `changelog.md`
+        - can be copied from `release.txt`
         - [ ] includes encouragement to say hi if you're using the plugin. (This fulfills the "who's using our stuff?" goal in https://github.com/INN/largo/issues/1495)
     - [ ] labs.inn.org blog post written and saved as draft, based on changelog
     - [ ] MailChimp campaign for Largo User mailing list drafted: https://github.com/INN/largo/issues/1796
@@ -35,7 +35,11 @@ The owner of the release needs to complete the following steps **BEFORE** mergin
     - [ ] in plugin description comment
 - [ ] bump version number
     - [ ] in readme.txt
-    - [ ] in pym-shortcode.php
+        - [ ] `Stable tag`
+        - [ ] changelog
+    - [ ] in pym-shortcode.php:
+        - [ ] `Version`
+        - [ ] `pym_plugin_version()`
     - [ ] in readme.md
     - [ ] in docs/maintainer-notes.md
 - [ ] testing as described in https://github.com/INN/pym-shortcode/blob/master/docs/maintainer-notes.md

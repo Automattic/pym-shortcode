@@ -5,7 +5,7 @@ Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
 Requires PHP: 5.3
 Tested up to: 5.4
-Stable tag: 1.3.2.3
+Stable tag: 1.3.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,8 +50,9 @@ Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode:
 
 == Changelog ==
 
-= [next] =
+= 1.3.2.4 =
 
+- Now tested up to WordPress 5.4 and Gutenberg 7.8.
 - Fixes a presentational error in the Pym.js Embeds Block's block inspector control within the editor. PR [#74](https://github.com/INN/pym-shortcode/pull/74) for issue [#72](https://github.com/INN/pym-shortcode/issues/72).
 
 = 1.3.2.3 =
