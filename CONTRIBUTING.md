@@ -10,7 +10,7 @@ We welcome contributions and suggestions to help us improve this project. Please
 4.  Push the changes to your fork (git push origin my-branch)
 5.  [Submit a pull request to the parent repo](https://help.github.com/articles/creating-a-pull-request). Please read our [guide to submitting pull requests](https://github.com/inn/docs/blob/master/how-to-work-with-us/pull-requests.md) to see what we expect in a good pull request message.
 6.  Pull request should be assigned to:
-    - [@benlk](http://github.com/benlk) (primary)
+    - [@benlk](https://github.com/benlk) (primary)
 
 We have [a helpful how-to](https://github.com/INN/docs/blob/master/how-to-work-with-us/via-github.md) that walks through this process in more detail if you're new to using Git.
 
@@ -21,5 +21,5 @@ And of course you can always email us: [support@inn.org](mailto:support@inn.org)
 ### Standards
 
 - Follow all standards from the INN Labs [coding style guide](https://github.com/INN/docs/tree/master/style-guides/code).
-- Use [markdown syntax](http://daringfireball.net/projects/markdown/syntax) for all text documents.
+- Use [markdown syntax](https://daringfireball.net/projects/markdown/syntax) for all text documents.
 - Pull requests for new functionality should be accompanied by tests wherever possible.
