@@ -37,13 +37,13 @@
 	};
 
 	/**
-	 * Check the message to make sure it comes from an acceptable xdomain.
-	 * Defaults to '*' but can be overriden in config.
-	 *
-	 * @method _isSafeMessage
-	 * @param {Event} e The message event.
-	 * @param {Object} settings Configuration.
-	 */
+		* Check the message to make sure it comes from an acceptable xdomain.
+		* Defaults to '*' but can be overriden in config.
+		*
+		* @method _isSafeMessage
+		* @param {Event} e The message event.
+		* @param {Object} settings Configuration.
+		*/
 	var _isSafeMessage = function(e, settings) {
 			if (settings.xdomain !== '*') {
 					// If origin doesn't match our xdomain, return.
@@ -54,16 +54,16 @@
 	};
 
 	/**
-	 * Construct a message to send between frames.
-	 *
-	 * NB: We use string-building here because JSON message passing is
-	 * not supported in all browsers.
-	 *
-	 * @method _makeMessage
-	 * @param {String} id The unique id of the message recipient.
-	 * @param {String} messageType The type of message to send.
-	 * @param {String} message The message to send.
-	 */
+		* Construct a message to send between frames.
+		*
+		* NB: We use string-building here because JSON message passing is
+		* not supported in all browsers.
+		*
+		* @method _makeMessage
+		* @param {String} id The unique id of the message recipient.
+		* @param {String} messageType The type of message to send.
+		* @param {String} message The message to send.
+		*/
 	var _makeMessage = function(id, messageType, message) {
 			var bits = ['pym', id, messageType, message];
 
@@ -71,11 +71,11 @@
 	};
 
 	/**
-	 * Construct a regex to validate and parse messages.
-	 *
-	 * @method _makeMessageRegex
-	 * @param {String} id The unique id of the message recipient.
-	 */
+		* Construct a regex to validate and parse messages.
+		*
+		* @method _makeMessageRegex
+		* @param {String} id The unique id of the message recipient.
+		*/
 	var _makeMessageRegex = function(id) {
 			var bits = ['pym', id, '(\\S+)', '(.+)'];
 
@@ -83,10 +83,10 @@
 	};
 
 	/**
-	 * Initialize Pym for elements on page that have data-pym attributes.
-	 *
-	 * @method _autoInit
-	 */
+		* Initialize Pym for elements on page that have data-pym attributes.
+		*
+		* @method _autoInit
+		*/
 	var _autoInit = function() {
 			var elements = document.querySelectorAll(
 					'[data-pym-src]:not([data-pym-auto-initialized])'
@@ -114,7 +114,7 @@
 					var config = {};
 
 					if (xdomain) {
-						 config.xdomain = xdomain;
+							config.xdomain = xdomain;
 					}
 
 					new lib.Parent(element.id, src, config);
@@ -122,13 +122,13 @@
 	};
 
 	/**
-	 * The Parent half of a response iframe.
-	 *
-	 * @class Parent
-	 * @param {String} id The id of the div into which the iframe will be rendered.
-	 * @param {String} url The url of the iframe source.
-	 * @param {Object} config Configuration to override the default settings.
-	 */
+		* The Parent half of a response iframe.
+		*
+		* @class Parent
+		* @param {String} id The id of the div into which the iframe will be rendered.
+		* @param {String} url The url of the iframe source.
+		* @param {Object} config Configuration to override the default settings.
+		*/
 	lib.Parent = function(id, url, config) {
 			this.id = id;
 			this.url = url;
@@ -146,11 +146,11 @@
 			config = (config || {});
 
 			/**
-			 * Construct the iframe.
-			 *
-			 * @memberof Parent.prototype
-			 * @method _constructIframe
-			 */
+				* Construct the iframe.
+				*
+				* @memberof Parent.prototype
+				* @method _constructIframe
+				*/
 			this._constructIframe = function() {
 					// Calculate the width of this element.
 					var width = this.el.offsetWidth.toString();
@@ -200,37 +200,37 @@
 			};
 
 			/**
-			 * Send width on resize.
-			 *
-			 * @memberof Parent.prototype
-			 * @method _onResize
-			 */
+				* Send width on resize.
+				*
+				* @memberof Parent.prototype
+				* @method _onResize
+				*/
 			this._onResize = function() {
 					this.sendWidth();
 			}.bind(this);
 
 			/**
-			 * Fire all event handlers for a given message type.
-			 *
-			 * @memberof Parent.prototype
-			 * @method _fire
-			 * @param {String} messageType The type of message.
-			 * @param {String} message The message data.
-			 */
+				* Fire all event handlers for a given message type.
+				*
+				* @memberof Parent.prototype
+				* @method _fire
+				* @param {String} messageType The type of message.
+				* @param {String} message The message data.
+				*/
 			this._fire = function(messageType, message) {
 					if (messageType in this.messageHandlers) {
 							for (var i = 0; i < this.messageHandlers[messageType].length; i++) {
-								 this.messageHandlers[messageType][i].call(this, message);
+									this.messageHandlers[messageType][i].call(this, message);
 							}
 					}
 			};
 
 			/**
-			 * Remove this parent from the page and unbind it's event handlers.
-			 *
-			 * @memberof Parent.prototype
-			 * @method remove
-			 */
+				* Remove this parent from the page and unbind it's event handlers.
+				*
+				* @memberof Parent.prototype
+				* @method remove
+				*/
 			this.remove = function() {
 					window.removeEventListener('message', this._processMessage);
 					window.removeEventListener('resize', this._onResize);
@@ -239,17 +239,17 @@
 			};
 
 			/**
-			 * @callback Parent~onMessageCallback
-			 * @param {String} message The message data.
-			 */
+				* @callback Parent~onMessageCallback
+				* @param {String} message The message data.
+				*/
 
 			/**
-			 * Process a new message from the child.
-			 *
-			 * @memberof Parent.prototype
-			 * @method _processMessage
-			 * @param {Event} e A message event.
-			 */
+				* Process a new message from the child.
+				*
+				* @memberof Parent.prototype
+				* @method _processMessage
+				* @param {Event} e A message event.
+				*/
 			this._processMessage = function(e) {
 					// First, punt if this isn't from an acceptable xdomain.
 					if (!_isSafeMessage(e, this.settings)) {
@@ -276,45 +276,45 @@
 			}.bind(this);
 
 			/**
-			 * Resize iframe in response to new height message from child.
-			 *
-			 * @memberof Parent.prototype
-			 * @method _onHeightMessage
-			 * @param {String} message The new height.
-			 */
+				* Resize iframe in response to new height message from child.
+				*
+				* @memberof Parent.prototype
+				* @method _onHeightMessage
+				* @param {String} message The new height.
+				*/
 			this._onHeightMessage = function(message) {
 					/*
-					 * Handle parent height message from child.
-					 */
+						* Handle parent height message from child.
+						*/
 					var height = parseInt(message);
 
 					this.iframe.setAttribute('height', height + 'px');
 			};
 
 			/**
-			 * Navigate parent to a new url.
-			 *
-			 * @memberof Parent.prototype
-			 * @method _onNavigateToMessage
-			 * @param {String} message The url to navigate to.
-			 */
+				* Navigate parent to a new url.
+				*
+				* @memberof Parent.prototype
+				* @method _onNavigateToMessage
+				* @param {String} message The url to navigate to.
+				*/
 			this._onNavigateToMessage = function(message) {
 					/*
-					 * Handle parent scroll message from child.
-					 */
-					 document.location.href = message;
+						* Handle parent scroll message from child.
+						*/
+						document.location.href = message;
 			};
 
 			/**
-			 * Bind a callback to a given messageType from the child.
-			 *
-			 * Reserved message names are: "height", "scrollTo" and "navigateTo".
-			 *
-			 * @memberof Parent.prototype
-			 * @method onMessage
-			 * @param {String} messageType The type of message being listened for.
-			 * @param {Parent~onMessageCallback} callback The callback to invoke when a message of the given type is received.
-			 */
+				* Bind a callback to a given messageType from the child.
+				*
+				* Reserved message names are: "height", "scrollTo" and "navigateTo".
+				*
+				* @memberof Parent.prototype
+				* @method onMessage
+				* @param {String} messageType The type of message being listened for.
+				* @param {Parent~onMessageCallback} callback The callback to invoke when a message of the given type is received.
+				*/
 			this.onMessage = function(messageType, callback) {
 					if (!(messageType in this.messageHandlers)) {
 							this.messageHandlers[messageType] = [];
@@ -324,25 +324,25 @@
 			};
 
 			/**
-			 * Send a message to the the child.
-			 *
-			 * @memberof Parent.prototype
-			 * @method sendMessage
-			 * @param {String} messageType The type of message to send.
-			 * @param {String} message The message data to send.
-			 */
+				* Send a message to the the child.
+				*
+				* @memberof Parent.prototype
+				* @method sendMessage
+				* @param {String} messageType The type of message to send.
+				* @param {String} message The message data to send.
+				*/
 			this.sendMessage = function(messageType, message) {
 					this.el.getElementsByTagName('iframe')[0].contentWindow.postMessage(_makeMessage(this.id, messageType, message), '*');
 			};
 
 			/**
-			 * Transmit the current iframe width to the child.
-			 *
-			 * You shouldn't need to call this directly.
-			 *
-			 * @memberof Parent.prototype
-			 * @method sendWidth
-			 */
+				* Transmit the current iframe width to the child.
+				*
+				* You shouldn't need to call this directly.
+				*
+				* @memberof Parent.prototype
+				* @method sendWidth
+				*/
 			this.sendWidth = function() {
 					var width = this.el.offsetWidth.toString();
 
@@ -368,11 +368,11 @@
 	};
 
 	/**
-	 * The Child half of a responsive iframe.
-	 *
-	 * @class Child
-	 * @param {Object} config Configuration to override the default settings.
-	 */
+		* The Child half of a responsive iframe.
+		*
+		* @class Child
+		* @param {Object} config Configuration to override the default settings.
+		*/
 	lib.Child = function(config) {
 			this.parentWidth = null;
 			this.id = null;
@@ -391,15 +391,15 @@
 			config = (config || {});
 
 			/**
-			 * Bind a callback to a given messageType from the child.
-			 *
-			 * Reserved message names are: "width".
-			 *
-			 * @memberof Child.prototype
-			 * @method onMessage
-			 * @param {String} messageType The type of message being listened for.
-			 * @param {Child~onMessageCallback} callback The callback to invoke when a message of the given type is received.
-			 */
+				* Bind a callback to a given messageType from the child.
+				*
+				* Reserved message names are: "width".
+				*
+				* @memberof Child.prototype
+				* @method onMessage
+				* @param {String} messageType The type of message being listened for.
+				* @param {Child~onMessageCallback} callback The callback to invoke when a message of the given type is received.
+				*/
 			this.onMessage = function(messageType, callback) {
 					if (!(messageType in this.messageHandlers)) {
 							this.messageHandlers[messageType] = [];
@@ -409,36 +409,36 @@
 			};
 
 			/**
-			 * @callback Child~onMessageCallback
-			 * @param {String} message The message data.
-			 */
+				* @callback Child~onMessageCallback
+				* @param {String} message The message data.
+				*/
 
 			/**
-			 * Fire all event handlers for a given message type.
-			 *
-			 * @memberof Parent.prototype
-			 * @method _fire
-			 * @param {String} messageType The type of message.
-			 * @param {String} message The message data.
-			 */
+				* Fire all event handlers for a given message type.
+				*
+				* @memberof Parent.prototype
+				* @method _fire
+				* @param {String} messageType The type of message.
+				* @param {String} message The message data.
+				*/
 			this._fire = function(messageType, message) {
 					/*
-					 * Fire all event handlers for a given message type.
-					 */
+						* Fire all event handlers for a given message type.
+						*/
 					if (messageType in this.messageHandlers) {
 							for (var i = 0; i < this.messageHandlers[messageType].length; i++) {
-								 this.messageHandlers[messageType][i].call(this, message);
+									this.messageHandlers[messageType][i].call(this, message);
 							}
 					}
 			};
 
 			/**
-			 * Process a new message from the parent.
-			 *
-			 * @memberof Child.prototype
-			 * @method _processMessage
-			 * @param {Event} e A message event.
-			 */
+				* Process a new message from the parent.
+				*
+				* @memberof Child.prototype
+				* @method _processMessage
+				* @param {Event} e A message event.
+				*/
 			this._processMessage = function(e) {
 					/*
 					* Process a new message from parent frame.
@@ -466,16 +466,16 @@
 			}.bind(this);
 
 			/**
-			 * Resize iframe in response to new width message from parent.
-			 *
-			 * @memberof Child.prototype
-			 * @method _onWidthMessage
-			 * @param {String} message The new width.
-			 */
+				* Resize iframe in response to new width message from parent.
+				*
+				* @memberof Child.prototype
+				* @method _onWidthMessage
+				* @param {String} message The new width.
+				*/
 			this._onWidthMessage = function(message) {
 					/*
-					 * Handle width message from the child.
-					 */
+						* Handle width message from the child.
+						*/
 					var width = parseInt(message);
 
 					// Change the width if it's different.
@@ -493,28 +493,28 @@
 			};
 
 			/**
-			 * Send a message to the the Parent.
-			 *
-			 * @memberof Child.prototype
-			 * @method sendMessage
-			 * @param {String} messageType The type of message to send.
-			 * @param {String} message The message data to send.
-			 */
+				* Send a message to the the Parent.
+				*
+				* @memberof Child.prototype
+				* @method sendMessage
+				* @param {String} messageType The type of message to send.
+				* @param {String} message The message data to send.
+				*/
 			this.sendMessage = function(messageType, message) {
 					/*
-					 * Send a message to the parent.
-					 */
+						* Send a message to the parent.
+						*/
 					window.parent.postMessage(_makeMessage(this.id, messageType, message), '*');
 			};
 
 			/**
-			 * Transmit the current iframe height to the parent.
-			 *
-			 * Call this directly in cases where you manually alter the height of the iframe contents.
-			 *
-			 * @memberof Child.prototype
-			 * @method sendHeight
-			 */
+				* Transmit the current iframe height to the parent.
+				*
+				* Call this directly in cases where you manually alter the height of the iframe contents.
+				*
+				* @memberof Child.prototype
+				* @method sendHeight
+				*/
 			this.sendHeight = function() {
 					// Get the child's height.
 					var height = document.getElementsByTagName('body')[0].offsetHeight.toString();
@@ -531,23 +531,23 @@
 			}.bind(this);
 
 			/**
-			 * Scroll parent to a given element id.
-			 *
-			 * @memberof Child.prototype
-			 * @method scrollParentTo
-			 * @param {String} hash The id of the element to scroll to.
-			 */
+				* Scroll parent to a given element id.
+				*
+				* @memberof Child.prototype
+				* @method scrollParentTo
+				* @param {String} hash The id of the element to scroll to.
+				*/
 			this.scrollParentTo = function(hash) {
 					this.sendMessage('navigateTo', '#' + hash);
 			};
 
 			/**
-			 * Navigate parent to a given url.
-			 *
-			 * @memberof Parent.prototype
-			 * @method navigateParentTo
-			 * @param {String} url The url to navigate to.
-			 */
+				* Navigate parent to a given url.
+				*
+				* @memberof Parent.prototype
+				* @method navigateParentTo
+				* @param {String} url The url to navigate to.
+				*/
 			this.navigateParentTo = function(url) {
 					this.sendMessage('navigateTo', url);
 			};
