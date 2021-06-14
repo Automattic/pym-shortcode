@@ -20,7 +20,7 @@
 
     /**
     * Generic function for parsing URL params.
-    * Via http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+    * Via https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
     *
     * @method _getParameterByName
     * @param {String} name The name of the paramter to get from the URL.
