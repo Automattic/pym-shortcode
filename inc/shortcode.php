@@ -52,7 +52,10 @@ function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 		$align,
 	) );
 
-	$src = $atts['src'];
+	$src = '';
+	if ( ! empty( $atts['src'] ) ) {
+		$src = esc_url_raw( $atts['src'] );
+	}
 
 	ob_start();
 
