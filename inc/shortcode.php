@@ -230,7 +230,7 @@ function pym_pymsrc_local_url() {
  *
  * The allowlist mirrors the Pym.js library's own autoInit type map.
  *
- * @since 1.3.2.5
+ * @since 2.0.0
  * @param string $raw The raw `pymoptions` attribute value.
  * @return array Sanitized options keyed by Pym.js option name.
  */
@@ -354,7 +354,7 @@ function pym_shortcode_parse_pymoptions( $raw ) {
 /**
  * Parse a single `pymoptions` value token into a typed primitive.
  *
- * @since 1.3.2.5
+ * @since 2.0.0
  * @param string $value    The raw value substring (already trimmed).
  * @param string $expected One of 'string', 'boolean', 'number'.
  * @return array|null `array( 'value' => mixed )` on success, null when the
