@@ -5,7 +5,7 @@ Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
 Requires PHP: 5.3
 Tested up to: 5.4
-Stable tag: 1.3.2.4
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,12 @@ Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode:
 ![Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode](img/pym-example-phone.png)
 
 == Changelog ==
+
+= 2.0.0 =
+
+Security fix: the `pymoptions` shortcode/block attribute is now parsed against an allowlist of known Pym.js Parent options (xdomain, title, name, id, sandbox, parenturlparam, parenturlvalue, allowfullscreen, optionalparams, trackscroll, scrollwait) and JSON-encoded at output time. Previously the attribute was inlined verbatim into the `new pym.Parent(...)` call, which made it a stored XSS sink for any user who could author content. Documented usage (e.g. `pymoptions=" xdomain: '*\.npr\.org' "`) continues to work; arbitrary JavaScript values are dropped.
+
+Backwards-incompatible change: the pluggable function `pym_shortcode_script_footer_enqueue` now receives `$args['pymoptions']` as an associative array of sanitized options rather than a raw JavaScript object body string. Sites that override this pluggable function must update their override to consume the array (and JSON-encode it safely on output).
 
 = 1.3.2.4 =
 
