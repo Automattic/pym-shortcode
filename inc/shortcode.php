@@ -31,7 +31,7 @@ function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 	}
 
 	// Set us up the vars.
-	$pymoptions = empty( $atts['pymoptions'] ) ? '' : $atts['pymoptions'];
+	$pymoptions = empty( $atts['pymoptions'] ) ? array() : pym_shortcode_parse_pymoptions( $atts['pymoptions'] );
 	$id = empty( $atts['id'] ) ? '' : esc_attr( $atts['id'] );
 	$actual_id = empty( $id ) ? 'pym_' . $pym_id : $id;
 
@@ -125,8 +125,10 @@ add_shortcode( 'pym', 'pym_shortcode' );
  *        this function. This is the first argument for `new pym.Parent()`.
  *     - 'src' the URL for the Pym.js child page. This is the second argument
  *        for `new pym.Parent()`.
- *     - 'pymoptions' The third argument for `pym.Parent()` See the xdomain
- *        argument in http://blog.apps.npr.org/pym.js/#example-block
+ *     - 'pymoptions' Associative array of sanitized options to pass as the
+ *        third argument to `pym.Parent()`. Only known Pym.js parent options
+ *        with primitive values (string/bool/number) are included; see
+ *        pym_shortcode_parse_pymoptions() for the allowlist.
  *     - 'actual_classes' The classes used on the Pym.js container element,
  *        provided to this function for informational purposes.
  *     - 'pymsrc' The URL from which Pym.js is to be loaded for this emebed,
@@ -139,14 +141,28 @@ if ( ! function_exists( 'pym_shortcode_script_footer_enqueue' ) ) {
 		add_action(
 			'wp_footer',
 			function() use ( $args ) {
+				$options = isset( $args['pymoptions'] ) && is_array( $args['pymoptions'] )
+					? $args['pymoptions']
+					: array();
+				// JSON-encode the options object with flags that make the result
+				// safe to embed inside an inline <script> tag without further
+				// escaping (no raw `<`, `>`, `&`, `'`, or `"`).
+				$options_json = wp_json_encode(
+					(object) $options,
+					JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+				);
+				if ( false === $options_json ) {
+					$options_json = '{}';
+				}
 				// Output the parent's scripts.
 				echo '<script>';
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $options_json is wp_json_encode() output with HTML-tag/amp/quote escapes; other args are esc_js()'d.
 				echo sprintf(
-					'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', {%4$s})',
+					'var pym_%1$s = new pym.Parent(\'%2$s\', \'%3$s\', %4$s)',
 					esc_js( (string) $args['pym_id'] ),
 					esc_js( $args['actual_id'] ),
 					esc_js( $args['src'] ),
-					$args['pymoptions']
+					$options_json
 				);
 				echo '</script>';
 				echo PHP_EOL; // for pretty printing of scripts in the footer.
@@ -195,4 +211,195 @@ function pym_pymsrc_default_url() {
  */
 function pym_pymsrc_local_url() {
 	return plugins_url( '/js/pym.v1.min.js', dirname( __FILE__ ) );
+}
+
+/**
+ * Parse the user-supplied `pymoptions` attribute into a sanitized array.
+ *
+ * Historically `pymoptions` accepted a raw JavaScript object body (without the
+ * surrounding `{}`), e.g. ` xdomain: '*\.npr\.org' `, and was inlined verbatim
+ * into a `<script>` tag. That made the attribute a stored-XSS sink any time a
+ * user who can author content also controls a post that reaches a privileged
+ * viewer.
+ *
+ * To preserve the documented attribute syntax while removing the sink, this
+ * function tokenises the string into key/value pairs and accepts only known
+ * Pym.js Parent options whose values are primitive (string, boolean, number).
+ * Anything else is dropped silently. The returned array is JSON-encoded at
+ * output time, so the result is always a safe object literal.
+ *
+ * The allowlist mirrors the Pym.js library's own autoInit type map.
+ *
+ * @since 1.3.2.5
+ * @param string $raw The raw `pymoptions` attribute value.
+ * @return array Sanitized options keyed by Pym.js option name.
+ */
+function pym_shortcode_parse_pymoptions( $raw ) {
+	$schema = array(
+		'xdomain'         => 'string',
+		'title'           => 'string',
+		'name'            => 'string',
+		'id'              => 'string',
+		'sandbox'         => 'string',
+		'parenturlparam'  => 'string',
+		'parenturlvalue'  => 'string',
+		'allowfullscreen' => 'boolean',
+		'optionalparams'  => 'boolean',
+		'trackscroll'     => 'boolean',
+		'scrollwait'      => 'number',
+	);
+
+	$raw = trim( (string) $raw );
+	if ( '' === $raw ) {
+		return array();
+	}
+
+	// Tolerate (but do not require) surrounding braces.
+	if ( '{' === $raw[0] && '}' === substr( $raw, -1 ) ) {
+		$raw = substr( $raw, 1, -1 );
+	}
+
+	$pairs       = array();
+	$buffer      = '';
+	$in_string   = false;
+	$string_char = '';
+	$len         = strlen( $raw );
+	for ( $i = 0; $i < $len; $i++ ) {
+		$char = $raw[ $i ];
+		if ( $in_string ) {
+			$buffer .= $char;
+			if ( '\\' === $char && $i + 1 < $len ) {
+				$buffer .= $raw[ ++$i ];
+				continue;
+			}
+			if ( $char === $string_char ) {
+				$in_string = false;
+			}
+			continue;
+		}
+		if ( "'" === $char || '"' === $char ) {
+			$in_string   = true;
+			$string_char = $char;
+			$buffer     .= $char;
+			continue;
+		}
+		if ( ',' === $char ) {
+			$pairs[] = $buffer;
+			$buffer  = '';
+			continue;
+		}
+		$buffer .= $char;
+	}
+	if ( '' !== trim( $buffer ) ) {
+		$pairs[] = $buffer;
+	}
+
+	$out = array();
+	foreach ( $pairs as $pair ) {
+		// Find the first top-level `:` to split key from value.
+		$colon       = -1;
+		$in_string   = false;
+		$string_char = '';
+		$pair_len    = strlen( $pair );
+		for ( $j = 0; $j < $pair_len; $j++ ) {
+			$char = $pair[ $j ];
+			if ( $in_string ) {
+				if ( '\\' === $char && $j + 1 < $pair_len ) {
+					$j++;
+					continue;
+				}
+				if ( $char === $string_char ) {
+					$in_string = false;
+				}
+				continue;
+			}
+			if ( "'" === $char || '"' === $char ) {
+				$in_string   = true;
+				$string_char = $char;
+				continue;
+			}
+			if ( ':' === $char ) {
+				$colon = $j;
+				break;
+			}
+		}
+		if ( $colon < 0 ) {
+			continue;
+		}
+		$key = trim( substr( $pair, 0, $colon ) );
+		$raw_value = trim( substr( $pair, $colon + 1 ) );
+
+		// Strip optional surrounding quotes from the key.
+		if ( strlen( $key ) >= 2 ) {
+			$first = $key[0];
+			$last  = substr( $key, -1 );
+			if ( ( "'" === $first && "'" === $last ) || ( '"' === $first && '"' === $last ) ) {
+				$key = substr( $key, 1, -1 );
+			}
+		}
+
+		if ( ! isset( $schema[ $key ] ) ) {
+			continue;
+		}
+
+		$parsed = pym_shortcode_parse_pymoption_value( $raw_value, $schema[ $key ] );
+		if ( null === $parsed ) {
+			continue;
+		}
+		$out[ $key ] = $parsed['value'];
+	}
+	return $out;
+}
+
+/**
+ * Parse a single `pymoptions` value token into a typed primitive.
+ *
+ * @since 1.3.2.5
+ * @param string $value    The raw value substring (already trimmed).
+ * @param string $expected One of 'string', 'boolean', 'number'.
+ * @return array|null `array( 'value' => mixed )` on success, null when the
+ *                    value cannot be coerced safely.
+ */
+function pym_shortcode_parse_pymoption_value( $value, $expected ) {
+	if ( '' === $value ) {
+		return null;
+	}
+
+	if ( 'boolean' === $expected ) {
+		if ( 'true' === $value ) {
+			return array( 'value' => true );
+		}
+		if ( 'false' === $value ) {
+			return array( 'value' => false );
+		}
+		return null;
+	}
+
+	if ( 'number' === $expected ) {
+		if ( ! is_numeric( $value ) ) {
+			return null;
+		}
+		if ( false === strpos( $value, '.' ) ) {
+			return array( 'value' => (int) $value );
+		}
+		return array( 'value' => (float) $value );
+	}
+
+	// String: require a quoted literal so we never accept arbitrary JS identifiers.
+	if ( strlen( $value ) < 2 ) {
+		return null;
+	}
+	$first = $value[0];
+	$last  = substr( $value, -1 );
+	if ( ! ( ( "'" === $first && "'" === $last ) || ( '"' === $first && '"' === $last ) ) ) {
+		return null;
+	}
+	$inner = substr( $value, 1, -1 );
+	// Decode the JS-style backslash escapes the documentation suggests authors use.
+	$inner = str_replace(
+		array( '\\\\', '\\\'', '\\"', '\\n', '\\r', '\\t' ),
+		array( '\\', '\'', '"', "\n", "\r", "\t" ),
+		$inner
+	);
+	return array( 'value' => $inner );
 }
