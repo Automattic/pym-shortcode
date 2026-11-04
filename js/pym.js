@@ -4,6 +4,8 @@
  * Source: NPR's dist/pym.v1.js at v1.3.2 (commit c3552a6cf2532664c17bd6a318fb3cf8e4cf2f97).
  * Local changes are marked "pym-shortcode local change". To update Pym.js,
  * start from a new upstream dist/pym.v1.js and re-apply each marked change.
+ * js/pym.v1.min.js is an exact copy of this file, kept for pages that link to
+ * that older name: copy this file over it after any change.
  */
 /*
 * Pym.js is library that resizes an iframe based on the width of the parent and the resulting height of the child.

@@ -12,7 +12,8 @@ To update:
 	- The `Parent` constructor builds no iframe when `_isSafeUrl()` rejects the child URL, trimmed of surrounding spaces. `_isSafeUrl()` is upstream's own check.
 3. Copy the header comment from the current `js/pym.js` into the new file, below upstream's first (banner) line, then update its tag and commit SHA.
 4. Compare the result with upstream: `curl -s https://raw.githubusercontent.com/nprapps/pym.js/<new tag>/dist/pym.v1.js | diff - js/pym.js`. The only differences should be the header comment and the marked changes.
-5. Bump the plugin's version and add a changelog entry, as for any release.
+5. Copy the result over `js/pym.v1.min.js`, which stays an exact copy for pages and graphics that link to that older name. `cmp js/pym.js js/pym.v1.min.js` should print nothing.
+6. Bump the plugin's version and add a changelog entry, as for any release.
 
 NPR Visuals Team's [stated intention](https://github.com/nprapps/pym.js/tree/master#versioning) is that versions of `Pym.js` will be backwards-compatible for `0.x` and `0.0.x` releases, so we can take those in with the local changes re-applied. When a `x.0.0` release comes around, we'll need to figure out a plan for that. See discussion in https://github.com/INN/pym-shortcode/issues/12
 
@@ -54,6 +55,7 @@ Plugin settings:
 
 - [ ] Does the settings notice work? With a `pym_embeds` option saved (`wp option update pym_embeds '{"default_pymsrc":"https://pym.nprapps.org/pym.v1.min.js"}' --format=json`), an administrator sees the notice with the saved URL, and its **Dismiss this notice** button deletes the option.
 - [ ] Does the plugin info page work? `/wp-admin/tools.php?page=pym-embeds-info`
+- [ ] Is `js/pym.v1.min.js` still an exact copy of `js/pym.js`? `cmp js/pym.js js/pym.v1.min.js` prints nothing.
 
 Shortcode tests:
 

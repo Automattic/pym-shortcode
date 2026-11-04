@@ -60,7 +60,7 @@ Changes:
 * `js/pym.js` is now Pym.js 1.3.2, with two local changes: each embed only acts on messages from its own iframe, and Pym.js skips any embed whose address uses a scheme it doesn't allow, such as `javascript:`.
 * WordPress now removes URL schemes it doesn't allow in links, such as `javascript:`, from `data-pym-src` attributes when users who can't post unfiltered HTML save content.
 * Pym.js loads with the plugin's version number, so browsers and caches fetch the new copy after an update.
-* Removes `js/pym.v1.min.js`.
+* `js/pym.v1.min.js` is now an exact copy of `js/pym.js`, so pages and graphics that link to it directly get the same updated copy. It's no longer minified.
 * Adds the `pym_shortcode_pymsrc` filter, which changes the URL Pym.js loads from on every embed.
 * Deprecates `pym_maybe_override_pymsrc()`, which now always returns `true`.
 * For developers: `Pymsrc_Output::add()` ignores its URL argument. `Pymsrc_Output`'s `maybe_warning_message()`, `warning_message_debug()` and `warning_message_footer()` methods are removed, and so are the settings page's functions in `INN\PymEmbeds\Settings`, except `option_key()`.
@@ -75,8 +75,8 @@ How to update:
             return 'https://cdn.example.org/pym.v1.min.js';
         } );
 
-4. Pages or graphics that linked straight to `js/pym.v1.min.js` in this plugin's folder need another source. Use the block or shortcode for embeds. Inside graphics, load Pym.js as NPR's documentation describes.
-5. After updating, clear any page and CDN caches. Until they clear, pages cached before this update that used the plugin's default copy still request `js/pym.v1.min.js`, and their embeds stay blank. If a caching or script-optimization plugin lists `pym.v1.min.js` in its settings, change that entry to `js/pym.js`.
+4. Pages or graphics that link straight to `js/pym.v1.min.js` in this plugin's folder keep working, because that file is now a copy of `js/pym.js`. For new embeds, use the block or shortcode. Inside graphics, load Pym.js as NPR's documentation describes.
+5. After updating, clear any page and CDN caches, so visitors get the updated copy of Pym.js instead of a cached older one. If a caching or script-optimization plugin lists `pym.v1.min.js` in its settings, add `js/pym.js` there too.
 
 = 2.0.0 =
 
@@ -190,7 +190,7 @@ Removed:
 == Upgrade Notice ==
 
 = 3.0.0 =
-Breaking changes: Pym.js loads from the plugin's own copy by default, and the settings page is gone. Embeds keep working without edits. Developers can change the source with the pym_shortcode_pymsrc filter. Direct links to js/pym.v1.min.js stop working. Clear page and CDN caches after updating.
+Breaking changes: Pym.js loads from the plugin's own copy by default, and the settings page is gone. Embeds keep working without edits. Developers can change the source with the pym_shortcode_pymsrc filter. Clear page and CDN caches after updating.
 
 == Pym.js Resources from NPR ==
 

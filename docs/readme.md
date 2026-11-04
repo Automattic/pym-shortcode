@@ -180,6 +180,8 @@ You can check by putting a shortcode or block in a post, then viewing the post f
 
 The URL can also be found on the "Pym.js Embeds Info" page, found under the "Tools" menu in the site's admin dashboard.
 
+`js/pym.v1.min.js`, the file earlier versions of the plugin loaded, is an exact copy of `js/pym.js`, so pages and graphics that link to it directly keep working.
+
 A developer can load `Pym.js` from another URL; see [Changing where Pym.js loads from](#changing-where-pymjs-loads-from).
 
 ### What is the difference between `Pym.js` and `js/pym.js`?
