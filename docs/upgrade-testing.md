@@ -49,16 +49,19 @@ wp post list --s='pymsrc' --format=ids | tr "[:space:]" "\n" | xargs -I % open h
 
 This opened two tabs: one each for post `5` and `10`. Use this with caution if you have a lot of stories with `Pym.js` embeds; you might crash your web browser.
 
-## Testing the pymsrc override
+## Checking embeds that set pymsrc after updating to 3.0.0
 
-1. Enable the override option in **Settings > Pym.js Embeds Settings > Override pymsrc**
-2. Find all posts using the pymsrc option in a shortcode or block, using one of the methods above.
-3. For a representative sample of posts, or for all posts if you can, open each post in a browser.
+Since 3.0.0, every embed loads Pym.js from the same URL, and the `pymsrc` value in a shortcode or block is ignored. Check that embeds which set `pymsrc` still work:
+
+1. Find all posts using the pymsrc option in a shortcode or block, using one of the methods above.
+2. For a representative sample of posts, or for all posts if you can, open each post in a browser.
 	1. Does the embed load correctly?
-	2. Open the browser console. Are there any notices, warnings, or errors?
-	3. 
+	2. Does the embed resize to fit its content?
+	3. Open the browser console. Are there any notices, warnings, or errors?
 
-You may want to take the time to edit your embedded pages so that they all use the NPR CDN version of `Pym.js`, or use your newsroom's CDN version of `Pym.js`. You should be using [the most-recent version of `Pym.js`](http://blog.apps.npr.org/pym.js/) in any case.
+If an embed worked with the `pymsrc` it set but not with the plugin's copy, first make sure the embedded page loads a current release of Pym.js. If every embed still needs a different copy, a developer can load a known one, such as an NPR tagged release or a copy the site hosts, with the `pym_shortcode_pymsrc` filter. Reuse a `pymsrc` URL from a post only if the site controls or trusts its host, since the file there can change after you check it. A copy from elsewhere doesn't include the plugin's local changes. See [Changing where Pym.js loads from](./readme.md#changing-where-pymjs-loads-from).
+
+Each embedded page loads its own copy of Pym.js. Keep that copy on [the most-recent version of `Pym.js`](http://blog.apps.npr.org/pym.js/) in any case.
 
 ## Testing embed alignment
 

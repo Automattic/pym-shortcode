@@ -2,7 +2,7 @@
 /**
  * The informational page for this plugin.
  *
- * This is available to everyone who can edit posts, because they'll need this info if they're creating new child pages for embed using the shortcode or plugin.
+ * This page shows where embeds on this site load Pym.js from. It's available to everyone who can edit posts, so authors can see which copy of Pym.js their embeds use.
  *
  * @package pym-embeds
  */
@@ -44,13 +44,18 @@ function options_page_callback() {
 	);
 
 	printf(
-		'<label for="local_url">%1$s</label>',
-		esc_html__( 'The URL for the copy of Pym.js hosted on this site is:', 'pym-embeds' )
+		'<label for="pymsrc_url">%1$s</label>',
+		esc_html__( 'Embeds on this site load Pym.js from:', 'pym-embeds' )
 	);
 
-	// copying how qz.com does their share links
+	// A read-only field, so the URL is easy to select and copy.
 	printf(
-		'<input id="local_url" type="text" readonly value="%1$s" style="clear:both; width: 100%%; display: block;"/>',
-		esc_attr( pym_pymsrc_local_url() )
+		'<input id="pymsrc_url" type="text" readonly value="%1$s" style="clear:both; width: 100%%; display: block;"/>',
+		esc_attr( pym_pymsrc_default_url() )
+	);
+
+	printf(
+		'<p>%1$s</p>',
+		wp_kses_post( __( 'Graphics embedded with Pym.js load their own copy of Pym.js. See <a href="https://blog.apps.npr.org/pym.js/">NPR\'s Pym.js documentation</a> for how to set one up.', 'pym-embeds' ) )
 	);
 }

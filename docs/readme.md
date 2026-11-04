@@ -9,27 +9,25 @@ Contents:
 3. [The Pym.js Block](#the-pym-block)
 4. [Embed Options](#embed-options)
 	1. [src: the only required argument](#src-the-child-url-required-argument)
-	2. [pymsrc](#pymsrc-the-url-for-pymjs)
-	3. [pymoptions](#pymoptions-settings-for-pymjs)
-	4. [class](#class-to-add-html-classes-to-the-pymjs-parent-element)
-	5. [align](#align-for-wordpress-alignment-support)
-	6. [id](#id-to-set-the-pym-parent-elements-id)
-5. [Plugin Options](#plugin-options)
+	2. [pymoptions](#pymoptions-settings-for-pymjs)
+	3. [class](#class-to-add-html-classes-to-the-pymjs-parent-element)
+	4. [align](#align-for-wordpress-alignment-support)
+	5. [id](#id-to-set-the-pym-parent-elements-id)
+5. [Changing where Pym.js loads from](#changing-where-pymjs-loads-from)
 5. [Frequently Asked Questions](#frequently-asked-questions)
 	1. [Why would I want to use Pym.js in the first place?](#why-would-i-want-to-use-pym-in-the-first-place)
 	2. [Why is a WordPress plugin needed to use Pym.js?](#why-is-a-wordpress-plugin-needed-to-use-pymjs)
 	3. [When would I use a Pym.js solution versus embed code without using Pym.js?](#when-would-i-use-a-pymjs-solution-versus-embed-code-without-using-pymjs)
 	4. [Is Pym.js or this plugin dependent on jQuery or any other library?](#is-pymjs-or-this-plugin-dependent-on-jquery-or-any-other-library)
 	5. [Where should I put the graphic files I want to embed using `Pym.js`?](#where-should-i-put-the-graphic-files-i-want-to-embed-using-pymjs)
-	6. [What is the URL for pym.v1.min.js?](#what-is-the-url-for-pymv1minjs)
-	7. [What is the difference between `Pym.js` and `pym.v1.min.js`?](what-is-the-difference-between-pymjs-and-pymv1minjs)
+	6. [Where does the plugin load Pym.js from?](#where-does-the-plugin-load-pymjs-from)
+	7. [What is the difference between `Pym.js` and `js/pym.js`?](#what-is-the-difference-between-pymjs-and-jspymjs)
 	8. [Why would I want to change the Pym.js source URL?](#why-would-i-want-to-change-the-pymjs-source-url)
-	9. [I've set a different pymsrc option, but now I'm seeing a message in the console](#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console)
-	10. [How do I serve Pym.js if the embedded page uses HTTPS and my site does not?](#how-do-i-serve-pymjs-if-the-embedded-page-uses-https-and-my-site-does-not)
-	11. [How do I know if there's an HTTPS problem with a given embedded iframe?](#how-do-i-know-if-theres-an-https-problem-with-a-given-embedded-iframe)
-	12. [What license is this plugin licensed under?](#what-license-is-this-plugin-licensed-under)
-	13. [How do I contribute to this plugin?](#how-do-i-contribute-to-this-plugin)
-	14. [How do I get support for this plugin?](#how-do-i-get-support-for-this-plugin)
+	9. [How do I serve Pym.js if the embedded page uses HTTPS and my site does not?](#how-do-i-serve-pymjs-if-the-embedded-page-uses-https-and-my-site-does-not)
+	10. [How do I know if there's an HTTPS problem with a given embedded iframe?](#how-do-i-know-if-theres-an-https-problem-with-a-given-embedded-iframe)
+	11. [What license is this plugin licensed under?](#what-license-is-this-plugin-licensed-under)
+	12. [How do I contribute to this plugin?](#how-do-i-contribute-to-this-plugin)
+	13. [How do I get support for this plugin?](#how-do-i-get-support-for-this-plugin)
 6. [Other Pym.js Resources](#other-pymjs-resources)
 
 ## Plugin Installation
@@ -59,7 +57,7 @@ For the block, all options available via shortcode arguments are available throu
 ## Embed Options
 
 ```
-[pym src="" pymsrc="" pymoptions="" class="" align="" id="" ]
+[pym src="" pymoptions="" class="" align="" id="" ]
 ```
 
 ### `src`, the child URL (required argument)
@@ -76,13 +74,9 @@ Here's what the setting looks like in a block:
 
 ![A Pym.js embed block in use in a post, showing its alignment controls](img/block.png)
 
-### `pymsrc`, the URL for Pym.js
+### `pymsrc`, ignored since 3.0.0
 
-`pymsrc` is optional; only set this if you need to specify a different source for `Pym.js` than the default. The default `Pym.js` source URL is `js/pym.v1.min.js` in this plugin's directory on your server. [NPR recommends](http://blog.apps.npr.org/pym.js/#get-pym-cdn) that you use the CDN version of `Pym.js` in most cases, which is available at `https://pym.nprapps.org/pym.v1.min.js`. An example shortcode using this option is as follows:
-
-```
-[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js"]
-```
+The plugin still accepts `pymsrc` but ignores it. Shortcodes and blocks that set it keep working, and every embed loads `Pym.js` from the same URL. To change that URL, see [Changing where Pym.js loads from](#changing-where-pymjs-loads-from).
 
 ### `pymoptions`, settings for Pym.js
 
@@ -134,29 +128,23 @@ For example, the shortcode `[pym src="https://blog.apps.npr.org/pym.js/examples/
 <script>var pym_0 = new pym.Parent('extremely_specific_example', 'https://blog.apps.npr.org/pym.js/examples/table/child.html', {})</script>
 ```
 
-## Plugin Options
+## Changing where Pym.js loads from
 
-The Pym.js Embed Settings page can be found under WordPress' "Settings" menu.
+Every embed on a site loads `Pym.js` from one URL. By default, that's `js/pym.js` in this plugin's folder. The **Tools > Pym.js Embeds Info** page in the admin dashboard shows the URL in use.
 
-The settings page provides two options: the default pymsrc and the option to override all pymsrc arguments.
+Only code can change the URL; shortcode attributes and block settings can't. To load `Pym.js` from another URL, such as a newsroom's CDN, add a `pym_shortcode_pymsrc` filter in a theme or plugin:
 
-We **strongly recommend** that you set the default pymsrc to `https://pym.nprapps.org/pym.v1.min.js` and check the box to enable the pymsrc override.
+```php
+add_filter( 'pym_shortcode_pymsrc', function ( $url ) {
+	return 'https://cdn.example.org/pym.v1.min.js';
+} );
+```
 
-### Default pymsrc
+The filter receives the URL of the plugin's `js/pym.js`.
 
-As explained in the documentation for [the pymsrc embed option](#pymsrc-the-url-for-pymjs), the default copy of `Pym.js` used by this plugin is the copy bundled with this plugin. NPR recommends, and we recommend, that you use the copy of `Pym.js` provided by NPR's CDN. However, this plugin cannot force you to do so; the WordPress.org plugin guidelines generally [prohibit plugin use of third-party scripts without user consent](https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/#7-plugins-may-not-track-users-without-their-consent), and frown upon plugins that use CDNs by default. Therefore, we give you the option to use NPR's CDN, or your newsroom's CDN, and ship the plugin in a state that defaults to no CDN.
+A copy of `Pym.js` from elsewhere doesn't include the plugin's two local changes, described in [What is the difference between `Pym.js` and `js/pym.js`?](#what-is-the-difference-between-pymjs-and-jspymjs). That includes NPR's CDN copy.
 
-Shortcodes and blocks have the the option to specify an alternate source for `Pym.js` at a per-embed level, which allows you to opt into using the CDN version of the script on a per-embed level. This is less than optimal; every time you create a `Pym.js` embed on your site, you will need to check that the pymsrc option is set.
-
-To save time and effort, set the "Default pymsrc" option in the plugin settings to NPR's CDN copy of `Pym.js`: `https://pym.nprapps.org/pym.v1.min.js`
-
-### Override pymsrc
-
-Anyone who can edit a post can set the pymsrc URL on a shortcode or a block, and the pymsrc URL can be *any* resource. Browsers will try to load it as JavaScript, even if the set URL is for an image, a 404 page, or a non-`Pym.js` library. This is not good.
-
-We **strongly recommend** that you check this box, to force all `Pym.js` Embed shortcodes and blocks to use the plugin's default pymsrc.
-
-This box is not checked by default, because defaulting to overriding the pymsrc URL would potentially break existing shortcodes on sites that used this plugin before release version 1.3.2.1. If you used this plugin to create `[pym]` shortcodes before release 1.3.2.1, and wish to test your embeds before enabling the override, read [this testing advice](./upgrade-testing.md).
+The plugin adds its version number to the URL of its own copy, so browsers fetch the new file after an update. A URL from the filter gets no version number, so browsers may keep an old copy after you update that file.
 
 ## Frequently Asked Questions
 
@@ -178,82 +166,45 @@ For the Pym.js shortcode or the Pym.js block to work, the `Pym.js` JavaScript li
 
 ### Is `Pym.js` or this plugin dependent on jQuery or any other library?
 
-Nope, all the required JavaScript is self-contained in the plugin-provided copy of `pym.v1.min.js`. The shortcode will enqueue `pym.v1.min.js` on the parent page when necessary. You will need to include `pym.v1.min.js` on the embedded page, however.
+Nope. The plugin's copy of `Pym.js`, `js/pym.js`, is self-contained, and the shortcode or block loads it on the parent page when necessary. The graphic you embed loads its own copy of `Pym.js`, as [NPR's `Pym.js` documentation](http://blog.apps.npr.org/pym.js/#examples) describes.
 
 ### Where should I put the graphic files I want to embed using `Pym.js`?
 
 Child graphic assets could go in your WordPress server's uploads directory, uploaded via SFTP. Or on a GitHub page. Or on Amazon S3.
 
-### What is the URL for `pym.v1.min.js`?
+### Where does the plugin load `Pym.js` from?
 
-Assuming that you have installed this plugin via the wordpress.org plugin repository and that your site is `https://example.org/`, you'll find `pym.v1.min.js` at `https://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js` .
+By default, every embed loads `Pym.js` from `js/pym.js` in this plugin's folder. Assuming that you have installed this plugin via the wordpress.org plugin repository and that the site is `https://example.org/`, you'll find it at `https://example.org/wp-content/plugins/pym-shortcode/js/pym.js` .
 
-You can check the validity of that assumption by putting a shortcode or block in a post, then viewing the post from the frontend. In the source code of the page, you should see a script tag loading `pym.v1.min.js`. 
+You can check by putting a shortcode or block in a post, then viewing the post from the frontend. In the source code of the page, you should see a script tag loading `pym.js`.
 
-The URL can also be found on the "Pym.js Plugin Info" page, found under the "Tools" menu in your site's admin dashboard.
+The URL can also be found on the "Pym.js Embeds Info" page, found under the "Tools" menu in the site's admin dashboard.
 
-Or, you can specify the URL from which to load `Pym.js`.
+A developer can load `Pym.js` from another URL; see [Changing where Pym.js loads from](#changing-where-pymjs-loads-from).
 
-### What is the difference between `Pym.js` and `pym.v1.min.js`?
+### What is the difference between `Pym.js` and `js/pym.js`?
 
 In this document, `Pym.js` is used to refer to the JavaScript library. "Pym.js Embeds" is the name of this plugin.
 
-`pym.v1.min.js` is a specific copy of that library, hosted on your server at a given URL. It's named following [NPR's `Pym.js` versioning strategy](https://github.com/nprapps/pym.js/tree/master#versioning). It is kept up to date with the CDN version of the library by this plugin's maintainers, [following these instructions](https://github.com/INN/pym-shortcode/blob/master/docs/maintainer-notes.md).
+`js/pym.js` is the copy of that library that comes with this plugin: NPR's `Pym.js` version 1.3.2, with two local changes. Each is marked "pym-shortcode local change" in the file:
 
-The CDN version of `Pym.js` is at https://pym.nprapps.org/pym.v1.min.js .
+- An embed only acts on messages sent by its own iframe.
+- `Pym.js` skips an embed whose address uses a scheme it doesn't allow, such as `javascript:`.
 
-Also included in this plugin is `js/pym.js`, which is `Pym.js` version 1.1.0, and which is kept around for legacy support for graphics created before this plugin had a defined update strategy.
+The CDN version of `Pym.js` is at https://pym.nprapps.org/pym.v1.min.js . It doesn't include these changes. This plugin's maintainers update `js/pym.js` [following these instructions](https://github.com/INN/pym-shortcode/blob/master/docs/maintainer-notes.md).
 
 ### Why would I want to change the `Pym.js` source URL?
 
-There are several reasons why you might want to change the version of `Pym.js` used to embed a webpage. For example:
+There are two common reasons why you might want to change the version of `Pym.js` used to embed a webpage:
 
 - The embedded page uses an older version of `Pym.js`
-- The embedded page is loaded over HTTPS but your website is not, so `Pym.js` must be loaded over HTTPS to communicate with the child
 - The embedded page uses a modified version of `Pym.js`
-- For ease of development, you've standardized on the CDN-served copy of `Pym.js`
 
-In any of these cases, set the different version of `Pym.js` using the `pymsrc` option in the shortcode:
-
-```
-[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js" pymoptions=""]
-```
-
-### I've set a different `pymsrc` option, but now I'm seeing a message in the console
-
-If a post has multiple instances of the Pym.js shortcode or block present, and between those different Pym.js instances there are different source URLs for `Pym.js` specified, then you should expect to see a message like the following in the browser's console when viewing that page:
-
-> Hi Pym.js user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym.js embeds. For more details, see https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console"
-
-If your server is running with [`WP_DEBUG` set to `true`](https://codex.wordpress.org/WP_DEBUG), then your server console will also contain a message like this:
-
-```
-PHP message: post 5: There are more than one pym source URLs set on this page! The list: array (
-  0 => 'http://example.org/wp-content/plugins/pym-shortcode/js/pym.v1.min.js',
-  1 => 'https://pym.nprapps.org/pym.v1.js',
-)
-```
-
-This message is included to make the process of debugging your content easier.
-
-To remedy this issue, take the following steps:
-
-1. Make sure every `[pym]` shortcode in the page has the same `pymsrc=""` attribute
-2. Make sure that every Pym.js Embed block on the page has the same URL set in the block settings for the "Pym.js URL" option.
-
-If your post has a mix of Pym.js shortcodes and blocks, you'll need to make sure that both types of Pym.js embed on the page use the same source URL.
+In either case, a developer can set the different version of `Pym.js` with the `pym_shortcode_pymsrc` filter. A copy from elsewhere doesn't include the plugin's local changes. See [Changing where Pym.js loads from](#changing-where-pymjs-loads-from).
 
 ### How do I serve `Pym.js` if the embedded page uses HTTPS and my site does not?
 
-If the embedded page's domain has an SSL certificate and is loaded over HTTPS, and if your site is loaded over plain HTTP, then the `Pym.js` script on your page will not be able to talk to the `Pym.js` script in the embedded page. This can be fixed by making sure your site loads over HTTPS, or by specifying an alternate source for your `Pym.js` script.
-
-The default `Pym.js` source URL is `js/pym.v1.min.js` in this plugin's folder, served by whatever protocol your site is using. You can change the source by using the `pymsrc` parameter in the shortcode, for example, an HTTPS-using CDN source like `https://pym.nprapps.org/pym.v1.min.js`:
-
-```
-[pym src="https://blog.apps.npr.org/pym.js/examples/table/child.html" pymsrc="https://pym.nprapps.org/pym.v1.min.js" pymoptions=""]
-```
-
-The URL provided above is the [official content delivery network (CDN) for Pym](http://blog.apps.npr.org/pym.js/#get-pym-cdn). If you're hosting your embed on an HTTPS domain, you can also host your copy of `Pym.js` there and use that URL.
+Serve your site over HTTPS. Loading `Pym.js` from a different URL doesn't change anything here: the script runs as part of your page, whatever URL it comes from.
 
 ### How do I know if there's an HTTPS problem with a given embedded iframe?
 

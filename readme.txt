@@ -4,8 +4,8 @@ Donate link: https://inn.org/donate
 Tags: shortcode, iframe, javascript, embeds, responsive, pym, NPR
 Requires at least: 3.0.1
 Requires PHP: 5.3
-Tested up to: 5.4
-Stable tag: 2.0.0
+Tested up to: 7.1
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,8 +21,7 @@ AMP compatibility is provided by the [official AMP plugin](https://wordpress.org
 
 1. In the WordPress Dashboard go to **Plugins**, then click the **Add Plugins** button and search the WordPress Plugins Directory for Pym.js Embeds. Alternatively, you can download the zip file from this Github repo and upload it manually to your WordPress site.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. In **Settings > Pym.js Embed Settings**, decide whether you'd like to change the plugin's behavior to use a non-default source URL for `Pym.js`, and whether you'd like to prevent post authors from setting embed-specific URLs for `Pym.js`
-4. Begin embedding content!
+3. Begin embedding content!
 
 == Frequently Asked Questions ==
 
@@ -49,6 +48,35 @@ Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode:
 ![Mobile view of the WordPress post with the NPR embed using Pym.js Shortcode](img/pym-example-phone.png)
 
 == Changelog ==
+
+= 3.0.0 =
+
+**This release has breaking changes. Please read before updating.**
+
+Changes:
+
+* Every embed now loads Pym.js from one site-wide URL: by default, the plugin's own copy, `js/pym.js`. The `pymsrc` shortcode attribute and block setting are ignored.
+* Removes the Pym.js Embeds Settings page and its "Default pymsrc" and "Override pymsrc" options.
+* `js/pym.js` is now Pym.js 1.3.2, with two local changes: each embed only acts on messages from its own iframe, and Pym.js skips any embed whose address uses a scheme it doesn't allow, such as `javascript:`.
+* WordPress now removes URL schemes it doesn't allow in links, such as `javascript:`, from `data-pym-src` attributes when users who can't post unfiltered HTML save content.
+* Pym.js loads with the plugin's version number, so browsers and caches fetch the new copy after an update.
+* Removes `js/pym.v1.min.js`.
+* Adds the `pym_shortcode_pymsrc` filter, which changes the URL Pym.js loads from on every embed.
+* Deprecates `pym_maybe_override_pymsrc()`, which now always returns `true`.
+* For developers: `Pymsrc_Output::add()` ignores its URL argument. `Pymsrc_Output`'s `maybe_warning_message()`, `warning_message_debug()` and `warning_message_footer()` methods are removed, and so are the settings page's functions in `INN\PymEmbeds\Settings`, except `option_key()`.
+
+How to update:
+
+1. Embeds with a `pymsrc` value keep working, using the plugin's copy of Pym.js. Posts don't need editing.
+2. If you set "Default pymsrc" on the old settings page, embeds now use the plugin's copy instead. A dashboard notice shows the URL you saved. Dismissing the notice deletes the old setting.
+3. To load Pym.js from another URL, add a `pym_shortcode_pymsrc` filter in a theme or plugin. A copy from elsewhere doesn't include the plugin's local changes.
+
+        add_filter( 'pym_shortcode_pymsrc', function ( $url ) {
+            return 'https://cdn.example.org/pym.v1.min.js';
+        } );
+
+4. Pages or graphics that linked straight to `js/pym.v1.min.js` in this plugin's folder need another source. Use the block or shortcode for embeds. Inside graphics, load Pym.js as NPR's documentation describes.
+5. After updating, clear any page and CDN caches. Until they clear, pages cached before this update that used the plugin's default copy still request `js/pym.v1.min.js`, and their embeds stay blank. If a caching or script-optimization plugin lists `pym.v1.min.js` in its settings, change that entry to `js/pym.js`.
 
 = 2.0.0 =
 
@@ -158,6 +186,11 @@ Removed:
 = 1.0 =
 
 * First release of the plugin
+
+== Upgrade Notice ==
+
+= 3.0.0 =
+Breaking changes: Pym.js loads from the plugin's own copy by default, and the settings page is gone. Embeds keep working without edits. Developers can change the source with the pym_shortcode_pymsrc filter. Direct links to js/pym.v1.min.js stop working. Clear page and CDN caches after updating.
 
 == Pym.js Resources from NPR ==
 

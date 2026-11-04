@@ -5,8 +5,6 @@
  * @package pym-embeds
  */
 
- use INN\PymEmbeds\Settings\option_key;
-
 /**
  * A shortcode to simplify the process of embedding articles using pym.js
  *
@@ -18,7 +16,6 @@
  * @param String $tag     the shortcode tag.
  * @uses pym_shortcode_script_footer_enqueue
  * @uses pym_pymsrc_default_url
- * @uses \INN\PymEmbeds\Settings\option_key()
  * @return String the embed HTML
  */
 function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
@@ -65,25 +62,10 @@ function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 		esc_attr( $actual_classes )
 	);
 
-	// What's the pymsrc for this shortcode?
-	if (
-		pym_maybe_override_pymsrc() // if the box to override has been checked...
-		|| empty( $atts['pymsrc'] ) // if there is no specified pymsrc...
-		|| ! wp_http_validate_url( $atts['pymsrc'] ) // if the specified pymsrc is not a safe URL...
-	) {
-		$pymsrc = pym_pymsrc_default_url(); // use the default URL.
-	} else {
-		$pymsrc = $atts['pymsrc'];
-	}
+	$pymsrc = pym_pymsrc_default_url();
 
-	// If this is the first Pym.js element on the page,
-	// register the default pymsrc script tag for output.
-	//
-	// Or, if the pymsrc is set, register that specific pymsrc for output.
-	if ( 0 === $pym_id || ! empty( $atts['pymsrc'] ) ) {
-		$pymsrc_output = Pymsrc_Output::get_instance();
-		$pymsrc_output->add( $pymsrc );
-	}
+	// Register Pym.js for output in the footer. It is enqueued once per page.
+	Pymsrc_Output::get_instance()->add();
 
 	// Output the parent's scripts.
 	pym_shortcode_script_footer_enqueue( array(
@@ -105,6 +87,30 @@ function pym_shortcode( $atts = array(), $content = '', $tag = '' ) {
 	return $ret;
 }
 add_shortcode( 'pym', 'pym_shortcode' );
+
+/**
+ * Has WordPress check `data-pym-src` attributes like links when content is saved.
+ *
+ * WordPress's HTML filter then drops URL schemes that aren't allowed (as it does
+ * for `href` and `src`) from `data-pym-src` when content is saved by users
+ * without `unfiltered_html`. Pym.js's auto-init builds an iframe from that
+ * attribute, whichever copy of Pym.js is on the page.
+ *
+ * This check and the child-URL check in js/pym.js each cover a case the other
+ * misses: content saved before 3.0.0 isn't checked here until a user without
+ * `unfiltered_html` saves it again, and another copy of Pym.js on the page
+ * doesn't carry the js/pym.js check.
+ *
+ * @since 3.0.0
+ *
+ * @param array $attributes Attribute names that hold URLs.
+ * @return array
+ */
+function pym_shortcode_kses_uri_attributes( $attributes ) {
+	$attributes[] = 'data-pym-src';
+	return $attributes;
+}
+add_filter( 'wp_kses_uri_attributes', 'pym_shortcode_kses_uri_attributes' );
 
 /**
  * Given the necessary arguments for creating an embed's activation javascript, enqueue that script in the footer
@@ -131,8 +137,8 @@ add_shortcode( 'pym', 'pym_shortcode' );
  *        pym_shortcode_parse_pymoptions() for the allowlist.
  *     - 'actual_classes' The classes used on the Pym.js container element,
  *        provided to this function for informational purposes.
- *     - 'pymsrc' The URL from which Pym.js is to be loaded for this emebed,
- *        based on the shortcode/block options and the plugin settings.
+ *     - 'pymsrc' The URL Pym.js loads from on every embed: the plugin's js/pym.js,
+ *        or the value of the pym_shortcode_pymsrc filter.
  *
  * @since 1.3.2.1
  */
@@ -167,7 +173,7 @@ if ( ! function_exists( 'pym_shortcode_script_footer_enqueue' ) ) {
 				echo '</script>';
 				echo PHP_EOL; // for pretty printing of scripts in the footer.
 			},
-			20 // So that this comes after the pymsrc tag is output at priority 10.
+			20 // Same priority as wp_print_footer_scripts, which core hooks first, so the Pym.js script tag prints before this.
 		);
 	}
 }
@@ -176,41 +182,45 @@ if ( ! function_exists( 'pym_shortcode_script_footer_enqueue' ) ) {
  * Whether to force use of the default pymsrc URL.
  *
  * @since 1.3.2.1
- * @uses \INN\PymEmbeds\Settings\option_key()
- * @return bool Whether to force use of the default URL.
+ * @deprecated 3.0.0 Pym.js always loads from one site-wide URL.
+ * @return bool Always true.
  */
 function pym_maybe_override_pymsrc() {
-	$settings = get_option( \INN\PymEmbeds\Settings\option_key() );
-	if ( isset( $settings['override_pymsrc'] ) && 'on' === $settings['override_pymsrc'] ) {
-		return true;
-	}
-	return false;
+	_deprecated_function( __FUNCTION__, '3.0.0' );
+	return true;
 }
 
 /**
- * The default URL for pymsrc, as defined in plugin settings
+ * The URL Pym.js loads from on every embed.
+ *
+ * This is the plugin's own js/pym.js unless the pym_shortcode_pymsrc filter
+ * returns something else. Only code can set the filter; no shortcode attribute,
+ * block setting or plugin setting changes this URL. A copy of Pym.js from
+ * elsewhere doesn't include the plugin's local changes.
  *
  * @since 1.3.2.1
  * @uses pym_pymsrc_local_url
+ * @return string The URL Pym.js loads from.
  */
 function pym_pymsrc_default_url() {
-	$settings = get_option( \INN\PymEmbeds\Settings\option_key() );
-	if ( isset ( $settings['default_pymsrc'] ) ) {
-		if ( wp_http_validate_url( $settings['default_pymsrc'] ) ) {
-			return $settings['default_pymsrc'];
-		}
-	}
-	return pym_pymsrc_local_url();
+	/**
+	 * Filter pym_shortcode_pymsrc sets the URL Pym.js loads from on every embed.
+	 *
+	 * @since 3.0.0
+	 * @param string $url The plugin's js/pym.js URL, without a version query.
+	 * @return string The URL Pym.js loads from.
+	 */
+	return apply_filters( 'pym_shortcode_pymsrc', pym_pymsrc_local_url() );
 }
 
 /**
  * The plugin-provided pymsrc url
  *
  * @since 1.3.2.1
- * @return string The URL for /wp-content/plugins/pym-shortcode/js/pym.v1.min.js
+ * @return string The URL for /wp-content/plugins/pym-shortcode/js/pym.js
  */
 function pym_pymsrc_local_url() {
-	return plugins_url( '/js/pym.v1.min.js', dirname( __FILE__ ) );
+	return plugins_url( '/js/pym.js', dirname( __FILE__ ) );
 }
 
 /**
