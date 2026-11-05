@@ -1,14 +1,12 @@
 <?php
 /**
- * The class and related methods for tracking which pymsrc tags will be output upon the page
+ * Enqueues the one Pym.js script that the embeds on a page need.
  *
  * @package pym-embeds
  */
 
 /**
- * Provide a singleton class to store all pymsrc URLs that will be output upon the page, and output them.
- *
- * Includes warning messages in the event that something strange is happening.
+ * Provide a singleton class to track whether Pym.js is needed on the page, and output it once.
  *
  * Influenced by https://ttmm.io/tech/the-case-for-singletons/
  *
@@ -42,102 +40,50 @@ class Pymsrc_Output{
 	}
 
 	/**
-	 * The array of ids and sources
-	 * @var Array
+	 * Whether this page needs the Pym.js script tag.
+	 *
+	 * @var bool
 	 */
-	private $sources = array();
+	private $needed = false;
 
 	/**
-	 * Add an item to the array of sources
+	 * Mark Pym.js as needed on this page.
 	 *
-	 * @param string $url The URL of the script tag to be added
-	 * @return Bool whether there was a success.
+	 * The script is enqueued once, however many embeds the page has.
 	 *
-	 * @todo validate these URLs somehow
-	 * @link https://github.com/INN/pym-shortcode/issues/8 arbitrary js
-	 * @link https://github.com/INN/pym-shortcode/issues/31 force CDN version
+	 * @since 1.3.2.1
+	 * @since 3.0.0 The argument is ignored; Pym.js always loads from the URL in pym_pymsrc_default_url().
+	 * @param string $url Ignored since 3.0.0.
 	 */
-	public function add( $url ) {
-		$sources = array_unique( array_merge(
-			$this->sources,
-			array( $url )
-		) );
-		$this->sources = $sources;
+	public function add( $url = '' ) {
+		$this->needed = true;
 	}
 
 	/**
-	 * Reset the array of sources to an empty array.
+	 * Mark Pym.js as not needed on this page.
 	 *
 	 * Implemented because at some point we'll write tests for this? ¯\_(ツ)_/¯
 	 */
 	public function reset() {
-		$this->sources = array();
+		$this->needed = false;
 	}
 
 	/**
-	 * Output the pymsrc script(s)
+	 * Output the Pym.js script tag, if any embed on the page needs it.
 	 *
-	 * @uses $this->warning_message()
+	 * @uses pym_pymsrc_default_url
+	 * @uses pym_pymsrc_local_url
+	 * @uses pym_plugin_version
 	 */
 	public function output() {
-		$this->maybe_warning_message();
-		foreach ( $this->sources as $url ) {
-			wp_enqueue_script(
-				esc_attr( uniqid( 'pym_', $url ) ), // Timestamp-based identifier seeded with URL to ensure different handles for different scripts.
-				$url,
-				array(),
-				null,
-				true
-			);
+		if ( ! $this->needed ) {
+			return;
 		}
-	}
 
-	/**
-	 * Determine whether warning messages should be output, based on $this->sources.
-	 *
-	 * This runs during wp_footer, as part of $this-output();
-	 *
-	 * @uses $this->warning_message_debug
-	 * @uses $this->warning_message_footer
-	 * @return bool Whether or not warning messages were output.
-	 */
-	public function maybe_warning_message() {
-		if ( 1 < count( $this->sources ) ) {
-			if ( WP_DEBUG ) {
-				// to avoid cluttering up production logs on every page load
-				$this->warning_message_debug();
-			}
-			$this->warning_message_footer();
-
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public function warning_message_debug() {
-		error_log(
-			sprintf(
-				'post %1$s: %2$s %3$s',
-				get_the_id(),
-				__( 'There are more than one pym source URLs set on this post! The list:', 'pym_shortcode' ),
-				var_export( $this->sources, true )
-			)
-		);
-	}
-
-	/**
-	 * Output a thing in the footer that shows up in the browser console, to assist in debugging
-	 *
-	 * This has to support IE 9 because Pym.js supports IE 9, but `console.log` and `console.error` aren't available in IE 9 unless the dev tools are open. Thus, the check `window.console`.
-	 * @link https://stackoverflow.com/questions/8002116/should-i-be-removing-console-log-from-production-code/15771110
-	 */
-	public function warning_message_footer() {
-		printf(
-			'<script type="text/javascript">window.console && console.log( \'%1$s\', %2$s );</script>',
-			wp_json_encode( __( 'Hi Pym.js user! It looks like your post has multiple values for pymsrc for the blocks and shortcodes in use on this page. This may be causing problems for your Pym.js embeds. For more details, see https://github.com/INN/pym-shortcode/tree/master/docs#ive-set-a-different-pymsrc-option-but-now-im-seeing-a-message-in-the-console', 'pym_shortcode' ) ),
-			wp_json_encode( $this->sources )
-		);
+		$url = pym_pymsrc_default_url();
+		// The plugin versions its own copy; whoever sets the filter owns that file's versioning.
+		$ver = ( pym_pymsrc_local_url() === $url ) ? pym_plugin_version() : null;
+		wp_enqueue_script( 'pym-embeds-pymjs', $url, array(), $ver, true );
 	}
 
 }

@@ -42,6 +42,7 @@ The owner of the release needs to complete the following steps **BEFORE** mergin
         - [ ] `pym_plugin_version()`
     - [ ] in readme.md
     - [ ] in docs/maintainer-notes.md
+- [ ] `js/pym.v1.min.js` is an exact copy of `js/pym.js` (`cmp js/pym.js js/pym.v1.min.js` prints nothing)
 - [ ] testing as described in https://github.com/INN/pym-shortcode/blob/master/docs/maintainer-notes.md
 
 ## Release process
